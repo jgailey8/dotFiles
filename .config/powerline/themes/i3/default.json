@@ -1,0 +1,64 @@
+{
+	"default_module": "powerline.segments.common",
+	"segment_data": {
+		"hostname": {
+			"before": " ",
+			"args": {
+				"only_if_ssh": true
+			}
+        },
+		"system_load": {
+		},
+		"external_ip": {
+		},
+		"date": {
+			"before": " "
+		},
+		"email_imap_alert": {
+			"before": "✉ ",
+			"args": {
+				"username": "",
+				"password": ""
+			}
+		},
+		"branch": {
+			"before": " "
+        }
+	},
+	"segments": {
+        "right": [
+			{
+				"name": "date",
+				"args": {
+					"format": "%H:%M",
+					"istime": true
+				}
+			},
+			{
+				"name": "hostname"
+			},
+			{
+				"name": "user"
+            },
+            {
+                "type": "string",
+                "contents": "load:",
+                "highlight_group": "static"
+            },
+			{
+				"name": "system_load",
+				"priority": 50
+			},
+            {
+                "type": "string",
+                "contents": "IP:",
+                "highlight_group": "static"
+            },
+            {
+                "name": "external_ip"
+            }
+        ],
+		"left": [
+		]
+	}
+}

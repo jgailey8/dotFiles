@@ -1,0 +1,14 @@
+#!/bin/bash
+#a dumb little bash script for mounting remote folder
+myServer="user@Hostname"
+directory=""  #leave blank to mount home directory 
+mount="/home/user/folder"
+
+if [ "$1" == "-d" ]; then
+   echo "unmounting remote fs"
+   fusermount -u  $mount
+else
+  echo "mounting remote fs to $mount"
+  sshfs $myServer":"$directory $mount
+fi
+

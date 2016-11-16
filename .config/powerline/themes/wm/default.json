@@ -1,0 +1,52 @@
+{
+	"segments": {
+		"left": [
+			{
+				"function": "powerline.segments.common.sys.uptime",
+				"draw_hard_divider": true ,
+                "draw_inner_divider": true
+			}
+		],
+		"right": [
+            {
+                "function":"powerline.segments.common.bat.battery",
+                    "args": {
+                        "full_heart": "♥",
+                        "empty_heart": "♥",
+                        "online": "online",
+                        "offline": "offline"
+                    },
+                "draw_inner_divider": true
+            },
+            {
+                "function": "powerline.segments.common.net.internal_ip",
+                "args": {
+                    "interface": "wlp3s0"
+                },
+                "draw_inner_divider": true
+            },
+			{
+				"function": "powerline.segments.common.time.date"
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+				"args": {
+					"format": "%H:%M",
+					"istime": true
+				},
+                "draw_inner_divider": true
+			},
+			{
+			    "display":true,
+				"function": "powerline.segments.common.mail.email_imap_alert",
+				"priority": 10,
+				"args": {
+					"username": "",
+					"password": ""
+				},
+                "draw_inner_divider": true
+			}
+		]
+	}
+}

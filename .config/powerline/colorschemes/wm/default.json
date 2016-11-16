@@ -1,0 +1,25 @@
+{
+	"name": "Default color scheme",
+	"groups": {
+		"information:unimportant":  { "fg": "gray8", "bg": "gray2", "attrs": [] },
+		"information:additional":   { "fg": "gray9", "bg": "gray4", "attrs": [] },
+		"background":               { "fg": "white", "bg": "gray2", "attrs": [] },
+		"background:divider":       { "fg": "darkorange", "bg": "darkorange", "attrs": [] },
+		"mode":                     { "fg": "darkestgreen", "bg": "brightgreen", "attrs": ["bold"] },
+		"w_focused":             { "fg": "white", "bg": "darkestblue", "attrs": ["bold"] },
+		"w_visible":       { "fg": "brightyellow", "bg": "gray4", "attrs": ["bold"] },
+		"workspace":          { "fg": "white", "bg": "blue", "attrs": ["bold"] },
+		"scatchpad:focused":             { "fg": "white", "bg": "darkestblue", "attrs": ["bold"] },
+		"scratchpad":       { "fg": "brightyellow", "bg": "gray4", "attrs": ["bold"] },
+		"scratchpad:visible":          { "fg": "white", "bg": "blue", "attrs": ["bold"] },
+		"battery_full":             { "fg": "white", "bg": "gray4", "attrs": [] },
+		"battery_online":             { "fg": "white", "bg": "blue", "attrs": [] },
+		"battery_ofline":             { "fg": "white", "bg": "red", "attrs": [] },
+		"battery_empty":             { "fg": "white", "bg": "gray4", "attrs": [] },
+		"output_lister":             { "fg": "white", "bg": "gray4", "attrs": [] },
+		"error":                    { "fg": "brightestred", "bg": "darkred", "attrs": ["bold"] },
+		"background":                { "fg": "white", "bg": "gray0", "attrs": [] },
+		"w_focused:divider":        { "fg": "gray5", "bg": "gray0", "attrs": [] },
+		"warning":                  { "fg": "brightyellow", "bg": "darkorange", "attrs": ["bold"] }
+	}
+}
