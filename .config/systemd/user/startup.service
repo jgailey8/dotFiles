@@ -1,0 +1,8 @@
+ [Unit]
+Description=My startup Script
+[Service]
+Type=oneshot
+RemainAfterExit=yes 
+ExecStart=/usr/bin/bash -c 'urxvtd -o &'
+[Install]
+WantedBy=multi-user.target

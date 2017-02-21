@@ -9,7 +9,9 @@ exec --no-startup-id urxvtd -q -f -o &
 exec --no-startup-id sleep 1 && urxvtc -name myTerm
 
 focus_follows_mouse no
+border pixel 3
 font pango:DejaVu Sans Mono 10, Awesome 8
+#
 ### Variables
 #
 set $mod Mod4
@@ -21,9 +23,10 @@ set $right l
 
 # workspace names
 set $tag1 "1: www"
-set $tag2 "2: terminal"
-set $tag3 "3: code"
-set $tag4 "4: media"
+set $tag2 "2: code"
+set $tag3 "3: terminal"
+set $tag4 "4: debug"
+set $tag5 "5: media"
 
 # default applications
 set $term urxvt
@@ -69,10 +72,10 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     bindsym $mod+Shift+e exit
 
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    # bindsym $mod+$left focus left
+    # bindsym $mod+$down focus down
+    # bindsym $mod+$up focus up
+    # bindsym $mod+$right focus right
     # or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -80,10 +83,10 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     bindsym $mod+Right focus right
 
     # _move_ the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    # bindsym $mod+Shift+$left move left
+    # bindsym $mod+Shift+$down move down
+    # bindsym $mod+Shift+$up move up
+    # bindsym $mod+Shift+$right move right
     # ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -95,7 +98,7 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     bindsym $mod+2 workspace $tag2
     bindsym $mod+3 workspace $tag3
     bindsym $mod+4 workspace $tag4
-    bindsym $mod+5 workspace 5
+    bindsym $mod+5 workspace $tag5
     bindsym $mod+6 workspace 6
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
@@ -106,7 +109,7 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     bindsym $mod+Shift+2 move container to workspace $tag2
     bindsym $mod+Shift+3 move container to workspace $tag3
     bindsym $mod+Shift+4 move container to workspace $tag4
-    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+5 move container to workspace $tag5
     bindsym $mod+Shift+6 move container to workspace 6
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
@@ -145,6 +148,22 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
+# move mode
+#
+bindsym $mod+m mode "move" focus floating
+mode "move" {
+    bindsym $mod+Tab focus right
+
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#
 # resize mode:
 #
 bindsym $mod+r mode "resize"
@@ -172,7 +191,8 @@ mode "launch" {
     bindsym c exec chromium ; mode "default"
     bindsym f exec firefox; mode "default"
     bindsym p exec pcmanfm ; mode "default"
-
+    bindsym k exec kodi; mode "default"
+    
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }

@@ -13,8 +13,10 @@ URxvt*saveLines: 1024
 URxvt*scrollBar:  false
 URxvt*depth: 32
 URxvt*buffered: true
-
-urxvt.foreground:       #aaaaaa
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+urxvt.foreground: #aaaaaa
 urxvt*background: rgba:0000/0000/0200/c800
 ! URxvt*fadeColor: grey
 !
@@ -27,9 +29,13 @@ URxvt.keysym.C-V: perl:clipboard:paste
 URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
 
 !------- tabs -----------------
-URxvt.tabbed.no-tabbedex-keys: no
-URxvt.keysym.Control-Shift-Left: perl:tabbedex:prev_tab
-URxvt.keysym.Control-Shift-Right: perl:tabbedex:next_tab
+! disable default mappings
+URxvt.tabbed.no-tabbedex-keys: true
+URxvt.keysym.Control-Shift-Left: perl:tabbedex:move_tab_left
+URxvt.keysym.Control-Shift-Right: perl:tabbedex:move_tab_right
+URxvt.keysym.Control-Shift-R: perl:tabbedex:rename_tab
+URxvt.keysym.Control-Left: perl:tabbedex:prev_tab
+URxvt.keysym.Control-Right: perl:tabbedex:next_tab
 URxvt.keysym.Control-Shift-Up: perl:tabbedex:new_tab
 URxvt.keysym.Control-Shift-Down: perl:tabbedex:kill_tab
 URxvt.keysym.Shift-Left: \033[1~

@@ -1,0 +1,49 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "ctrl+n",
+        "command": "workbench.view.explorer"
+    },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "ctrl+shift+n",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+q",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+shift+q",
+        "command": "workbench.action.closeAllEditors"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "default:cut",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+v",
+        "command": "default:paste",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.focusNextGroup"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.focusPreviousGroup"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.terminal.new"
+    }
+]

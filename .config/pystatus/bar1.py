@@ -17,7 +17,7 @@ status.register("temp",
 
 status.register("updates",
                 format = "Updates: {count}",
-                format_no_updates = "No updates",
+                format_no_updates = "",
                 backends = [pacman.Pacman(), cower.Cower()])
 
 # status.register("mail",

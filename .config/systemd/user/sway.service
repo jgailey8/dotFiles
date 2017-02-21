@@ -1,0 +1,9 @@
+ [Unit]
+Description=My sway Script
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/bash -c 'xrdb ~/.Xresources &'
+ExecStartPre=/usr/bin/bash -c 'urxvtd -0 &'
+ExecStart=/usr/bin/bash -c 'sway'
+[Install]
+WantedBy=wm.target
