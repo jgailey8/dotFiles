@@ -7,7 +7,7 @@ nmap <S-i> <esc>o
 nmap ; :
 
 " clear search highlight with esc or c/
-" nnoremap <esc><esc> :noh<return>
+nnoremap <esc><esc> :noh<return>
 " nmap <silent> c/ :noh<CR>
 
 " quite/save faster

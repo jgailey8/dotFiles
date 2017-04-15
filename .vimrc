@@ -80,64 +80,9 @@ setlocal foldlevel=99
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 
-call plug#begin('~/.vim/plugged')
-    "---- main plugs -----
-        Plug 'tomtom/tcomment_vim'
-        Plug 'tpope/vim-surround'
-        Plug 'scrooloose/nerdTree'
-        Plug 'ctrlpvim/ctrlp.vim'
-        " Plug 'tpope/vim-dispatch'
-        Plug 'tpope/vim-fugitive'
-        " Plug 'janko-m/vim-test'
-        " Plug 'tpope/vim-haml'
-        " Plug 'skywind3000/asyncrun.vim'
-        " must run ./install.py in directory for installing ycmd server
-        " ./install.py --tern-completer --clang-completer
-        Plug 'Valloric/YouCompleteMe'
-    "------snippets--------
-        Plug 'Shougo/neocomplete'
-        Plug 'Shougo/neosnippet'
-        Plug 'Shougo/neosnippet-snippets'
-        " Plug 'tomtom/tlib_vim'
-        " Plug 'MarcWeber/vim-addon-mw-utils'
-        " Plug 'garbas/vim-snipmate'
-        " Plug 'honza/vim-snippets'
-
-        " Snippets are separated from the engine. Add this if you want them:
-        Plug 'honza/vim-snippets'
-        Plug 'magarcia/vim-angular2-snippets'  " or just cppy snippet into snippets directory
-    "----  format code -----
-        " Plug 'Chiel92/vim-autoformat'
-        "  requires clang and js-buetify
-        Plug 'google/vim-maktaba'
-        Plug 'google/vim-codefmt'
-        Plug 'google/vim-glaive'  " :help :Glaive` for usage.
-    "---- syntastic -----
-        Plug 'scrooloose/syntastic'
-    "----- javascritp ----------------
-        " Plug 'pangloss/vim-javascript'
-        " Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
-    "---------typescript and angular -------
-        Plug 'leafgarland/typescript-vim'
-        " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-        " Plug 'Quramy/tsuquyomi'
-    "----- extras ---------
-        " Plug 'milkypostman/vim-togglelist'     " toggle location & quickfix window
-        " Plug 'tpope/vim-capslock'
-        " Plug 'jiangmiao/auto-pairs'
-        Plug 'vim-airline/vim-airline'          " airline status bar
-        Plug 'vim-airline/vim-airline-themes'
-        "  Plug 'crusoexia/vim-monokai'
-call plug#end()
-
-call glaive#Install()
-
-  " Optional: Enable codefmt's default mappings on the &lt;Leader&gt;= prefix.
-    Glaive codefmt plugin[mappings]
     let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
 " typescript-vim
     " let g:tsuquyomi_disable_default_mappings = 1
-
     " let g:typescript_compiler_binary = 'tsc'
     " let g:typescript_compiler_options = ''
     " autocmd FileType typescript :set makeprg=tsc
@@ -153,13 +98,13 @@ call glaive#Install()
     set omnifunc=syntaxcomplete#Complete
 
 " syntastic with Tsquyomi
-    set statusline+=%{fugitive#statusline()}
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%{fugitive#statusline()}
     set statusline+=%*
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 1
-    let g:syntastic_javascript_checkers = ['jshint']
+    let g:syntastic_javascript_checkers = ['jshint', 'eslint']
     let g:syntastic_typescript_checkers = ["tslint"]
     " let g:syntastic_typescript_checkers = ['tsuquyomi']
     " disable syntasticCheck as default
@@ -175,6 +120,7 @@ call glaive#Install()
 
 " Nerd Tree
     let g:NERDTreeWinSize=25        " resize nerdtree width
+
 " Load subconfigurations from .vimrc.d
 for f in split(glob('~/.vimrc.d/*.vim'), '\n')
   exe 'source' f
