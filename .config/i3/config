@@ -1,149 +1,173 @@
-#my custome tags
-    set $tag1 "1: www"
-    set $tag2 "2: terminal"
-    set $tag3 "3: devel"
-    set $tag4 "4: media"
+## quick terminal
+exec --no-startup-id urxvtc -name myTerm
+# other startup programs launched in .xinitrc
 
 
 focus_follows_mouse no
+# border pixel 3
+font pango:Awesome 12, DejaVu Sans Mono 12
 
-# i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-
+### variables
+#
 set $mod Mod4
-#set $mod1 Mod1
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-#font pango:monospace 8
+set $left h
+set $down j
+set $up k
+set $right l
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-# font pango:DejaVu Sans Mono 10, Awesome 8
-font pango:Inconsolata for Powerline 12, Awesome 8
-# font pango:Inconsolata for Powerline 10
-# font pango:Terminus 8
-# Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# workspace names
+set $tag1 "1: www"
+set $tag2 "2: code"
+set $tag3 "3: terminal"
+set $tag4 "4: debug"
+set $tag5 "5: media"
 
-bindsym XF86Launch1 exec chromium
-# start a terminal
-bindsym $mod+Return exec urxvt
+# default applications
+set $term urxvt
+set $menu dmenu_run 
+# set $menu dmenu_run  -nb '#000000' -nf '#FFFFFF'
 
-# kill focused window
-bindsym $mod+q kill
+#
+### Media keys
+#
+    bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+    bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+    bindsym XF86AudioMute exec amixer -q set Master toggle
+#
+#----------Navigation--------
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+    # move to next prev workspace
+    bindsym $mod+Control+Left workspace prev_on_output
+    bindsym $mod+Control+Right workspace next_on_output
+    bindsym $mod+Control+$left workspace prev_on_output
+    bindsym $mod+Control+$right workspace next_on_output
+    # move container to next prev workspace
+    bindsym $mod+Shift+Left move container to workspace prev_on_output
+    bindsym $mod+Shift+Right move container to workspace next_on_output
+    bindsym $mod+Shift+$left move container to workspace prev_on_output
+    bindsym $mod+Shift+$right move container to workspace next_on_output
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -nb '#000000' -nf '#FFFFFF'
-# start dmenu desktop launcher
-bindsym $mod+p exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nb '#000000' -nf '#FFFFFF'"
+#
+### WM bindings
+#
+    # start a terminal
+    bindsym $mod+Return exec urxvt
 
-bindsym $mod+Control+Left workspace prev_on_output
-bindsym $mod+Control+Right workspace next_on_output
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    floating_modifier $mod
 
-bindsym $mod+Tab exec aworkspace switch
-bindsym $mod+Shift+Right move container to workspace next_on_output
+    # kill focused window
+    bindsym $mod+q kill
+
+    # start your launcher
+    bindsym $mod+d exec $menu
 
 
-# change focus !mod+h is already used
-# bindsym $mod+h focus left
-# bindsym $mod+j focus down
-# bindsym $mod+k focus up
-# bindsym $mod+l focus right
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+    # exit i3
+    bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+### Workspaces:
+    bindsym $mod+1 workspace $tag1
+    bindsym $mod+2 workspace $tag2
+    bindsym $mod+3 workspace $tag3
+    bindsym $mod+4 workspace $tag4
+    bindsym $mod+5 workspace $tag5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace $tag1
+    bindsym $mod+Shift+2 move container to workspace $tag2
+    bindsym $mod+Shift+3 move container to workspace $tag3
+    bindsym $mod+Shift+4 move container to workspace $tag4
+    bindsym $mod+Shift+5 move container to workspace $tag5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+#
+# Layout stuff:
+#
+    # "split" the current object of your focus
+    # bindsym $mod+h splith
+    bindsym $mod+v splitv
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Alt+Left move left
-bindsym $mod+Alt+Down move down
-bindsym $mod+Alt+Up move up
-bindsym $mod+Alt+Right move right
+    # Switch the current container between different layout styles
+    # bindsym $mod+s layout stacking
+    bindsym $mod+t layout tabbed
+    bindsym $mod+s layout toggle split
 
-# split in horizontal orientation
-# bindsym $mod+h split h
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
 
-# split in vertical orientation
-bindsym $mod+v split v
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
-bindsym $mod+1 workspace $tag1
-bindsym $mod+2 workspace $tag2
-bindsym $mod+3 workspace $tag3
-bindsym $mod+4 workspace $tag4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
-# move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $tag1
-bindsym $mod+Shift+2 move container to workspace $tag2
-bindsym $mod+Shift+3 move container to workspace $tag3
-bindsym $mod+Shift+4 move container to workspace $tag4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-
-# reload the configuration file
-  bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-  bindsym $mod+Shift+r restart 
-# exit i3 (logs you out of your X session) 
- bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
+    # move focus to the parent container
+    bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
     # Move the currently focused window to the scratchpad
-    bindsym $mod+minus move scratchpad
-    #bindsym $mod+Shift+Print move scratchpad
+    bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+plus scratchpad show
-    #bindsym $mod+Print show scratchpad
+    bindsym $mod+minus scratchpad show
+#
+# ---------- MODES ---------------
+#
+# move mode
+#
+bindsym $mod+m mode "move" focus floating
+mode "move" {
+    bindsym $mod+Tab focus right
 
+    bindsym $left move left
+    bindsym $down move down
+    bindsym $up move up
+    bindsym $right move right
+    bindsym Left  move left
+    bindsym Down  move down
+    bindsym Up    move up
+    bindsym Right move right
 
-#--------MEDIA KEYS--------
-bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
-
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q set Master toggle
-
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+#
+# resize mode:
+#
+bindsym $mod+r mode "resize"
 mode "resize" {
+    bindsym $left resize shrink width 10 px or 10 ppt
+    bindsym $down resize grow height 10 px or 10 ppt
+    bindsym $up resize shrink height 10 px or 10 ppt
+    bindsym $right resize grow width 10 px or 10 ppt
 
     # ditto, with arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
@@ -155,44 +179,53 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
-#resize mode
-#
 #
 # launcher mode
 #
-bindsym $mod+l mode "launch"
+
+# mod + colon
+bindsym $mod+0x3b mode "launch"
 mode "launch" {
     bindsym c exec chromium ; mode "default"
-    bindsym p exec pcmanfm ; mode "default"
     bindsym f exec firefox; mode "default"
-
+    bindsym p exec pcmanfm ; mode "default"
+    
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-# exec /usr/lib/python3.5/site-packages/powerline/bindings/lemonbar/powerline-lemonbar.py --i3
-# bottom bar
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
 bar {
-   status_command    ~/.config/pystatus/bar1.py
-   position    bottom
-   workspace_buttons no
+    position bottom
+    status_command  ~/.config/pystatus/bar1.py
+    colors {
+        statusline #cccccc
+        background #000000
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
 # top bar
 bar {
-   status_command    ~/.config/pystatus/bar2.py
-   position    top
-   workspace_buttons yes
+    position top
+      # ~/.config/myBar.sh | lemonbar -p -f "Inconsolata for Powerline" -f "Font Awesome" -g "x18" 
+    
+    status_command    ~/.config/pystatus/bar2.py
+    workspace_buttons no
+    colors {
+        statusline #cccccc
+        background #000000
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
 }
+
 #================= RULES =================
 for_window [class="^.*"] border pixel 2
 
-# assign [class="^Kodi$"] $tag4
-for_window [class="^Kodi$"] move to workspace $tag4, border none; fullscreen; 
+assign [class="Code"] $tag2
+assign [instance="Karma - Chromium"] $tag4
 
-## quick terminal
-exec --no-startup-id urxvtc -name myTerm
-# for_window [instance="myTerm"] border none; sticky enable; floating enable;
 for_window [instance="myTerm"] border none; floating enable;
-for_window [instance="myTerm"] move scratchpad; [instance="myTerm"] scratchpad show; move position 0px 0px; resize grow width 683px; move scratchpad
+for_window [instance="myTerm"] move scratchpad; [instance="myTerm"] scratchpad show; resize set 1920 1000; move position 0px 25px; move scratchpad
 bindsym Print [instance="myTerm"] scratchpad show
-

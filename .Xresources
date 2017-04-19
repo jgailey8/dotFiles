@@ -1,13 +1,10 @@
-! Xft.dpi: 125.37  dpi is set in xinitrc
-
 URxvt.perl-ext-common: 	  	default,clipboard
 myTerm*perl-ext-common: 	  	default,tabbedex,clipboard
-! It seems that (X)characters = 8x(X) pixels and (Y) characters = 16x(Y) pixels, a urxvt -geometry 160x25 would take 1280 px width and 400 px height
-myTerm*geometry:			180x48  
-URxvt.borderless:       true
+! myTerm*geometry:			180x48  
+URxvt.borderless: true
 URxvt.utf8: true
 URxvt.locale: true
-URxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=12
+URxvt*font: xft:Inconsolata\ for\ Powerline:pixelsize=22
 
 URxvt*saveLines: 1024
 URxvt*scrollBar:  false

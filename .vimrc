@@ -59,7 +59,7 @@ set guifont=Inconsolata\ for\ Powerline:h12
     set viminfo="NONE" " no annoying bkp files and .viminfo
     set nobackup
     set noswapfile
-    set completeopt=longest,menuone " omnicomplete dont auto select
+    set completeopt=longest,menuone,preview " omnicomplete dont auto select
 
 " Enable folding
 setlocal foldmethod=indent
@@ -83,34 +83,14 @@ setlocal foldlevel=99
     let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
 " typescript-vim
     " let g:tsuquyomi_disable_default_mappings = 1
-    " let g:typescript_compiler_binary = 'tsc'
+    let g:typescript_compiler_binary = 'tsc'
     " let g:typescript_compiler_options = ''
-    " autocmd FileType typescript :set makeprg=tsc
+    autocmd FileType typescript :set makeprg=tsc
     " autocmd QuickFixCmdPost [^l]* nested cwindow  " show errors on compile failure
     " autocmd QuickFixCmdPost    l* nested lwindow
 
-" YCM gives you popups and splits by default that some people might not like, so these should tidy it up a bit for you.
-" YCM and completeopt
-    let g:ycm_add_preview_to_completeopt=0
-    let g:ycm_confirm_extra_conf=0
-    set completeopt-=preview
-    let g:ycm_key_list_select_completion = [] " unbind tab
-    set omnifunc=syntaxcomplete#Complete
 
-" syntastic with Tsquyomi
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%{fugitive#statusline()}
-    set statusline+=%*
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_check_on_wq = 1
-    let g:syntastic_javascript_checkers = ['jshint', 'eslint']
-    let g:syntastic_typescript_checkers = ["tslint"]
-    " let g:syntastic_typescript_checkers = ['tsuquyomi']
-    " disable syntasticCheck as default
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ["javascritpt","typescript"],'passive_filetypes': [] }
-    " let g:tsuquyomi_disable_quickfix = 1
-
+    " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
 " Tell Neosnippet about the other snippets
     let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets/'
 

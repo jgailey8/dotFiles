@@ -21,18 +21,15 @@
 
 #add user and set passwords and configure sudo etc..
     useradd -m -G wheel -s /bin/bash archie
-    EDITOR=vi visudo
+    EDITOR=vim visudo
 
-# install bootloader
-#   grub or refind or systemd
+# install systemd ootloader
 
 # basic core packages i install
     pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils
 # other packages
-pacman -S wget ssvfs python gvim rxvt-unicode unzip zip chromium pcmanfm-gtk3 feh tlp acpi_call networkmanager
+pacman -S wget ssvfs python node npm gvim rxvt-unicode unzip zip chromium pcmanfm-gtk3 feh tlp acpi_call networkmanager
 
-#development packages
-pacman -S node npm python 
 # extra packages
 pacman -S lm_sensors pianobar lxappearance mysql-workbench
 
@@ -59,34 +56,13 @@ pacman -S lm_sensors pianobar lxappearance mysql-workbench
 # udev rules
 # edit xorg.conf
 
-# choices to make
-  let window manager handle media keys(brightness, volume etc..)
-    or
-  use set up acpi events 
-        # volume /etc/acpi/events/vol-d
-            event=button/volumedown
-            action=amixer set Master 5-
-        # brightness /etc/acpi/handlers/bl
-            #!/bin/sh
-            bl_dev=/sys/class/backlight/acpi_video0
-            step=1
-
-            case $1 in
-              -) echo $(($(< $bl_dev/brightness) - $step)) >$bl_dev/brightness;;
-              +) echo $(($(< $bl_dev/brightness) + $step)) >$bl_dev/brightness;;
-            esac
-
-        # /etc/acpi/events/bl_d
-                event=video/brightnessdown
-            action=/etc/acpi/handlers/bl -
-
 
 Powerline
 http://misctechmusings.com/powerline-on-archlinux
 
     # bash
-    if [ -f /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh ]; then
-		source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+    if [ -f /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh ]; then
+		source /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 	fi
 	# vim
 
@@ -102,9 +78,6 @@ Git
 
 ----ISSUES---
 annoying screen flicker at login screen
-
-i dont like pgUp/pgDown handles history
-    configure .inputrc or just configure urxvt
 
 power-management improvements
     dpms,inactivity,tlp etc...
