@@ -12,7 +12,7 @@ augroup filetype_cs, filetype_xml
     " let g:OmniSharp_typeLookupInPreview = 1
 
     "Timeout in seconds to wait for a response from the server
-    let g:OmniSharp_timeout = 3
+    let g:OmniSharp_timeout = 2
 
     "Showmatch significantly slows down omnicomplete
     "when the first match contains parentheses.

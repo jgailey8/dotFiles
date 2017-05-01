@@ -1,15 +1,30 @@
 ===fresh install setup notes===
-# initial inistall
-    partition setup - i usually just use gdisk
+# pre installation setup
+##  partition setup - i usually just use gdisk
     partion 1 = 512Mib typeCode="ef00"
     partion 2 = 100%   linuxFilesystem
-
     mkfs.vfat -F32 /dev/sda1
     mkfs.btrfs -L arch -f /dev/sda2
-
-# mount partions
-    pacstrap /mnt base base base-devel btrfs-progs
+## create root subvolume
+    mount /dev/sda2 /mnt
+    cd /mnt
+    btfs subvolume create ROOT
+##  setup btrfs subvolumes(makes taking snapshots/backup easy)
+    umount /dev/sda2
+    mount -o ssd,noatime,subvol=ROOT /dev/sda2
+    cd /mnt
+    btfs subvolume create home
+    btfs subvolume create etc
+    btfs subvolume create mnt
+    ...
+    ...
+    > don't usualy bother with swap partition or file unless i feel like it
+# install
+    pacstrap /mnt base base-devel btrfs-progs
     genfstab -U /mnt >> /mnt/etc/fstab
+
+    fstab example with btrfs volume
+    UUID={##}	/         	btrfs     	rw,noatime,ssd,subvol=ROOT	0 0
 
     arch-chroot /mnt /bin/bash
 #clock, locale and hostname
@@ -23,67 +38,59 @@
     useradd -m -G wheel -s /bin/bash archie
     EDITOR=vim visudo
 
-# install systemd ootloader
-
+# install systemd bootloader
+    bootctl --path=/boot install
+## example entrie wtih btrfs subvol
+    title   Arch Linux
+    linux   /vmlinuz-linux
+    initrd  /initramfs-linux.img
+    options root=PARTUUID=## rw rootflags=subvol=ROOT elevator=noop nmi_watchdog=0
+### blkid -s PARTUUID -o value /dev/sda2 
 # basic core packages i install
-    pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils
-# other packages
-pacman -S wget ssvfs python node npm gvim rxvt-unicode unzip zip chromium pcmanfm-gtk3 feh tlp acpi_call networkmanager
-
-# extra packages
-pacman -S lm_sensors pianobar lxappearance mysql-workbench
-
-# some aur packages i like
-    py3status
-    adobe-source-pro fonts #
-    gtk-arc # theme
+    pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils gvim wget node python npm rxvt-unicode feh networkmanager chromium
+## other packages
+    powerline, pcmanfm, docker, xcompmgr, snapper, trash-cli
+## some aur packages 
     visual-studio-code
+    py3status(requires installing a few python libraries for some basic functionallity)
+    adobe-source-pro 
+    powerline-fonts-git
     light
-
-# get infinality-fonts
-
-# setup LEMP or LAMP for php/mysql
+### i3pystatus
+    pip install --user pyalsaaudio colour netifaces basiciw
+    yaourt font-awesome
+    
+# dev environment
+## vimrc and install vim-plug
+## docker!
+## npmrc
+## npm install -g typescript eslint etc...
+## setup nginx or apache for php
+## mysql, mongo etc..
+## dotnet-cli, ruby etc...
 
 # optimize system
     kernel parameters
         disable watchdog
         use noop scheduler
         etc...
-    # fstab settings
+    fstab settings
+## btrfs snapshots
+    snapper -c home create-config /home
+    snapper -c root create-config /
+    enable timed backups for home or whatever
+    install snap-pac for nice pre&post pacman snapshots
+    allow user to manage home snaps
+        sudo snapper -c home set-config "ALLOW_USERS=user" SYNC_ACL="yes"
 
-# tlp/power-management settings
+## tlp/power-management settings
+## udev rules(keyboard,trackpoint tweaks)
+## configure xorg.conf
+## setup backups with snapshots etc..
 
-# udev rules
-# edit xorg.conf
-
-
-Powerline
-http://misctechmusings.com/powerline-on-archlinux
-
-    # bash
-    if [ -f /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh ]; then
-		source /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
-	fi
-	# vim
-
-Urxvt
+# Urxvt notes
 install tabbedex from
 https://github.com/mina86/urxvt-tabbedex for close tab support
     git package supports Control+Shift and kill_tab
 
-Git
- git config --global user.email "jgailey8@gmail.com"
- git config --global user.name "Jared Gailey
- setup ssh keys
-
-----ISSUES---
-annoying screen flicker at login screen
-
-power-management improvements
-    dpms,inactivity,tlp etc...
-trackpoint speed too fast for my liking
-    create udev rule?
-setup ssh keys for git and my servers
-
-make managing dotfiles easier
-    symlinks and use some scripts etc...
+# copy over dotfiles and prosper!

@@ -1,8 +1,18 @@
 // Place your key bindings in this file to overwrite the defaults
-[
-    {
+[{
         "key": "ctrl+n",
         "command": "workbench.view.explorer"
+        // "command": "workbench.files.action.focusFilesExplorer"
+    },
+    {
+        "key": "tab",
+        "command": "workbench.files.action.focusFilesExplorer",
+        "when": "explorerViewletFocus"
+    },
+    {
+        "key": "tab",
+        "command": "workbench.files.action.focusOpenEditorsView",
+        "when": "filesExplorerFocus"
     },
     {
         "key": "ctrl+shift+n",
@@ -47,22 +57,6 @@
         "command": "workbench.action.terminal.new"
     },
     {
-        // j and k naviage file explorer
-        "key": "j",
-        "command": "list.focusdown",
-        "when": "listfocus"
-    },
-    {
-        "key": "k",
-        "command": "list.focusup",
-        "when": "listfocus"
-    },
-    {
-        "key": "o",
-        "command": "list.toggleExpand",
-        "when": "listFocus"
-    },
-    {
         // snippet next group with ctrl+k
         "key": "Ctrl+k",
         "command": "jumpToNextSnippetPlaceholder",
@@ -75,7 +69,7 @@
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
     {
-        "key": "Ctrl+j",
+        "key": "ctrl+j",
         "command": "selectNextSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
     },
@@ -86,85 +80,39 @@
     {
         "key": "ctrl+shift+pageup",
         "command": "workbench.action.terminal.focusPrevious"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "j",
+        "command": "list.focusDown",
+        "when": "listFocus"
+    },
+    {
+        "key": "k",
+        "command": "list.focusUp",
+        "when": "listFocus"
+    },
+    {
+        "key": "enter",
+        "command": "list.select",
+        "when": "explorerViewletVisible && filesExplorerFocus"
+    },
+    {
+        "key": "o",
+        "command": "list.toggleExpand",
+        "when": "listFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": ""
     }
-    // {
-    //     "command": "search.history.showPrevious",
-    //     "key": "Alt+j",
-    //     "when": "searchInputBoxFocus && searchViewletVisible"
-    // },
-    // {
-    //     "command": "search.history.showNext",
-    //     "key": "Alt+k",
-    //     "when": "searchInputBoxFocus && searchViewletVisible"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "workbench.action.interactivePlayground.arrowDown",
-    //     "when": "interactivePlaygroundFocus && !editorTextFocus"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "workbench.action.interactivePlayground.arrowUp",
-    //     "when": "interactivePlaygroundFocus && !editorTextFocus"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "cursorDown",
-    //     "when": "editorTextFocus"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "cursorUp",
-    //     "when": "editorTextFocus"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "repl.action.historyNext",
-    //     "when": "editorTextFocus && inDebugRepl && onLastDebugReplLine"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "repl.action.historyPrevious",
-    //     "when": "editorTextFocus && inDebugRepl && onFirsteDebugReplLine"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "showNextParameterHint",
-    //     "when": "editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "showPrevParameterHint",
-    //     "when": "editorTextFocus && parameterHintsMultipleSignatures && parameterHintsVisible"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "selectNextSuggestion",
-    //     "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "selectPrevSuggestion",
-    //     "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "search.focus.nextInputBox",
-    //     "when": "inputBoxFocus && searchViewletVisible"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "search.focus.previousInputBox",
-    //     "when": "inputBoxFocus && searchViewletVisible && !searchInputBoxFocus"
-    // },
-    // {
-    //     "key": "alt+j",
-    //     "command": "workbench.action.interactivePlayground.arrowDown",
-    //     "when": "interactivePlaygroundFocus && !editorTextFocus"
-    // },
-    // {
-    //     "key": "alt+k",
-    //     "command": "workbench.action.interactivePlayground.arrowUp",
-    //     "when": "interactivePlaygroundFocus && !editorTextFocus"
-    // }
 ]

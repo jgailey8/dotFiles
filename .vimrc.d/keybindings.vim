@@ -3,17 +3,10 @@
 " map <DOWN>  <NOP>
 " map <LEFT>  <NOP>
 " map <RIGHT> <NOP>
-
 " exit from insert mode with  jj
-imap jj <Esc>
+imap jk <Esc>
 " remap colon
 nmap ; :
-
-" arrow keys in insert mode fix
-imap <ESC>oA <ESC>ki
-imap <ESC>oB <ESC>ji
-imap <ESC>oC <ESC>li
-imap <ESC>oD <ESC>hi
 
 " quite/save faster
 nnoremap <Leader>q :q<CR>
@@ -27,6 +20,10 @@ command SudoWrite w !sudo tee "%"
 " remap U to <C-r> for easier redo
 nnoremap U <C-r>
 
+" new line without going to insert mode
+nnoremap O o <esc>
+
+nnoremap <Leader>w :w<CR>
 nnoremap <F2> :buffers<CR>:buffer<Space>
 set pastetoggle=<F3>            " paste mode
 " Toggle Syntastic
@@ -64,13 +61,12 @@ nnoremap <C-b> :buffers<CR>:buffer<Space>
 
 " show nerdtree with Control n
 map <C-n> :NERDTreeToggle<CR>
-
 " Move up and down in autocomplete with Control j/k
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> <Esc><Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
-
 " Enable folding with the spacebar
 nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf

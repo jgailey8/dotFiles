@@ -20,16 +20,17 @@ call plug#begin('~/.vim/plugged')
         Plug 'magarcia/vim-angular2-snippets'  " or just cppy snippet into snippets directory
     "----  format code -----
     "   really only use for c# astyle
-        " Plug 'Chiel92/vim-autoformat'
+        Plug 'Chiel92/vim-autoformat'
 
-        Plug 'google/vim-maktaba'
-        Plug 'google/vim-codefmt'
-        Plug 'google/vim-glaive'  " :help :Glaive` for usage.
+        " Plug 'google/vim-maktaba'
+        " Plug 'google/vim-codefmt'
+        " Plug 'google/vim-glaive'  " :help :Glaive` for usage.
     "---- syntastic -----
         Plug 'scrooloose/syntastic'
     "----- javascritp/Html ----------------
         Plug 'othree/html5.vim'
         Plug 'pangloss/vim-javascript'
+        Plug 'mxw/vim-jsx' " react/jsx
         " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
     "---- dotnet / c# ----------------
         Plug 'OmniSharp/omnisharp-vim'
@@ -43,4 +44,4 @@ call plug#begin('~/.vim/plugged')
         Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
-call glaive#Install()
+" call glaive#Install()

@@ -1,4 +1,3 @@
-
 " /usr/share/vim/vimfiles/archlinux.vim) and sourced by the call to :runtime
 " you can find below.  If you wish to change any of those settings, you should
 " do it in this file (/etc/vimrc), since archlinux.vim will be overwritten
@@ -53,7 +52,8 @@ set guifont=Inconsolata\ for\ Powerline:h12
     set nolist                      " don't show invisible characters by default,
                                     " but it is enabled for some file types (see later)
     set fileformats="unix,dos,mac"
-    set timeoutlen=1000 ttimeoutlen=0 "  fixes issue with delay in status change
+    set timeoutlen=1000 ttimeoutlen=10 "  fixes issue with delay in status change
+    " set timeout ttimeoutlen=100 timeoutlen=1000
     set laststatus=2        " always show status bar
     set t_Co=256            " 256 colors
     set viminfo="NONE" " no annoying bkp files and .viminfo
@@ -101,6 +101,7 @@ setlocal foldlevel=99
 " Nerd Tree
     let g:NERDTreeWinSize=25        " resize nerdtree width
 
+    let g:jsx_ext_required = 0 " jsx syntax highlighting for all js files
 " Load subconfigurations from .vimrc.d
 for f in split(glob('~/.vimrc.d/*.vim'), '\n')
   exe 'source' f
