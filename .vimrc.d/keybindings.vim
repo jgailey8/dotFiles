@@ -77,11 +77,13 @@ nnoremap Za zR
 
 " search and replace hotkey
 nnoremap <Leader>sr :%s/wordToReplace/replaceWith/gc
+" clear dos eol
+:command ClearEol %s/\r//g
 
 " neosnippet
-" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+imap <C-k>  <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>  <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>  <Plug>(neosnippet_expand_target)
 imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -96,7 +98,6 @@ augroup filetype_javascript, filetype_typescript
     autocmd FileType javascript,typescript nnoremap gd :YcmCompleter GoToDefinition<CR>
     autocmd FileType javascript,typescript nnoremap gr :YcmCompleter GoToReferences<CR>
     autocmd FileType javascript,typescript nnoremap gt :YcmCompleter GetType<CR>
-    autocmd FileType javascript,typescript nnoremap rn :YcmCompleter RefactorRename
 
     autocmd FileType javascript,typescript nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
     autocmd FileType javascript,typescript nnoremap <leader>gr :YcmCompleter GoToReferences<CR>

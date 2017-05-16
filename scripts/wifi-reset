@@ -1,0 +1,42 @@
+#!/bin/sh
+#Author: Jared Gailey
+#Date: 5/3/17
+#
+#   Simple bash script that pings google to check if connected and
+#   resets network connection accordingly
+#   force reset with -f
+#   check connection only with -c
+
+force=false
+check=false
+while getopts 'fc' flag; do
+    case "${flag}" in
+        f) force=true ;;
+        c) check=true ;;
+        *) error "Unexpected option ${flag}" ;;
+    esac
+done
+
+function reset {
+    echo "resetting wifi..."
+    nmcli networking off
+    sleep 1
+    nmcli networking on
+    sleep 1
+}
+
+if [[ "$force" = true && "$check" = false ]] ; then
+    echo "forcing wifi reset"
+    reset
+else 
+    ping -c2 8.8.8.8 > /dev/null
+    connected=$? 
+    if [ "$connected" -ne 0 ]; then
+        echo "It seems wifi not working"
+    else
+        echo "Wifi seems to be all good"
+    fi
+    if [[ "$check" = false && "$connected" -ne 0 ]]; then
+        reset
+    fi
+fi

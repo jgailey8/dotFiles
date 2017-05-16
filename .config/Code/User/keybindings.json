@@ -40,11 +40,11 @@
     {
         // navigate open windows with ctrl+L/H
         "key": "ctrl+l",
-        "command": "workbench.action.focusNextGroup"
+        "command": "workbench.action.navigateRight"
     },
     {
         "key": "ctrl+h",
-        "command": "workbench.action.focusPreviousGroup"
+        "command": "workbench.action.navigateLeft"
     },
     {
         // open close terminal

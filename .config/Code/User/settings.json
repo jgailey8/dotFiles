@@ -6,6 +6,7 @@
     //     "statusBarNoFolderBackground": "#0A0A0D",
     //     "statusBarDebuggingBackground": "#811f1f"
     // },
+    // "csharp.fallbackDebuggerLinuxRuntimeId": "ubuntu.16.10-x64",
     "files.exclude": {
         "**/.git": true, // this is a default value
         "**/.DS_Store": true, // this is a default value
@@ -51,19 +52,29 @@
     "vim.useCtrlKeys": false,
     "vim.showcmd": true,
     "vim.searchHighlightColor": "rgba(50, 50, 255, 0.9)",
-    "vim.insertModeKeyBindings": [{
-        "before": ["j", "k"],
-        "after": ["<Esc>"]
-    }],
-    "vim.otherModesKeyBindingsNonRecursive": [{ // remap : to vs code commands
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.otherModesKeyBindingsNonRecursive": [
+        { // remap : to vs code commands
             "before": [
                 ":"
             ],
             "after": [],
-            "commands": [{
-                "command": "workbench.action.showCommands",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "workbench.action.showCommands",
+                    "args": []
+                }
+            ]
         },
         { // remap : to vs code commands
             "before": [
@@ -114,11 +125,13 @@
                 "d"
             ],
             "after": [],
-            "commands": [{
-                "command": "editor.action.gotodeclaration",
-                "when": "editorhasdefinitionprovider && editortextfocus && !isinembeddededitor",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "editor.action.gotodeclaration",
+                    "when": "editorhasdefinitionprovider && editortextfocus && !isinembeddededitor",
+                    "args": []
+                }
+            ]
         },
         {
             "before": [
@@ -127,11 +140,13 @@
                 "s"
             ],
             "after": [],
-            "commands": [{
-                "command": "workbench.action.goToSymbol",
-                "when": "editorhasdefinitionprovider && editortextfocus && !isinembeddededitor",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "workbench.action.goToSymbol",
+                    "when": "editorhasdefinitionprovider && editortextfocus && !isinembeddededitor",
+                    "args": []
+                }
+            ]
         },
         {
             // open quickfix
@@ -140,10 +155,12 @@
                 "f"
             ],
             "after": [],
-            "commands": [{
-                "command": "editor.action.quickFix",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "editor.action.quickFix",
+                    "args": []
+                }
+            ]
         },
         // vim write and quit with leader
         {
@@ -152,10 +169,12 @@
                 "q"
             ],
             "after": [],
-            "commands": [{
-                "command": "workbench.action.closeActiveEditor",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "workbench.action.closeActiveEditor",
+                    "args": []
+                }
+            ]
         },
         {
             "before": [
@@ -163,13 +182,16 @@
                 "w"
             ],
             "after": [],
-            "commands": [{
-                "command": "workbench.action.files.save",
-                "args": []
-            }]
+            "commands": [
+                {
+                    "command": "workbench.action.files.save",
+                    "args": []
+                }
+            ]
         }
     ],
-    "vim.otherModesKeyBindings": [{ // redo with U
+    "vim.otherModesKeyBindings": [
+        { // redo with U
             "before": [
                 "U"
             ],
@@ -197,5 +219,9 @@
             ]
         }
     ],
-    "window.zoomLevel": 1
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#2222ff",
+        "statusBar.noFolderBackground": "#2222ff",
+        "statusBar.debuggingBackground": "#2222ff"
+    }
 }

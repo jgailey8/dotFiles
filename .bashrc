@@ -15,6 +15,11 @@ if [ -f `which powerline-daemon` ]; then
   . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
 fi
 
+export DOTNET_CLI_TELEMETRY_OPTOUT=1 # seems to cause segmentation faults with openssl-1.0
+export LIBVA_DRIVER_NAME="i965"
+export VDPAU_DRIVER="vs_gl"
+export PAGER='vimpager'
+alias less=$PAGER
 alias rm="trash"
 export LANG="en_US.UTF-8"
 export NODE_ENV="development"
@@ -41,6 +46,7 @@ alias node-prod="export NODE_ENV=production"
 if [ -d ~/.gem/ruby/2.4.0/bin ]; then
     PATH=$PATH:~/.gem/ruby/2.4.0/bin
 fi
+export PATH
 
 if [ -f ~/.bash_completions/git-completion.bash ]; then
     . ~/.bash_completions/git-completion.bash
@@ -53,8 +59,12 @@ fi
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
-export PATH
 
+
+function wifi-reload() {
+    nmcli networking off 
+    nmcli networking on
+}
 function docker-ip() {
   docker inspect --format '{{ .NetworkSettings.IPAddress }}' "$@"
 }
@@ -104,3 +114,64 @@ function extract()
         echo "'$1' is not a valid file"
     fi
 }
+
+###-begin-npm-completion-###
+#
+# npm command completion script
+#
+# Installation: npm completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
+#
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${words[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+    if type __ltrim_colon_completions &>/dev/null; then
+      __ltrim_colon_completions "${words[cword]}"
+    fi
+  }
+  complete -o default -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###

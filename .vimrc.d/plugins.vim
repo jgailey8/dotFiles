@@ -5,11 +5,11 @@ call plug#begin('~/.vim/plugged')
         Plug 'scrooloose/nerdTree'
         Plug 'ctrlpvim/ctrlp.vim'
         Plug 'tpope/vim-dispatch'
-        Plug 'tpope/vim-fugitive'
+        " Plug 'tpope/vim-fugitive'
 
         " must run ./install.py in directory for installing ycmd server
         " ./install.py --tern-completer --clang-completer --omnisharp-completer
-        Plug 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
     "------snippets--------
         " Plug 'Shougo/neocomplete'
         Plug 'Shougo/neosnippet'
@@ -19,7 +19,6 @@ call plug#begin('~/.vim/plugged')
         Plug 'honza/vim-snippets'
         Plug 'magarcia/vim-angular2-snippets'  " or just cppy snippet into snippets directory
     "----  format code -----
-    "   really only use for c# astyle
         Plug 'Chiel92/vim-autoformat'
 
         " Plug 'google/vim-maktaba'

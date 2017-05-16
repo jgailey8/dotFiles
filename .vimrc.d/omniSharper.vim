@@ -2,11 +2,11 @@ augroup filetype_cs, filetype_xml
     autocmd!
     " OmniSharp won't work without this setting
     filetype plugin on
-    " let g:OmniSharp_server_type = 'v1'
+    let g:OmniSharp_server_type = 'v1'
     let g:OmniSharp_server_type = 'roslyn'
     let g:OmniSharp_server_path = "/opt/omnisharp-rosly"
     "This is the default value, setting it isn't actually necessary
-    let g:OmniSharp_host = "http://localhost:2000"
+    " let g:OmniSharp_host = "http://localhost:2000"
 
     "Set the type lookup function to use the preview window instead of the status line
     " let g:OmniSharp_typeLookupInPreview = 1

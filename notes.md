@@ -49,7 +49,7 @@
 # basic core packages i install
     pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils gvim wget node python npm rxvt-unicode feh networkmanager chromium
 ## other packages
-    powerline, pcmanfm, docker, xcompmgr, snapper, trash-cli
+    powerline pcmanfm docker xcompmgr snapper xclip tlp acpi_call trash-cli ntp
 ## some aur packages 
     visual-studio-code
     py3status(requires installing a few python libraries for some basic functionallity)
@@ -64,7 +64,8 @@
 ## vimrc and install vim-plug
 ## docker!
 ## npmrc
-## npm install -g typescript eslint etc...
+## npm install -g typescript eslint @angular/cli etc...
+### npm install -g yo geneator-aspnet generator-aspnet-item
 ## setup nginx or apache for php
 ## mysql, mongo etc..
 ## dotnet-cli, ruby etc...
