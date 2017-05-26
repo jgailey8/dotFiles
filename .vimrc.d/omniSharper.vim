@@ -1,90 +1,57 @@
-augroup filetype_cs, filetype_xml
-    autocmd!
-    " OmniSharp won't work without this setting
-    filetype plugin on
-    let g:OmniSharp_server_type = 'v1'
-    let g:OmniSharp_server_type = 'roslyn'
-    let g:OmniSharp_server_path = "/opt/omnisharp-rosly"
-    "This is the default value, setting it isn't actually necessary
-    " let g:OmniSharp_host = "http://localhost:2000"
+let g:OmniSharp_server_type = 'v1'
+let g:OmniSharp_server_type = 'roslyn'
+" let g:OmniSharp_server_path = "/opt/omnisharp-roslyn/OmniSharp.exe"
+let g:OmniSharp_server_path = "omnisharp"
+let g:OmniSharp_start_without_solution = 1
+" let g:OmniSharp_prefer_global_sln = 1
+" let g:Omnisharp_highlight_user_types = 1
+" let g:Omnisharp_start_server = 1
+"This is the default value, setting it isn't actually necessary
+" let g:OmniSharp_host = "http://localhost:2000"
+" :Dispatch roslyn
 
-    "Set the type lookup function to use the preview window instead of the status line
-    " let g:OmniSharp_typeLookupInPreview = 1
+"Set the type lookup function to use the preview window instead of the status line
+" let g:OmniSharp_typeLookupInPreview = 1
+let g:OmniSharp_want_snippet=0
+"Timeout in seconds to wait for a response from the server
+let g:OmniSharp_timeout = 2
 
-    "Timeout in seconds to wait for a response from the server
-    let g:OmniSharp_timeout = 2
+let g:OmniSharp_selector_ui = 'ctrlp'  " Use ctrlp.vim
+"Showmatch significantly slows down omnicomplete
+"when the first match contains parentheses.
+set noshowmatch
 
-    "Showmatch significantly slows down omnicomplete
-    "when the first match contains parentheses.
-    set noshowmatch
+" Fetch full documentation during omnicomplete requests.
+" There is a performance penalty with this (especially on Mono)
+" By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
+" you need it with the :OmniSharpDocumentation command.
+" let g:omnicomplete_fetch_documentation=1
 
-    "Super tab settings - uncomment the next 4 lines
-    "let g:SuperTabDefaultCompletionType = 'context'
-    "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-    "let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-    "let g:SuperTabClosePreviewOnPopupClose = 1
+"Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
+"You might also want to look at the echodoc plugin
 
-    "don't autoselect first item in omnicomplete, show if only one item (for preview)
-    "remove preview if you don't want to see any documentation whatsoever.
-    set completeopt=longest,menuone,preview
-    " Fetch full documentation during omnicomplete requests.
-    " There is a performance penalty with this (especially on Mono)
-    " By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
-    " you need it with the :OmniSharpDocumentation command.
-    " let g:omnicomplete_fetch_documentation=1
+"show type information automatically when the cursor stops moving
+" autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 
-    "Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
-    "You might also want to look at the echodoc plugin
-    set splitbelow
+" this setting controls how long to wait (in ms) before fetching type / symbol information.
+set updatetime=500
+" Remove 'Press Enter to continue' message when type information is longer than one line.
+set cmdheight=2
 
-    " Get Code Issues and syntax errors
-    " let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-    " If you are using the omnisharp-roslyn backend, use the following
-    let g:syntastic_cs_checkers = ['code_checker']
-    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
-    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+" Enable snippet completion, requires completeopt-=preview
+" set completeopt-=preview
+" let g:OmniSharp_want_snippet=1
+" autocmd FileType cs let b:dispatch = 'call StartRoslyn()'
 
-    " Synchronous build (blocks Vim)
-    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
-    " Builds can also run asynchronously with vim-dispatch installed
-    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
-    " automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+" autocmd  BufReadPost,FileReadPost   *.cs  call StartRoslyn() "Start ominisharp server if not alread started
+" dont know why it starts automaticly
+function! StartRoslyn()
+    if !OmniSharp#ServerIsRunning()
+        " :Spawn mono /opt/omnisharp-roslyn/OmniSharp.exe -p 2000 -s $PWD >/dev/null &
+        " call dispatch#start(join('mono /opt/omnisharp-roslyn/OmniSharp.exe -p 2000 -s $PWD' . ''), {'background':1})
 
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    "show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-
-
-    " this setting controls how long to wait (in ms) before fetching type / symbol information.
-    set updatetime=500
-    " Remove 'Press Enter to continue' message when type information is longer than one line.
-    set cmdheight=2
-
-    " Contextual code actions (requires CtrlP or unite.vim)
-    nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
-    " Run code actions with text selected in visual mode to extract method
-    vnoremap <leader><space> :call OmniSharp#GetCodeActions('visual')<cr>
-
-    " Force OmniSharp to reload the solution. Useful when switching branches etc.
-    nnoremap <leader>rl :OmniSharpReloadSolution<cr>
-    nnoremap <leader>cf :OmniSharpCodeFormat<cr>
-    " Load the current .cs file to the nearest project
-    nnoremap <leader>tp :OmniSharpAddToProject<cr>
-
-    " (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
-    nnoremap <leader>ss :OmniSharpStartServer<cr>
-    nnoremap <leader>sp :OmniSharpStopServer<cr>
-
-    " Add syntax highlighting for types and interfaces
-    nnoremap <leader>th :OmniSharpHighlightTypes<cr>
-    "Don't ask to save when changing buffers (i.e. when jumping to a type definition)
-    set hidden
-
-    " Enable snippet completion, requires completeopt-=preview
-    let g:OmniSharp_want_snippet=0
-
-augroup END
+        call dispatch#start('mono /opt/omnisharp-roslyn/OmniSharp.exe -p 2000 -s $PWD', {'background':1})
+        " call OmniSharp#StartServer()
+        echom "Not Running"
+    endif
+endfunction
