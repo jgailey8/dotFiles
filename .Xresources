@@ -1,4 +1,5 @@
-URxvt.perl-ext-common: 	  	default,clipboard
+! URxvt.perl-ext-common: 	  	default,clipboard
+URxvt.perl-ext-common: 	  	default,tabbedex,clipboard
 myTerm*perl-ext-common: 	  	default,tabbedex,clipboard
 ! myTerm*geometry:			180x48  
 URxvt.borderless: true
@@ -35,8 +36,23 @@ URxvt.keysym.Control-Left: perl:tabbedex:prev_tab
 URxvt.keysym.Control-Right: perl:tabbedex:next_tab
 URxvt.keysym.Control-Shift-Up: perl:tabbedex:new_tab
 URxvt.keysym.Control-Shift-Down: perl:tabbedex:kill_tab
-URxvt.keysym.Shift-Left: \033[1~
-URxvt.keysym.Shift-Right: \033[4~
+
+! URxvt.keysym.Control-Shift-Left: perl:tabbedex:move_tab_left
+! URxvt.keysym.Control-Shift-Right: perl:tabbedex:move_tab_right
+URxvt.keysym.Control-Shift-H: perl:tabbedex:prev_tab
+URxvt.keysym.Control-Shift-L: perl:tabbedex:next_tab
+URxvt.keysym.Control-Shift-N: perl:tabbedex:new_tab
+URxvt.keysym.Control-Shift-Q: perl:tabbedex:kill_tab
+
+! vim hjkl with controll modifier
+URxvt.keysym.Control-l: \033[C
+URxvt.keysym.Control-h: \033[D
+URxvt.keysym.Control-j: \033[B
+URxvt.keysym.Control-k: \033[A
+! URxvt.keysym.C-Left:   \033[1;5D
+! URxvt.keysym.C-Right:  \033[1;5C
+! URxvt.keysym.Shift-Left: \033[1~
+! URxvt.keysym.Shift-Right: \033[4~
 ! URxvt.tabbed.reopen-on-close: yes
 ! URxvt.tabbed.title: yes
 

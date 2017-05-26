@@ -6,7 +6,7 @@
 
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id urxvtd -q -f -o &
-exec --no-startup-id dunst -c ~/.config/dunst/dunstrc & 
+# exec --no-startup-id dunst -c ~/.config/dunst/dunstrc & 
 exec --no-startup-id  xautolock -time 30 -locker "systemctl suspend" &
 exec --no-startup-id sleep 1 && urxvtc -name myTerm 
 
@@ -64,15 +64,15 @@ output * bg /home/jared/.config/wallpapers/arch_kiss.jpg stretch
     bindsym $mod+Up focus up
     bindsym $mod+Right focus right
     # move to next prev workspace
-    bindsym $mod+Control+Left workspace prev_on_output
-    bindsym $mod+Control+Right workspace next_on_output
-    bindsym $mod+Control+$left workspace prev_on_output
-    bindsym $mod+Control+$right workspace next_on_output
+    bindsym $mod+Shift+Left workspace prev_on_output
+    bindsym $mod+Shift+Right workspace next_on_output
+    bindsym $mod+Shift+$left workspace prev_on_output
+    bindsym $mod+Shift+$right workspace next_on_output
     # move container to next prev workspace
-    bindsym $mod+Shift+Left move container to workspace prev_on_output
-    bindsym $mod+Shift+Right move container to workspace next_on_output
-    bindsym $mod+Shift+$left move container to workspace prev_on_output
-    bindsym $mod+Shift+$right move container to workspace next_on_output
+    bindsym $mod+Control+Left move container to workspace prev_on_output
+    bindsym $mod+Control+Right move container to workspace next_on_output
+    bindsym $mod+Control+$left move container to workspace prev_on_output
+    bindsym $mod+Control+$right move container to workspace next_on_output
 
 #
 ### WM bindings

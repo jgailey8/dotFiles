@@ -1,4 +1,0 @@
-#!/bin/bash
-#start urxvt as a drop down terminal
-i3-msg "exec --no-startup-id urxvtc -name myTerm"
-

@@ -1,0 +1,27 @@
+#!/bin/sh
+#Author: Jared Gailey
+#Date: 5/3/17
+#
+PS3='Please enter your choice: '
+options=("Connect" "Disconnect" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Connect")
+            sudo /bin/systemctl start openvpn-client@US_Chicago
+            break
+            ;;
+        "Disconnect")
+            sudo /bin/systemctl stop openvpn-client@US_Chicago
+            break
+            # echo "you chose choice 2"
+            ;;
+        # "Option 3")
+        #     echo "you chose choice 3"
+        #     ;;
+        "Quit")
+            break
+            ;;
+        *) echo invalid option;;
+    esac
+done

@@ -49,7 +49,7 @@
 # basic core packages i install
     pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils gvim wget node python npm rxvt-unicode feh networkmanager chromium
 ## other packages
-    powerline pcmanfm docker xcompmgr snapper xclip tlp acpi_call trash-cli ntp
+    powerline pcmanfm docker httpie xcompmgr snapper xsel tlp acpi_call trash-cli ntp
 ## some aur packages 
     visual-studio-code
     py3status(requires installing a few python libraries for some basic functionallity)

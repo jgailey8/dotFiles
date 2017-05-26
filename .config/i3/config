@@ -232,4 +232,4 @@ assign [class="Code"] $tag2
 assign [instance="Karma - Chromium"] $tag4
 
 for_window [instance="myTerm"] border none; floating enable;
-for_window [instance="myTerm"] move scratchpad; [instance="myTerm"] scratchpad show; resize set 1920 1000; move position 0px 25px; move scratchpad;
+for_window [instance="myTerm"] move scratchpad; [instance="myTerm"] scratchpad show; resize set 1920 1000; move position 0px 25px; move scratchpad;move position 0px 25px;

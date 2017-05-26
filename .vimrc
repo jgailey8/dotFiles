@@ -13,18 +13,43 @@ set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set nocompatible               " be iMproved
 
-set guifont=Inconsolata\ for\ Powerline:h12
+filetype plugin on
+filetype indent on
+syntax on
+syntax enable
 
-" Enable filetype plugins
-    filetype plugin on
-    filetype indent on
-    syntax on
-    syntax enable
-" editing ng behaviour {{{
+set fileformats="unix,dos,mac"
+set ff=unix
+set fileformat=unix
+
+" Appearance settings
+    set guifont=Inconsolata\ for\ Powerline:h12
+    set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+    colorscheme monokai
+
+    " AIRLINE Status bar
+        let g:airline#extensions#tabline#enabled =1
+        let g:airline_theme='murmur'
+        let g:airline_powerline_fonts = 1
+    " highlight only line number
+        highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+        set cursorline
+
+    " overide theme colors
+    " Overide Omnicomplete color
+        hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60   guibg=brown 
+    " Overide syntastic error
+    hi SpellBad    ctermfg=white ctermbg=darkred cterm=none
+    hi SpellCap    ctermfg=white ctermbg=yellow cterm=none
+    hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen
+
+" disable bell
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
+" editing  behaviour 
     set hidden                      " hide buffers instaed of closing
     set showmode                    " always show what mode we're currently editing in
     set matchtime=0                 " disables moving cursor when matching brackets
-    set cursorline                  " highlight current line
     set nowrap                      " don't wrap lines
     set tabstop=4                   " a tab is four space\adafd s
     set softtabstop=4               " when hitting &lt;BS&gt;,i pretend like a tab is removed, even if spaces
@@ -36,44 +61,27 @@ set guifont=Inconsolata\ for\ Powerline:h12
     set copyindent                  " copy the previous indentation on autoindenting
     set number                      " always show line numbers
     set showmatch                   " set show matching parenthesis
-    set ignorecase                  " ignore case when searching
     set smartcase                   " ignore case if search pattern is all lowercase,
     set smarttab                    " insert tabs on the start of a line according to
     set smartindent
     set scrolloff=4                 " keep 4 lines off the edges of the screen when scrolling
-    " set virtualedit=all             " allow the cursor to go in to "invalid" places
     set hlsearch                    " highlight search terms
     set incsearch                   " show search matches as you type
-    set gdefault                    " search/replace globally (on a line) by default
     set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
     set shortmess+=I                " hide the launch screen
     set clipboard=unnamedplus
     set autoread                    " automatically reload files changed outside of Vim"
     set nolist                      " don't show invisible characters by default,
                                     " but it is enabled for some file types (see later)
-    set fileformats="unix,dos,mac"
     set timeoutlen=1000 ttimeoutlen=10 "  fixes issue with delay in status change
-    " set timeout ttimeoutlen=100 timeoutlen=1000
     set laststatus=2        " always show status bar
-    set t_Co=256            " 256 colors
     set viminfo="NONE" " no annoying bkp files and .viminfo
     set nobackup
     set noswapfile
     set completeopt=longest,menuone,preview " omnicomplete dont auto select
-
-" Enable folding
-setlocal foldmethod=indent
-setlocal foldlevel=99
-" set list
-" POWERLINE Status bar
-    " set rtp+=/usr/lib/python3.5/site-packages/powerline/bindings/vim/
-    " let g:Powerline_symbols = 'fancy'
-
-" AIRLINE Status bar
-    let g:airline#extensions#tabline#enabled =1
-    " let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
-    let g:airline_theme='murmur'
-    let g:airline_powerline_fonts = 1
+" folding
+    setlocal foldmethod=indent
+    setlocal foldlevel=99
 
 " different cursor for Insert,Normal,View (for vte terminals)
     let &t_SI = "\<Esc>[6 q"
@@ -81,34 +89,14 @@ setlocal foldlevel=99
     let &t_EI = "\<Esc>[2 q"
 
     let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
-" typescript-vim
-    " let g:tsuquyomi_disable_default_mappings = 1
-    let g:typescript_compiler_binary = 'tsc'
-    " let g:typescript_compiler_options = ''
-    autocmd FileType typescript :set makeprg=tsc
-    " autocmd QuickFixCmdPost [^l]* nested cwindow  " show errors on compile failure
-    " autocmd QuickFixCmdPost    l* nested lwindow
-
-
-    " autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
-" Tell Neosnippet about the other snippets
-    let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets/'
-
 " Ctrl P
-    " ignore files in gitignore
-    let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
+    " ignore files
+    let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'
 " Nerd Tree
     let g:NERDTreeWinSize=25        " resize nerdtree width
+    let NERDTreeShowHidden=1
 
-    let g:jsx_ext_required = 0 " jsx syntax highlighting for all js files
-" Load subconfigurations from .vimrc.d
-for f in split(glob('~/.vimrc.d/*.vim'), '\n')
-  exe 'source' f
-endfor
 
-" toggle quickFix
-command -bang -nargs=? QFix call QFixToggle(<bang>0)
 function! QFixToggle(forced)
   if exists("g:qfix_win") && a:forced == 0
     cclose
@@ -118,3 +106,92 @@ function! QFixToggle(forced)
     let g:qfix_win = bufnr("$")
   endif
 endfunction
+
+autocmd  BufReadPost,FileReadPost   *.cs  :e ++ff=dos "hide ^m eol when opening cs file 
+
+" ================ Custom Commands====================== "
+command! -bang -nargs=? QFix call QFixToggle(<bang>0)
+command! DosClearEOL %s/\r//g
+command! Reload :source $MYVIMRC
+command! SudoWrite w !sudo tee "%"
+
+" ---------------------------------------------------- "
+" ================ KEY BINDINGS ====================== "
+" ---------------------------------------------------- "
+" hard mode
+" map <UP>    <NOP>
+" map <DOWN>  <NOP>
+" map <LEFT>  <NOP>
+" map <RIGHT> <NOP>
+
+" exit from insert mode with  jj
+imap jk <Esc>
+" remap colon
+nmap ; :
+
+"disable ex-mode
+map Q <Nop> 
+
+" quite/save faster
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader><esc> :q!<CR>
+nnoremap <Leader>w :w<CR>
+
+
+" remap U to <C-r> for easier redo
+nnoremap U <C-r>
+
+" new line without going to insert mode
+nnoremap O o <esc>
+" d except dont coppy to register
+" nnoremap D "_d
+nnoremap <Leader>w :w<CR>
+set pastetoggle=<F3>            " paste mode
+
+nnoremap <Leader><Leader> :noh<return>
+
+" ====easier navigation=====
+" Better window navigation -Ctrl+j,k etc..
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+
+" more natural up down movement
+nnoremap j gj
+nnoremap k gk
+
+" end and start of line with shift h l
+map <S-h> <Home>
+map <S-l> <End>
+
+"page up down with shift j/k
+map <S-j> <C-d>
+map <S-k> <C-u>
+
+" show buffer list with Control b
+nnoremap <C-b> :buffers<CR>:buffer<Space>  
+
+" show nerdtree with Control n
+map <C-n> :NERDTreeToggle<CR>
+
+" Move up and down in autocomplete with Control j/k
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+" Enable folding with the spacebar
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
+" FOLD ALL
+nnoremap zA zM
+" UNFOLD ALL
+nnoremap Za zR
+
+" search and replace hotkey
+nnoremap <Leader>sr :%s/wordToReplace/replaceWith/gc
+
+" Load subconfigurations from .vimrc.d
+ for f in split(glob('~/.vimrc.d/*.vim'), '\n')
+   exe 'source' f
+ endfor
