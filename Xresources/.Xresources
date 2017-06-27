@@ -1,0 +1,60 @@
+#if __has_include(".Xresources.solarized")
+#include ".Xresources.solarized"
+#endif
+
+URxvt.perl-ext-common: default,tabbedex,selection-to-clipboard, url-select
+URxvt.borderless: true
+URxvt.utf8: true
+URxvt.locale: true
+URxvt*font: xft:Droid Sans Mono for Powerline:pixelsize=16
+URxvt*saveLines: 1024
+URxvt*scrollBar:  false
+URxvt*depth: 32
+
+! URxvt*buffered: true
+! URxvt*scrollTtyOutput: false
+! URxvt*scrollWithBuffer:  false
+! URxvt*scrollTtyKeypress: true
+URxvt.url-select.launcher: chromium
+URxvt.url-select.underline: true
+
+! overide background color for my drop down terminal
+myTerm*background: rgba:0000/2b00/3600/F200
+myTerm*foreground: #ffffff
+
+! ------ copy/paste -------
+! disable ctrl-shift key combo
+URxvt*iso14755: False
+! usE control+shift+v/c for copy and paste
+URxvt.keysym.C-S-C: perl:clipboard:copy
+URxvt.keysym.C-S-V: perl:clipboard:paste
+URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+
+!------- tabs -----------------
+URxvt.tabbed.autohide: yes
+URxvt.tabbed.new-button: no
+URxvt.tabbed.no-tabbedex-keys: true
+URxvt.tabbed.title: no
+URxvt.keysym.C-S-Left: perl:tabbedex:prev_tab
+URxvt.keysym.C-S-Right: perl:tabbedex:next_tab
+URxvt.keysym.C-S-Up: perl:tabbedex:new_tab
+URxvt.keysym.C-S-Down: perl:tabbedex:kill_tab
+
+URxvt.keysym.M-comma: perl:tabbedex:prev_tab
+URxvt.keysym.M-period: perl:tabbedex:next_tab
+URxvt.keysym.M-n: perl:tabbedex:new_tab
+URxvt.keysym.M-q: perl:tabbedex:kill_tab
+URxvt.keysym.M-r: perl:tabbedex:rename_tab
+! < > keys for moving tabs
+URxvt.keysym.M-0x3c: perl:tabbedex:move_tab_left
+URxvt.keysym.M-0x3e: perl:tabbedex:move_tab_right
+! vim
+! URxvt.keysym.Meta-Shift-H: perl:tabbedex:prev_tab
+! URxvt.keysym.Meta-Shift-L: perl:tabbedex:next_tab
+! URxvt.keysym.Meta-Shift-R: perl:tabbedex:rename_tab
+
+! vim hjkl arrow keys with modifier
+URxvt.keysym.Meta-l: \033[C
+URxvt.keysym.Meta-h: \033[D
+URxvt.keysym.Meta-j: \033[B
+URxvt.keysym.Meta-k: \033[A

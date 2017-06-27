@@ -1,0 +1,5 @@
+"Razer DeathAdder" "/dev/input/event*" any key/274 "XKey/F3"
+"Razer DeathAdder" "/dev/input/event*" any key/275 "XKey/F10"
+#"Razer DeathAdder" "/dev/input/event*" any key/276 "XKey/F6"
+#"Razer DeathAdder" "/dev/input/event*" any key/277 "XKey/F2"
+#"Razer DeathAdder" "/dev/input/event*" any key/278 "XKey/F1"

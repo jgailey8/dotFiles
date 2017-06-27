@@ -1,0 +1,15 @@
+# Ignore all files named .DS_Store or ending with .log
+**/.DS_Store
+**.log
+**.swp
+
+vim/.vim/plugged
+vim/.vim/autoload
+
+.bash_history
+.bash_local
+.bash_logout
+
+**/.ssh
+
+**/.node_modules

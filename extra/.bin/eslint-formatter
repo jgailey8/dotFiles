@@ -1,0 +1,7 @@
+#!/bin/bash
+# can be used within vim to format
+SRC=`mktemp`
+cat - >$SRC
+eslint -o /dev/null --no-color --fix $SRC &>/dev/null
+cat $SRC
+rm -f $SRC

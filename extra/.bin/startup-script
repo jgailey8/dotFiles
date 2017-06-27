@@ -1,0 +1,6 @@
+#!/bin/sh
+xrdb ~/.Xresources
+setxkbmap -option caps:escape
+# dunst &
+/usr/bin/xautolock -time 45 -detectsleep -locker "systemctl suspend" &
+urxvtd -q -f -o && sleep 1 && urxvtc -name myTerm  &
