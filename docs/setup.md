@@ -33,6 +33,7 @@
         locale-gen
     echo LANG=en_US.UTF-8 > /etc/locale.conf
     echo myhostname > /etc/hostname
+    > if time is incorrect try enabling ntpd service
 
 #add user and set passwords and configure sudo etc..
     useradd -m -G wheel -s /bin/bash archie
@@ -41,13 +42,15 @@
 # install systemd bootloader
     bootctl --path=/boot install
 ## example entrie wtih btrfs subvol
+### blkid -s PARTUUID -o value /dev/sda2 
+```
     title   Arch Linux
     linux   /vmlinuz-linux
     initrd  /initramfs-linux.img
     options root=PARTUUID=## rw rootflags=subvol=ROOT elevator=noop nmi_watchdog=0
-### blkid -s PARTUUID -o value /dev/sda2 
-# basic core packages i install
-    pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway alsa-utils gvim wget node python npm rxvt-unicode feh networkmanager chromium
+```
+# some basic core packages
+    pacman -S xorg-server xorg-server-utils xorg-xinit xf86-video-intel i3 sway networkmanager alsa-utils wget python node npm rxvt-unicode feh stow chromium
 ## other packages
     powerline pcmanfm xcompmgr snapper xsel tlp acpi_call trash-cli ntp
 ## some aur packages 
@@ -60,11 +63,21 @@
     yaourt should install all required python dependencies
     yaourt font-awesome
     
+# dotfiles install
+    git clone https://github.com/jmg5e/dotfiles .dotfiles
+    ./install.sh 
+    or install individually ie stow -v -t $HOME vim
+## install (vim-plug)[https://github.com/junegunn/vim-plug]
+    ```
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    ```
+
 # [ dev environment/setup ](dev-setup.md)
-## vimrc and install vim-plug
 ## docker, npmrc, nginx/mysql, android-sdk, dotnet-core etc..
 
-# optimize system
+# optimize system etc..
     kernel parameters
         disable watchdog
         use noop scheduler
@@ -84,11 +97,10 @@
 ## setup backups with snapshots etc..
 
 # Urxvt notes
-get [ tabbadex ] (https://github.com/mina86/urxvt-tabbedex)
+get [tabbadex] (https://github.com/mina86/urxvt-tabbedex)
     git package supports Control+Shift and kill_tab
 
-# Capslock -> Escap mapping(works under wayland)
+# Capslock -> Escape mapping(works under wayland)
 ## started in ~/.bin/startup.sh
   setxkbmap -option caps:escape
 
-# copy over dotfiles and prosper!

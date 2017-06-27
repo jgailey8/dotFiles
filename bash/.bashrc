@@ -10,7 +10,7 @@ else
     export PS1='\033[0m\]\u@\h:\033[0m\]\w\[\033[1;33m\]$(parse_git_branch)\033[0m\]$ '
 fi
 
-# LS_COLORS=$LS_COLORS:'di=0;32:' ; export LS_COLORS
+LS_COLORS=$LS_COLORS:'di=0;32:' ; export LS_COLORS
 # if [ "$TERM" != "dumb" ]; then
 #     [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
 #     [ -e "$DIR_COLORS" ] || DIR_COLORS=""
