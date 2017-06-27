@@ -149,7 +149,6 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
 #
 bindsym $mod+m mode "move" focus floating
 mode "move" {
-    bindsym $mod+Tab focus right
     bindsym $left move left
     bindsym $down move down
     bindsym $up move up

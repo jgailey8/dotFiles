@@ -26,9 +26,8 @@ myTerm*foreground: #ffffff
 ! disable ctrl-shift key combo
 URxvt*iso14755: False
 ! usE control+shift+v/c for copy and paste
-URxvt.keysym.C-C: perl:clipboard:copy
-URxvt.keysym.C-V: perl:clipboard:paste
-URxvt.keysym.C-A-V: perl:clipboard:paste_escaped
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 !------- tabs -----------------
 URxvt.tabbed.autohide: yes
