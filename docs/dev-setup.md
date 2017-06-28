@@ -38,7 +38,7 @@
     mysql_secure_installation
 ### mysql
     enable mysqli extension in /etc/php/php.ini
-### phpmyadmin easiest is method is just to create symlink
+### phpmyadmin easiest method is just to create symlink
     ln -s /usr/share/webapps/phpMyAdmin/ /srv/http/phpmyadmin
 
 # [android](https://wiki.archlinux.org/index.php/android#Android_development)
