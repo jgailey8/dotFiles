@@ -21,7 +21,6 @@ $if mode=vi
     "\e[B":history-search-forward
     j:history-search-forward
     k:history-search-backward
-    q:quoted-insert
 
     H:beginning-of-line 
     L:end-of-line

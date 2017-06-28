@@ -59,6 +59,15 @@ hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen
 " endif
 " ================================================
 
+" ========== Undo /Persisten ========
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+" set undodir=~/.vim/undo-dir
+" set undofile
+set undodir=$HOME/.vim/undo-dir " where to save undo histories
+set undofile                    " Save undo's after file closes
+
 " disable bell
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
@@ -97,8 +106,8 @@ set nobackup
 set noswapfile
 set completeopt=longest,menuone,preview " omnicomplete dont auto select
 " folding
-setlocal foldmethod=indent
-setlocal foldlevel=99
+setlocal foldmethod=syntax
+setlocal foldlevel=5
 
 " different cursor for Insert,Normal,View (for vte terminals)
 let &t_SI = "\<Esc>[6 q"
@@ -111,7 +120,7 @@ let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'
 " Nerd Tree
 let g:NERDTreeWinSize=25        " resize nerdtree width
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 
 
 function! QFixToggle(forced)

@@ -25,7 +25,7 @@
 
 ### some npm packages i like to have
     npm install -g @angular/cli nativescript typescript js-beautify create-react-app 
-    npm install -g eslint eslint-plugin-react eslint-config-airbnb babel-eslint 
+    npm install -g eslint eslint eslint-config-standard eslint-config-standard-jsx
     npm install -g yo geneator-aspnet generator-aspnet-item
 
 # nginx, php, mysql(mariadb) etc..

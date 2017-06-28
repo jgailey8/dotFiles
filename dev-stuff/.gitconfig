@@ -1,3 +1,7 @@
 [user]
-	name = github_name
-	email = github_email
+	name = jmg5e
+[core]
+	editor = vim
+[filter "gitignore"]
+	clean = "sed \"/#gitignore$/d\""
+	smudge = cat

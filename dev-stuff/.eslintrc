@@ -1,5 +1,8 @@
 {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
-  "plugins": ["react"]
+    "extends": ["standard", "standard-jsx"],
+    "rules": {
+        semi: ["warn", "always", { "omitLastInOneLineBlock": true}],
+        quotes: ["warn", "single"],
+        no-multiple-empty-lines: 0
+    }
 }

@@ -5,7 +5,7 @@
 
 vim/.vim/plugged
 vim/.vim/autoload
-
+vim/.vim/undo-dir
 .bash_history
 .bash_local
 .bash_logout
