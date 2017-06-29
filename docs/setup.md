@@ -29,11 +29,16 @@
     arch-chroot /mnt /bin/bash
 ## clock, locale and hostname
     ln -sf /usr/share/zoneinfo/America/Chicago /etc/localtime
+    hwclock --systohc
     set en_US.UTF-8 in /etc/locale.gen
         locale-gen
     echo LANG=en_US.UTF-8 > /etc/locale.conf
     echo myhostname > /etc/hostname
-    > if time is incorrect try enabling ntpd service
+    > if time is still incorrect 
+    check with timedatectl
+    pacman -S ntp
+    ntpd -qg # to check timedatctl to see if everything is good
+    enable ntpd.service
 
 ## add user and set passwords and configure sudo etc..
     useradd -m -G wheel -s /bin/bash archie
@@ -41,8 +46,8 @@
 
 ## install systemd bootloader
     bootctl --path=/boot install
-    >  A basic configuration file example is located at /usr/share/systemd/bootctl/loader.conf
-    cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/
+    > enable timeout disable default from /boot/loader/loader.conf
+    cp /usr/share/systemd/bootctl/arch.conf /boot/loader/entries/arch.conf
 ## edit entrie wtih btrfs subvol
 ### blkid -s PARTUUID -o value /dev/sda2 
 ```
@@ -52,12 +57,13 @@
     options root=PARTUUID=## rw rootflags=subvol=ROOT elevator=noop nmi_watchdog=0
 ```
 # some basic core packages
-    pacman -S xorg-server xorg-xinit xf86-video-intel i3 sway networkmanager alsa-utils wget git python nodejs npm rxvt-unicode feh stow vim chromium
+    pacman -S xorg-server xorg-xinit xf86-video-intel i3 sway networkmanager alsa-utils wget git python nodejs lua npm rxvt-unicode dmenu feh stow vim chromium 
 ## other packages
-    powerline pcmanfm xcompmgr snapper xsel tlp acpi_call trash-cli ntp
+    pcmanfm xcompmgr snapper xsel tlp acpi_call trash-cli ntp xautolock xdg-user-dirs
 ## some aur packages 
     visual-studio-code
     adobe-source-pro 
+    powerline-git
     powerline-fonts-git
     light
 ### [bumblebee-status](https://github.com/tobi-wan-kenobi/bumblebee-status)
@@ -68,6 +74,8 @@
     git clone https://github.com/jmg5e/dotfiles .dotfiles
     ./install.sh 
     or install individually ie stow -v -t $HOME vim
+
+
 ## install (vim-plug)[https://github.com/junegunn/vim-plug]
     ```
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

@@ -19,8 +19,8 @@ URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
 
 ! overide background color for my drop down terminal
-myTerm*background: rgba:0000/2b00/3600/F200
-myTerm*foreground: #ffffff
+dropTerm*background: rgba:0000/2b00/3600/F200
+dropTerm*foreground: #ffffff
 
 ! ------ copy/paste -------
 ! disable ctrl-shift key combo

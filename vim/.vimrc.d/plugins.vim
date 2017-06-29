@@ -39,5 +39,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-airline/vim-airline'          " airline status bar
     Plug 'vim-airline/vim-airline-themes'
 
+    Plug 'airblade/vim-gitgutter'
     " Plug 'davidhalter/jedi-vim'
 call plug#end()

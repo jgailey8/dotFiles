@@ -11,7 +11,7 @@ runtime! archlinux.vim
 set mouse=a
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
-set nocompatible               " be iMproved
+set nocompatible               " be iMproved not vi
 
 filetype plugin on
 filetype indent on
@@ -22,51 +22,64 @@ set fileformats="unix,dos,mac"
 set ff=unix
 set fileformat=unix
 
-" Appearance settings
-set guifont=Inconsolata\ for\ Powerline:h12
-
-
-" AIRLINE Status bar
-let g:airline#extensions#tabline#enabled =1
-let g:airline_theme='murmur'
-let g:airline_powerline_fonts = 1
-set cursorline
 " realitive/current line
 set relativenumber
 set number
-set t_Co=256  " vim-monokai now only support 256 colours in terminal.
-set term=rxvt-unicode-256color
-" =========== apearance/theme colors =======
-" if &t_Co == 256 && &term != 'linux'
-colorscheme monokai
-" = overide theme colors =
-set background=dark
-" highlight only line number not line
-hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
-" visual mode select bg color
-hi Visual ctermbg=DarkGrey ctermfg=NONE
-" comment color
-hi Comment ctermfg=Grey
-" transparent background
-hi Normal ctermbg=NONE
-" search colors
-" Overide omnicomplete appearance
-hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60  guibg=brown
-" Overide syntastic error
-hi SpellBad    ctermfg=white ctermbg=darkred cterm=none
-hi SpellCap    ctermfg=white ctermbg=yellow cterm=none
-hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen
-" endif
+
+set guifont=Inconsolata\ for\ Powerline:h12
+" Appearance settings
+if !has("gui_running") && &t_Co > 255
+
+    " AIRLINE Status bar
+    let g:airline#extensions#tabline#enabled =1
+    let g:airline_theme='murmur'
+    let g:airline_powerline_fonts = 1
+
+    " different cursor for Insert,Normal,View (for vte terminals)
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
+
+    set t_Co=256  " vim-monokai now only support 256 colours in terminal.
+    " set term=rxvt-unicode-256color
+    " =========== apearance/theme colors =======
+
+    " = overide theme colors =
+    if filereadable( expand("$HOME/.vim/colors/monokai.vim") )
+        colorscheme monokai
+        set cursorline
+        set background=dark
+        " highlight only line number not line
+        hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
+        " visual mode select bg color
+        hi Visual ctermbg=DarkGrey ctermfg=NONE
+        " comment color
+        hi Comment ctermfg=Grey
+        " transparent background
+        hi Normal ctermbg=NONE
+        " search colors
+        " Overide omnicomplete appearance
+        hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60  guibg=brown
+        " Overide syntastic error
+        hi SpellBad    ctermfg=white ctermbg=darkred cterm=none
+        hi SpellCap    ctermfg=white ctermbg=yellow cterm=none
+        hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen
+    endif
+else
+    colorscheme default
+
+    " improve omnicomplete visiblity
+    hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60  guibg=brown
+endif
+
 " ================================================
 
 " ========== Undo /Persisten ========
-if !isdirectory($HOME."/.vim/undo-dir")
-    call mkdir($HOME."/.vim/undo-dir", "", 0700)
-endif
-" set undodir=~/.vim/undo-dir
-" set undofile
-set undodir=$HOME/.vim/undo-dir " where to save undo histories
-set undofile                    " Save undo's after file closes
+" if !isdirectory($HOME."/.vim/undo-dir")
+"     call mkdir($HOME."/.vim/undo-dir", "", 0700)
+" endif
+" set undodir=$HOME/.vim/undo-dir " where to save undo histories
+" set undofile                    " Save undo's after file closes
 
 " disable bell
 set noerrorbells visualbell t_vb=
@@ -99,7 +112,6 @@ set clipboard=unnamedplus
 set autoread                    " automatically reload files changed outside of Vim"
 set nolist                      " don't show invisible characters by default,
 " but it is enabled for some file types (see later)
-set timeoutlen=1000 ttimeoutlen=10 "  fixes issue with delay in status change
 set laststatus=2        " always show status bar
 set viminfo="NONE" " no annoying bkp files and .viminfo
 set nobackup
@@ -109,18 +121,20 @@ set completeopt=longest,menuone,preview " omnicomplete dont auto select
 setlocal foldmethod=syntax
 setlocal foldlevel=5
 
-" different cursor for Insert,Normal,View (for vte terminals)
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
+" set timeoutlen=1000 ttimeoutlen=10 "  fixes issue with delay in status change
+if !has('nvim') && &ttimeoutlen == -1
+  set ttimeout
+  set ttimeoutlen=100
+endif
 
 let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
+set conceallevel=0
 " Ctrl P
 " ignore files
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'
 " Nerd Tree
 let g:NERDTreeWinSize=25        " resize nerdtree width
-let NERDTreeShowHidden=0
+let NERDTreeShowHidden=0        " hide hidden files (Shift+i) togggles this
 
 
 function! QFixToggle(forced)

@@ -11,27 +11,42 @@ set convert-meta on
 # Keep the 8th bit for display
 set output-meta on
 
+
+# vim key bindings without full vim mode
+Meta-l: \033[C
+Meta-h: \033[D
+Meta-j: \033[B
+Meta-k: \033[A
+
+Meta-H:beginning-of-line 
+Meta-L:end-of-line
+
+Meta-b: backward-word
+Meta-w: forward-word
+
+# or umcomment to enable full
 # vi mode inside bash
-set show-mode-in-prompt on
-set editing-mode vi
-$if mode=vi
-    set keymap vi-command
-    # these are for vi-command mode
-    "\e[A":history-search-backward
-    "\e[B":history-search-forward
-    j:history-search-forward
-    k:history-search-backward
-
-    H:beginning-of-line 
-    L:end-of-line
-    set keymap vi-insert
-    # these are for vi-insert mode
-    "\e[A":history-search-backward
-    "\e[B":history-search-forward
-$endif
-
-# powerline bash command mode
-$if term=rxvt-unicode-256color
-    set vi-cmd-mode-string \1\e[48;5;166;1m\2 N \1\e[38;5;166;48;5;31;1m\2\1\e[0m\2
-    set vi-ins-mode-string \1\e[48;5;107;1m\2 I \1\e[38;5;107;48;5;31;1m\2\1\e[0m\2
-$endif
+#
+# set show-mode-in-prompt on
+# set editing-mode vi
+# $if mode=vi
+#     set keymap vi-command
+#     # these are for vi-command mode
+#     "\e[A":history-search-backward
+#     "\e[B":history-search-forward
+#     j:history-search-forward
+#     k:history-search-backward
+#
+#     H:beginning-of-line 
+#     L:end-of-line
+#     set keymap vi-insert
+#     # these are for vi-insert mode
+#     "\e[A":history-search-backward
+#     "\e[B":history-search-forward
+# $endif
+#
+# # powerline bash command mode
+# $if term=rxvt-unicode-256color
+#     set vi-cmd-mode-string \1\e[48;5;166;1m\2 N \1\e[38;5;166;48;5;31;1m\2\1\e[0m\2
+#     set vi-ins-mode-string \1\e[48;5;107;1m\2 I \1\e[38;5;107;48;5;31;1m\2\1\e[0m\2
+# $endif

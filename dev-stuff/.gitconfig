@@ -1,7 +1,7 @@
 [user]
 	name = jmg5e
-[core]
-	editor = vim
 [filter "gitignore"]
 	clean = "sed \"/#gitignore$/d\""
 	smudge = cat
+[core]
+	editor = vim
