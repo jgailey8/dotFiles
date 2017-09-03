@@ -92,3 +92,9 @@ else
     LS_COLORS=$LS_COLORS:'di=0;32:'
     export LS_COLORS
 fi
+
+###-tns-completion-start-###
+if [ -f /home/jared/.tnsrc ]; then 
+    source /home/jared/.tnsrc 
+fi
+###-tns-completion-end-###

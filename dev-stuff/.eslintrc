@@ -1,8 +1,36 @@
 {
-    "extends": ["standard", "standard-jsx"],
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
     "rules": {
-        semi: ["warn", "always", { "omitLastInOneLineBlock": true}],
-        quotes: ["warn", "single"],
-        no-multiple-empty-lines: 0
+        "no-console": 0,
+        "no-unused-vars": "warn",
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "linebreak-style": [
+            "warn",
+            "unix"
+        ],
+        "semi": [
+            "warn",
+            "never"
+        ]
     }
 }

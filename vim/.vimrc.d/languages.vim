@@ -1,5 +1,5 @@
 " -----------------------------------------
-"  ============ Javascript ================
+"  ============ Javascript/TernJs ================
 "  ----------------------------------------
 autocmd FileType javascript setlocal completeopt+=menu,preview
 let g:tern_map_keys=0
@@ -15,7 +15,7 @@ autocmd FileType javascript nmap <Leader>ft :TernType<CR>
 " find refernces
 
 " -----------------------------------------
-"  ============ Typescript ================
+"  ============ Typescript/Tsuquyomi ================
 "  ----------------------------------------
 autocmd FileType typescript setlocal completeopt+=menu,preview
 autocmd FileType typescript let NERDTreeIgnore = ['\.js$']
@@ -23,31 +23,34 @@ let g:typescript_compiler_binary = 'tsc'
 " let g:typescript_compiler_options = ''
 autocmd FileType typescript :set makeprg=tsc
 
-let g:tsuquyomi_disable_quickfix = 1
+let g:tsuquyomi_disable_quickfix = 0
 
-set ballooneval
-autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
 autocmd FileType typescript nmap <leader>gd :TsuDefinition<CR>
 autocmd FileType typescript nmap <Leader>rn <Plug>(TsuquyomiRenameSymbol)
 autocmd FileType typescript nmap <Leader>h : <C-u>echo tsuquyomi#hint()<CR>
-" autocmd FileType typescript nmap <leader>gd :TernDef <CR>
 " find refernces
 autocmd FileType typescript nmap <leader>fr :TsuReferences<CR>
 autocmd FileType typescript nmap <leader>ti :TsuImport<CR>
 " go back
 autocmd FileType typescript nmap <leader>gb :TsuGoBack<CR> 
 
-autocmd FileType typescript nmap <leader>fix :TsuQuickFix<CR> 
+autocmd FileType typescript nmap <leader>f :TsuQuickFix<CR> 
 
 autocmd FileType typescript nmap <leader>ss :TsuStartServer 
 
-autocmd FileType typescript nmap <leader>Ss :TsuStopServer 
+autocmd FileType typescript nmap <leader>sS :TsuStopServer 
 " show errors
-autocmd FileType typescript nmap <leader>err : TsuGeterrProject<CR>
 autocmd FileType typescript nmap <leader>er : TsuGeterrProject<CR>
 
+" show tooltip
+" set ballooneval
+" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+autocmd FileType typescript nmap <buffer> <Leader>h : echo tsuquyomi#hint()<CR>
+
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
 " -----------------------------------------
-"  ===============  C#  ===================
+"  ===============  C#/Omnisharp  ===================
 "  ----------------------------------------
 "
 "don't autoselect first item in omnicomplete, show if only one item (for preview)

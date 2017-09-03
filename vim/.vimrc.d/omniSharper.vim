@@ -1,16 +1,16 @@
 let g:OmniSharp_server_type = 'v1'
 let g:OmniSharp_server_type = 'roslyn'
-" let g:OmniSharp_server_path = "/opt/omnisharp-roslyn/OmniSharp.exe"
+" let g:OmniSharp_server_path = "/opt/omnisharp-roslyn/"
 let g:OmniSharp_server_path = "omnisharp" " calls bash script in /bin
 let g:OmniSharp_start_without_solution = 1
-" let g:OmniSharp_prefer_global_sln = 1
+let g:OmniSharp_prefer_global_sln = 1
 " let g:Omnisharp_highlight_user_types = 1
-" let g:Omnisharp_start_server = 1
+let g:Omnisharp_start_server = 1
 "This is the default value, setting it isn't actually necessary
 
 "Set the type lookup function to use the preview window instead of the status line
 " let g:OmniSharp_typeLookupInPreview = 1
-let g:OmniSharp_want_snippet=0
+" let g:OmniSharp_want_snippet=0
 "Timeout in seconds to wait for a response from the server
 let g:OmniSharp_timeout = 2
 
@@ -43,8 +43,8 @@ set cmdheight=2
 
 " autocmd  BufReadPost,FileReadPost *.cs  call StartRoslyn() "Start ominisharp server if not alread started
 " dont know why it  doesnt start automaticly
-function! StartRoslyn()
-    if !OmniSharp#ServerIsRunning()
-        call dispatch#start('mono /opt/omnisharp-roslyn/OmniSharp.exe -p 2000 -s $PWD', {'background':1})
-    endif
-endfunction
+" function! StartRoslyn()
+"     if !OmniSharp#ServerIsRunning()
+"         call dispatch#start('mono /opt/omnisharp-roslyn/OmniSharp.exe -p 2000 -s $PWD', {'background':1})
+"     endif
+" endfunction

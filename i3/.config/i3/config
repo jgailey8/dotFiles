@@ -203,7 +203,7 @@ mode "launch" {
     bindsym f exec --no-startup-id firefox; mode "default"
     bindsym p exec --no-startup-id pcmanfm ; mode "default"
     bindsym t exec --no-startup-id urxvt; mode "default"
-    bindsym $mod+Return exec --no-startup-id urxvtc -name myTerm; mode "default"
+    bindsym $mod+Return exec --no-startup-id urxvtc -name dropTerm; mode "default"
     
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -303,7 +303,7 @@ assign [class="[Q,q]emu\-system.*"] $tag6
 assign [class="[Q,q]EMU.*"] $tag6
 
 # my Drop down terminal
-# for_window [title="^myTerm"] border none; floating enable; move scratchpad; scratchpad show;
-# for_window [title="^myTerm"] resize set 1920 1080; resize shrink height 50px; move scratchpad; 
-for_window [instance="myTerm"] border none; floating enable;
-for_window [instance="myTerm"] move scratchpad; [instance="myTerm"] scratchpad show; resize set 1920 1000; move position 0px 25px; move scratchpad;move position 0px 25px;
+# for_window [title="^dropTerm"] border none; floating enable; move scratchpad; scratchpad show;
+# for_window [title="^dropTerm"] resize set 1920 1080; resize shrink height 50px; move scratchpad; 
+for_window [instance="dropTerm"] border none; floating enable;
+for_window [instance="dropTerm"] move scratchpad; [instance="dropTerm"] scratchpad show; resize set 1920 1000; move position 0px 25px; move scratchpad;move position 0px 25px;

@@ -38,7 +38,7 @@
     check with timedatectl
     pacman -S ntp
     ntpd -qg # to check timedatctl to see if everything is good
-    enable ntpd.service
+    timedatectl set-ntp true
 
 ## add user and set passwords and configure sudo etc..
     useradd -m -G wheel -s /bin/bash archie

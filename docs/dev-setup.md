@@ -17,6 +17,7 @@
 ### ominsharp roslyn server does not autostart
     vim calls script omnisharp(make sure script is in path somewhere) to fix this
     3. have vim start roslyn from /opt/omnisharp-roslyn
+#### or [create symbolic link](https://github.com/OmniSharp/omnisharp-vim/issues/306)
 
 # node, javascript, typescript
 ## set environment varialbs and path for global npm packages
@@ -55,3 +56,9 @@
         sdkmanager "system-images;android-25;google_apis;x86"
     2. create avd
         avdmanager create avd --force --name avd-25 --package 'system-images;android-25;google_apis;x86'
+## Docker
+
+## Vm's
+    use virt-manager or command line qemu
+    add user to libvirt-group
+    enable libvirtd

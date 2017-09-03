@@ -18,17 +18,20 @@ filetype indent on
 syntax on
 syntax enable
 
-set fileformats="unix,dos,mac"
-set ff=unix
-set fileformat=unix
+if has('unix')
+    set fileformats="unix,dos,mac"
+    set ff=unix
+    set fileformat=unix
+    " set term=rxvt-unicode-256color
+endif
 
 " realitive/current line
 set relativenumber
 set number
 
-set guifont=Inconsolata\ for\ Powerline:h12
+" set guifont=Inconsolata\ for\ Powerline:h14
 " Appearance settings
-if !has("gui_running") && &t_Co > 255
+if  &t_Co > 255
 
     " AIRLINE Status bar
     let g:airline#extensions#tabline#enabled =1
@@ -41,7 +44,6 @@ if !has("gui_running") && &t_Co > 255
     let &t_EI = "\<Esc>[2 q"
 
     set t_Co=256  " vim-monokai now only support 256 colours in terminal.
-    " set term=rxvt-unicode-256color
     " =========== apearance/theme colors =======
 
     " = overide theme colors =
@@ -59,15 +61,14 @@ if !has("gui_running") && &t_Co > 255
         hi Normal ctermbg=NONE
         " search colors
         " Overide omnicomplete appearance
-        hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60  guibg=brown
+        hi Pmenu  ctermfg=grey ctermbg=black guifg=grey guibg=black
         " Overide syntastic error
         hi SpellBad    ctermfg=white ctermbg=darkred cterm=none
         hi SpellCap    ctermfg=white ctermbg=yellow cterm=none
-        hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen
+        hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen guibg=NONE guifg=green
     endif
 else
     colorscheme default
-
     " improve omnicomplete visiblity
     hi Pmenu  ctermfg=grey ctermbg=black guifg=grey60  guibg=brown
 endif
@@ -119,7 +120,7 @@ set noswapfile
 set completeopt=longest,menuone,preview " omnicomplete dont auto select
 " folding
 setlocal foldmethod=syntax
-setlocal foldlevel=5
+setlocal foldlevel=99
 
 " set timeoutlen=1000 ttimeoutlen=10 "  fixes issue with delay in status change
 if !has('nvim') && &ttimeoutlen == -1
@@ -127,8 +128,11 @@ if !has('nvim') && &ttimeoutlen == -1
   set ttimeoutlen=100
 endif
 
+" vim-json dont hide quotes
 let g:vim_json_syntax_conceal = 0 " dont hide quotes in json
-set conceallevel=0
+autocmd InsertEnter *.json setlocal conceallevel=2 concealcursor=
+autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
+
 " Ctrl P
 " ignore files
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'
@@ -172,10 +176,13 @@ nmap ; :
 
 "disable ex-mode
 map Q <Nop>
+" mapp Q to macro
+nnoremap Q @
 
 " quit/save faster with leader key
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader><esc> :q!<CR>
+nnoremap <Leader>w :w<CR>
 nnoremap <Leader>w :w<CR>
 
 " remap U to <C-r> for easier redo
@@ -184,7 +191,6 @@ nnoremap U <C-r>
 " new line without going to insert mode
 " nnoremap O o <esc>
 
-nnoremap <Leader>w :w<CR>
 set pastetoggle=<F3>            " paste mode
 
 nnoremap <Leader><Leader> :noh<return>
@@ -214,23 +220,31 @@ map <S-k> <C-u>
 nnoremap <C-b> :buffers<CR>:buffer<Space>
 
 " show nerdtree with Control n
-map <C-n> :NERDTreeToggle<CR>
+
+try 
+    map <C-n> :NERDTreeToggle<CR>
+catch
+    echo "NerdTree Not installed"
+endtry
 
 " ================================================================
 " ========== NEOCOMPLETE / NEOSNIPPET keybinds ===================
 " ================================================================
-" Move up and down in autocomplete with Control j/k
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+try
+    inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
+    inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-" neocomplete - scroll popup with ctrl-j/k
-inoremap <expr><C-j> pumvisible() ?  "\<C-n>" : "\<C-j>"
-" inoremap <expr><C-k> pumvisible() ?  "\<C-p>" : "\<C-k>"
-" smart C-k scroll omnicomplete and expand snippets
-imap <expr><C-k> pumvisible() ? "<C-p>" : neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+    " neocomplete - scroll popup with ctrl-j/k
+    inoremap <expr><C-j> pumvisible() ?  "\<C-n>" : "\<C-j>"
+    " inoremap <expr><C-k> pumvisible() ?  "\<C-p>" : "\<C-k>"
+    " smart C-k scroll omnicomplete and expand snippets
+    imap <expr><C-k> pumvisible() ? "<C-p>" : neosnippet#expandable_or_jumpable() ?
+                \ "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+catch
+endtry
+
 " ================================================================
 
 " Enable folding with the spacebar
@@ -243,8 +257,8 @@ nnoremap Za zR
 
 " search and replace hotkey
 nnoremap <Leader>sr :%s/wordToReplace/replaceWith/gc
+
 if !has('nvim')
-    " Neovim specific commands
     for f in split(glob('~/.vimrc.d/*.vim'), '\n')
         exe 'source' f
     endfor

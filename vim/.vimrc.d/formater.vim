@@ -12,16 +12,6 @@ augroup autoformat_settings
 
     " debug autoformat
     let g:autoformat_verbosemode=1
-
-    " codefmt plugin settings
-    " autocmd FileType bzl AutoFormatBuffer buildifier
-    " autocmd FileType c,cpp,proto,typescript AutoFormatBuffer clang-format
-    " autocmd FileType dart AutoFormatBuffer dartfmt
-    " autocmd FileType go AutoFormatBuffer gofmt
-    " autocmd FileType gn AutoFormatBuffer gn
-    " autocmd FileType html,css,json,javascript  AutoFormatBuffer js-beautify
-    " autocmd FileType java AutoFormatBuffer google-java-format
-    " autocmd FileType python AutoFormatBuffer yapf
 augroup END
 
 autocmd Filetype cs command! FormatDocumentOmni OmniSharpCodeFormat

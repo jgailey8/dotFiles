@@ -1,3 +1,10 @@
+" install vim-plug if it is not installed
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd vimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
     "---- main plugs -----
     Plug 'tomtom/tcomment_vim'
@@ -6,7 +13,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'tpope/vim-dispatch'
     Plug 'tpope/vim-fugitive'
-    Plug 'scrooloose/syntastic'
+    " Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
 
     Plug 'Shougo/neocomplete'
 

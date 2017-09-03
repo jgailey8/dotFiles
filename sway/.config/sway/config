@@ -144,108 +144,13 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $scratchKey scratchpad show
     # removes item from scratchpad
     bindsym $mod+shift+$scratchKey floating disable
-#
-# ---------- MODES ---------------
-#
-# move mode
-#
-bindsym $mod+m mode "move" focus floating
-mode "move" {
-    bindsym $left move left
-    bindsym $down move down
-    bindsym $up move up
-    bindsym $right move right
-    bindsym Left  move left
-    bindsym Down  move down
-    bindsym Up    move up
-    bindsym Right move right
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-#
-# resize mode:
-#
-bindsym $mod+r mode "resize"
-mode "resize" {
-    bindsym $left resize shrink width 10 px or 10 ppt
-    bindsym $down resize grow height 10 px or 10 ppt
-    bindsym $up resize shrink height 10 px or 10 ppt
-    bindsym $right resize grow width 10 px or 10 ppt
-
-    # ditto, with arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
-
-    # return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-#
-# layout mode
-#
-bindsym $mod+shift+m mode "layout"
-mode "layout" {
-    bindsym v layout splitv ;mode "default"
-    bindsym h layout splith ;mode "default"
-    bindsym s layout toggle split ;mode "default"
-    bindsym t layout tabbed ;mode "default"
-    # doesnt work in sway
-    # bindsym space layout toggle all
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-#
-# launcher mode
-#
-bindsym $mod+semicolon mode "launch"
-mode "launch" {
-    bindsym c exec --no-startup-id chromium ; mode "default"
-    bindsym f exec --no-startup-id firefox; mode "default"
-    bindsym p exec --no-startup-id pcmanfm ; mode "default"
-    bindsym t exec --no-startup-id urxvt; mode "default"
-    bindsym $mod+Return exec --no-startup-id urxvtc -name dropTerm; mode "default"
-    
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-#
-# volume mode
-#
-bindsym $mod+shift+v mode "volume"
-mode "volume" {
-    bindsym $up exec amixer -q set Master 2dB+ unmute
-    bindsym Up exec amixer -q set Master 2dB+ unmute
-    bindsym $down exec amixer -q set Master 2dB- unmute
-    bindsym Down exec amixer -q set Master 2dB- unmute
-    bindsym m exec amixer -q set Master toggle
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-#
-# brightness mode
-#
-bindsym $mod+shift+b mode "brightness"
-mode "brightness" {
-    bindsym $up exec --no-startup-id light -A 5
-    bindsym Up exec --no-startup-id light -A 5
-    bindsym $down exec --no-startup-id light -U 5
-    bindsym Down exec --no-startup-id light -U 5
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
+include ~/.config/sway/modes.conf
 include ~/.config/sway/bar.conf
 include ~/.config/sway/color.conf
+include ~/.config/sway/rules.conf
 include ~/.config/sway/input.conf
 include ~/.config/sway/output.conf
-include ~/.config/sway/rules.conf
 
 #
 # Protip:
