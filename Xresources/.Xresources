@@ -1,7 +1,7 @@
-#if __has_include(".Xresources.solarized")
-#include ".Xresources.solarized"
+#if __has_include(".Xresources.color")
+#include ".Xresources.color"
 #endif
-
+URxvt.intensityStyles: false
 URxvt.perl-ext-common: default,tabbedex,selection-to-clipboard, url-select
 URxvt.borderless: true
 URxvt.utf8: true
@@ -19,8 +19,8 @@ URxvt.url-select.launcher: chromium
 URxvt.url-select.underline: true
 
 ! overide background color for my drop down terminal
-dropTerm*background: rgba:0000/2b00/3600/F200
-dropTerm*foreground: #ffffff
+!dropTerm*background: rgba:0000/2b00/3600/F200
+!dropTerm*foreground: #ffffff
 
 ! ------ copy/paste -------
 ! disable ctrl-shift key combo
@@ -41,7 +41,7 @@ URxvt.keysym.C-S-Down: perl:tabbedex:kill_tab
 
 URxvt.keysym.M-comma: perl:tabbedex:prev_tab
 URxvt.keysym.M-period: perl:tabbedex:next_tab
-URxvt.keysym.M-n: perl:tabbedex:new_tab
+URxvt.keysym.M-t: perl:tabbedex:new_tab
 URxvt.keysym.M-q: perl:tabbedex:kill_tab
 URxvt.keysym.M-r: perl:tabbedex:rename_tab
 ! < > keys for moving tabs
@@ -57,3 +57,6 @@ URxvt.keysym.Meta-l: \033[C
 URxvt.keysym.Meta-h: \033[D
 URxvt.keysym.Meta-j: \033[B
 URxvt.keysym.Meta-k: \033[A
+
+URxvt.keysym.Meta-K: command:\033]720;1\007
+URxvt.keysym.Meta-J: command:\033]721;1\007

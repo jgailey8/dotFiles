@@ -5,10 +5,10 @@
 # Read `man 5 sway` for a complete reference.
 exec --no-startup-id ~/.bin/startup-script &
 
-focus_follows_mouse no
-font pango:Awesome 12, DejaVu Sans Mono 14
-gaps 1px
-new_window pixel 2
+# focus_follows_mouse yes
+font pango:DejaVu Sans Mono 14, Awesome 12
+gaps 2px
+new_window pixel 3
 
 #
 ### variables
@@ -35,8 +35,8 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
 
 ### Media keys
 #
-    bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
-    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+    bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
+    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
     bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
     bindsym XF86AudioMute exec amixer -q set Master toggle
@@ -111,7 +111,7 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $mod+Shift+0 move container to workspace 10
 #
 # Layout stuff:
-    bindsym $mod+h splith
+    # bindsym $mod+h splith
     bindsym $mod+v splitv
     # bindsym $mod+s layout stacking
     bindsym $mod+t layout tabbed

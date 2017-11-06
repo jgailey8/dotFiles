@@ -15,30 +15,6 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
-# --------------- environment variables ---------------------
-export CHROME_BIN="/usr/bin/chromium"
-export NODE_ENV="development"
-# export TERM=rxvt-unicode-256color # for a colorful rxvt unicode session
-# can also set in .npmrc
-export npm_config_prefix=$HOME/.local/node_modules
-
-export ASPNETCORE_ENVIRONMENT=Development
-export DOTNET_CLI_TELEMETRY_OPTOUT=1 # seems to cause segmentation faults with openssl-1.0
-
-export ANDROID_HOME=/opt/android-sdk
-
-# ------------- PATH ----------------
-PATH=$PATH:$HOME/.local/bin:$HOME/.bin:$HOME/.local/node_modules/bin
-export PATH
-
-# fix issue with android studio on tiling managers
-# https://issuetracker.google.com/issues/36975466
-# export _JAVA_AWT_WM_NONREPARENTING=1
-# export JAVA_HOME=/usr/lib/jvm/java-x-openjdk
-
-# PATH=$PATH:$HOME/.node_modules/bin:$HOME/.bin:$Home/.local/bin
-# PATH=$PATH:$ANDROID_HOME:$npm_config_prefix/bin
-# PATH=$PATH:$ANDROID_HOME
 
 if [ -d ~/.gem/ruby/2.4.0/bin ]; then
     PATH=$PATH:~/.gem/ruby/2.4.0/bin
@@ -51,13 +27,18 @@ if [ -f ~/.bash_completions/git-completion.bash ]; then
 fi
 
 # ng-cli completion
-if [ -f ~/.bash_completions/ng-cli.bash ]; then
-    . ~/.bash_completions/ng-cli.bash
+if [ -f ~/.bash_completions/ng-completion.bash ]; then
+    . ~/.bash_completions/ng-completion.bash
 fi
 
 #-tns-completion-start-#
-if [ -f ~/.bash_completions/nativescript.bash ]; then
-    source ~/.bash_completions/nativescript.bash
+if [ -f ~/.bash_completions/tns-completion.bash ]; then
+    source ~/.bash_completions/tns-completion.bash
+fi
+
+#-dotnet-completion-start-#
+if [ -f ~/.bash_completions/dotnet-completion.bash ]; then
+    source ~/.bash_completions/dotnet-completion.bash
 fi
 
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
@@ -84,14 +65,11 @@ function parse_git_dirty {
 function parse_git_branch {
     git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
 }
+[ -e "$HOME/.dircolors" ]; DIR_COLORS="$HOME/.dircolors"
+[ -e "$DIR_COLORS" ] || DIR_COLORS=""
+eval "`dircolors -b $DIR_COLORS`"
 
-# eval `dircolors ~/.dir_colors`
-if [[ -f ~/.dircolors && $(tput colors) -gt 8 ]]; then
-    eval "`dircolors -b ~/.dircolors`"
-else
-    LS_COLORS=$LS_COLORS:'di=0;32:'
-    export LS_COLORS
-fi
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ###-tns-completion-start-###
 if [ -f /home/jared/.tnsrc ]; then 

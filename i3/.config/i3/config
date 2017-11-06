@@ -2,9 +2,9 @@
 
 exec --no-startup-id ~/.bin/startup-script &
 
-focus_follows_mouse no
+focus_follows_mouse yes
 font pango:Awesome 12, DejaVu Sans Mono 14
-new_window pixel 2
+new_window pixel 3
 
 #
 ### variables
@@ -107,7 +107,7 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
 #
 # Layut stuff:
     # bindsym $mod+h splith
-    bindsym $mod+v splitv
+    # bindsym $mod+v splitv
     # bindsym $mod+s layout stacking
     bindsym $mod+t layout tabbed
     bindsym $mod+s layout toggle split

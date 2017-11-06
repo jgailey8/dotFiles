@@ -1,7 +1,0 @@
-#!/bin/sh
-#Author: Jared Gailey
-#Date: 5/3/17
-#
-#!/bin/bash
-# echo "pwd: `pwd`"
-mono /opt/omnisharp-roslyn/OmniSharp.exe 
