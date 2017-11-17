@@ -12,4 +12,6 @@ vim/.vim/undo-dir
 
 **/.ssh
 
+**/plugged
+**/autoload
 **/.node_modules

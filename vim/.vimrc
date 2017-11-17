@@ -22,7 +22,6 @@ if has('unix')
     set fileformats="unix,dos,mac"
     set ff=unix
     set fileformat=unix
-    " set term=rxvt-unicode-256color
 endif
 
 " realitive/current line
@@ -61,7 +60,7 @@ if  &t_Co > 255
         hi Normal ctermbg=NONE
         " search colors
         " Overide omnicomplete appearance
-        hi Pmenu  ctermfg=grey ctermbg=black guifg=grey guibg=black
+        " hi Pmenu  ctermfg=grey ctermbg=black guifg=grey guibg=black
         " Overide syntastic error
         hi SpellBad    ctermfg=white ctermbg=darkred cterm=none
         hi SpellCap    ctermfg=white ctermbg=yellow cterm=none
@@ -169,7 +168,7 @@ command! SudoWrite w !sudo tee "%"
 " map <RIGHT> <NOP>
 
 " exit from insert mode with  ;;
-imap oj <Esc>
+imap ;;; <Esc>
 
 " remap colon
 nmap ; :
@@ -195,19 +194,10 @@ set pastetoggle=<F3>            " paste mode
 
 nnoremap <Leader><Leader> :noh<return>
 
-" ====easier navigation=====
-" Better window navigation -Ctrl+j,k etc..
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-
 " more natural up down movement
 nnoremap j gj
 nnoremap k gk
-" Omnicomplete j k navigation
-" inoremap <expr> <C-j> ("\<C-n>")
-" inoremap <expr> <C-k> ("\<C-p>")
+
 " end and start of line with shift h l
 map <S-h> <Home>
 map <S-l> <End>
@@ -220,7 +210,6 @@ map <S-k> <C-u>
 nnoremap <C-b> :buffers<CR>:buffer<Space>
 
 " show nerdtree with Control n
-
 try 
     map <C-n> :NERDTreeToggle<CR>
 catch
@@ -228,20 +217,12 @@ catch
 endtry
 
 " ================================================================
-" ========== NEOCOMPLETE / NEOSNIPPET keybinds ===================
+" ========== Completiong / Snippet keybinds ===================
 " ================================================================
 try
     inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
     inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
-    " neocomplete - scroll popup with ctrl-j/k
-    inoremap <expr><C-j> pumvisible() ?  "\<C-n>" : "\<C-j>"
-    " inoremap <expr><C-k> pumvisible() ?  "\<C-p>" : "\<C-k>"
-    " smart C-k scroll omnicomplete and expand snippets
-    imap <expr><C-k> pumvisible() ? "<C-p>" : neosnippet#expandable_or_jumpable() ?
-                \ "\<Plug>(neosnippet_expand_or_jump)" : "\<C-k>"
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
 catch
 endtry
 
@@ -258,12 +239,7 @@ nnoremap Za zR
 " search and replace hotkey
 nnoremap <Leader>sr :%s/wordToReplace/replaceWith/gc
 
-if !has('nvim')
-    for f in split(glob('~/.vimrc.d/*.vim'), '\n')
-        exe 'source' f
-    endfor
-endif
 " Load subconfigurations from .vimrc.d
-" for f in split(glob('~/.vimrc.d/*.vim'), '\n')
-"     exe 'source' f
-" endfor
+for f in split(glob('~/.vimrc.d/*.vim'), '\n')
+    exe 'source' f
+endfor

@@ -1,5 +1,4 @@
 alias less=$PAGER
-alias rm="trash"
 alias ls="ls --color=auto"
 alias i3rc="vim ~/.config/i3/config"
 alias swayrc="vim ~/.config/sway/config"
@@ -23,6 +22,10 @@ alias dotnet-prod="export ASPNETCORE_ENVIRONMENT=Production"
 alias snapshot-home="snapper -c home create -d '$(date)'"
 alias snapshot-root="sudo snapper -c root create -d '$(date)'"
 
+# use trash-cli
+if type trash > /dev/null 2>&1; then
+    alias rm="trash"
+fi
 # migrating to neovim
 if type nvim > /dev/null 2>&1; then
     alias vim="nvim"

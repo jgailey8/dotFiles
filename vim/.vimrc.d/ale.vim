@@ -2,7 +2,7 @@
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
 " warning and error sign
-let g:ale_sign_error = '>>'
+let g:ale_sign_error = 'xx'
 let g:ale_sign_warning = '--'
 " check errors only on save
 " let g:ale_lint_on_text_changed = 'never'
@@ -20,8 +20,15 @@ let g:ale_set_quickfix = 1
 let g:ale_linters = {
 \           'jsx': ['stylelint', 'eslint'], 
 \           'javascript': ['eslint'],
+\           'cs': [],
 \           'json': ['jsonlint'],
 \           'typescript': ['tslint']}
+
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+
+let g:ale_fix_on_save = 0
 
 " jsx support
 augroup FiletypeGroup

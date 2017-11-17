@@ -1,6 +1,6 @@
 # i3 config file (v4)
 
-exec --no-startup-id ~/.bin/startup-script &
+exec --no-startup-id ~/.bin/startup-script i3&
 
 focus_follows_mouse yes
 font pango:Awesome 12, DejaVu Sans Mono 14

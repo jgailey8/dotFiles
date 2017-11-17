@@ -70,9 +70,3 @@ function parse_git_branch {
 eval "`dircolors -b $DIR_COLORS`"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-###-tns-completion-start-###
-if [ -f /home/jared/.tnsrc ]; then 
-    source /home/jared/.tnsrc 
-fi
-###-tns-completion-end-###

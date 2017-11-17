@@ -1,53 +1,53 @@
 " -----------------------------------------
 "  ============ Javascript/TernJs ================
 "  ----------------------------------------
-autocmd FileType javascript setlocal completeopt+=menu,preview
-let g:tern_map_keys=0
-" let g:tern_show_argument_hints='on_hold'
-" let g:tern_show_signature_in_pum=1
-let g:tern_show_loc_after_rename=1
-let g:jsx_ext_required = 1 " Allow JSX in normal JS files
-
-autocmd FileType javascript nmap <leader>gd :TernDef<CR>
-autocmd FileType javascript nmap <Leader>rn :TernRename<CR>
-autocmd FileType javascript nmap <leader>fr :TernRefs<CR>
-autocmd FileType javascript nmap <Leader>ft :TernType<CR>
-" find refernces
-
-" -----------------------------------------
-"  ============ Typescript/Tsuquyomi ================
-"  ----------------------------------------
-autocmd FileType typescript setlocal completeopt+=menu,preview
-autocmd FileType typescript let NERDTreeIgnore = ['\.js$']
-let g:typescript_compiler_binary = 'tsc'
-" let g:typescript_compiler_options = ''
-autocmd FileType typescript :set makeprg=tsc
-
-let g:tsuquyomi_disable_quickfix = 0
-
-autocmd FileType typescript nmap <leader>gd :TsuDefinition<CR>
-autocmd FileType typescript nmap <Leader>rn <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <Leader>h : <C-u>echo tsuquyomi#hint()<CR>
-" find refernces
-autocmd FileType typescript nmap <leader>fr :TsuReferences<CR>
-autocmd FileType typescript nmap <leader>ti :TsuImport<CR>
-" go back
-autocmd FileType typescript nmap <leader>gb :TsuGoBack<CR> 
-
-autocmd FileType typescript nmap <leader>f :TsuQuickFix<CR> 
-
-autocmd FileType typescript nmap <leader>ss :TsuStartServer 
-
-autocmd FileType typescript nmap <leader>sS :TsuStopServer 
-" show errors
-autocmd FileType typescript nmap <leader>er : TsuGeterrProject<CR>
-
-" show tooltip
-" set ballooneval
-" autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
-autocmd FileType typescript nmap <buffer> <Leader>h : echo tsuquyomi#hint()<CR>
-
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+" autocmd FileType javascript setlocal completeopt+=menu,preview
+" let g:tern_map_keys=0
+" " let g:tern_show_argument_hints='on_hold'
+" " let g:tern_show_signature_in_pum=1
+" let g:tern_show_loc_after_rename=1
+" let g:jsx_ext_required = 1 " Allow JSX in normal JS files
+"
+" autocmd FileType javascript nmap <leader>gd :TernDef<CR>
+" autocmd FileType javascript nmap <Leader>rn :TernRename<CR>
+" autocmd FileType javascript nmap <leader>fr :TernRefs<CR>
+" autocmd FileType javascript nmap <Leader>ft :TernType<CR>
+" " find refernces
+"
+" " -----------------------------------------
+" "  ============ Typescript/Tsuquyomi ================
+" "  ----------------------------------------
+" autocmd FileType typescript setlocal completeopt+=menu,preview
+" autocmd FileType typescript let NERDTreeIgnore = ['\.js$']
+" let g:typescript_compiler_binary = 'tsc'
+" " let g:typescript_compiler_options = ''
+" autocmd FileType typescript :set makeprg=tsc
+"
+" let g:tsuquyomi_disable_quickfix = 0
+"
+" autocmd FileType typescript nmap <leader>gd :TsuDefinition<CR>
+" autocmd FileType typescript nmap <Leader>rn <Plug>(TsuquyomiRenameSymbol)
+" autocmd FileType typescript nmap <Leader>h : <C-u>echo tsuquyomi#hint()<CR>
+" " find refernces
+" autocmd FileType typescript nmap <leader>fr :TsuReferences<CR>
+" autocmd FileType typescript nmap <leader>ti :TsuImport<CR>
+" " go back
+" autocmd FileType typescript nmap <leader>gb :TsuGoBack<CR> 
+"
+" autocmd FileType typescript nmap <leader>f :TsuQuickFix<CR> 
+"
+" autocmd FileType typescript nmap <leader>ss :TsuStartServer 
+"
+" autocmd FileType typescript nmap <leader>sS :TsuStopServer 
+" " show errors
+" autocmd FileType typescript nmap <leader>er : TsuGeterrProject<CR>
+"
+" " show tooltip
+" " set ballooneval
+" " autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+" autocmd FileType typescript nmap <buffer> <Leader>h : echo tsuquyomi#hint()<CR>
+"
+" autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 
 " -----------------------------------------
 "  ===============  C#/Omnisharp  ===================
@@ -66,7 +66,7 @@ autocmd FileType cs set splitbelow
 " autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
 
 " Automatically add new cs files to the nearest project on save
-autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+" autocmd BufWritePost *.cs call OmniSharp#AddToProject()
 
 augroup filetype_cs
     autocmd!
