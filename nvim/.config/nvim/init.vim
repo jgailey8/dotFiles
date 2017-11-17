@@ -4,8 +4,6 @@ set mouse=a
 set encoding=utf-8  " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 set nocompatible               " be iMproved not vi
-set backup             " keep a backup file (restore to previous version)
-set undofile           " keep an undo file (undo changes after closing)
 set ruler              " show the cursor position all the time
 set showcmd            " display incomplete commands
 set splitbelow         " preview window on bottom
@@ -64,6 +62,14 @@ setlocal foldlevel=99
 " command tabcompletion
 set wildmode=longest,list,full
 set wildmenu
+
+" viminfo stores the the state of your previous editing session
+if exists("+undofile")
+    set undofile           " keep an undo file (undo changes after closing)
+  " This is only present in 7.3+
+    " let $VIMHOME = $XDG_CONFIG_HOME.'/nvim'
+    set undodir=$HOME/.local/tmp/vim-undo
+endif
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
     autocmd!
