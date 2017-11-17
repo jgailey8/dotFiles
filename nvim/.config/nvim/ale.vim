@@ -3,7 +3,7 @@ highlight clear ALEWarningSign
 " warning and error sign
 let g:ale_sign_error = 'xx'
 let g:ale_sign_warning = '--'
-
+let g:ale_set_highlights = 0 " disable highlighting
 " show error msg in status bar
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -23,7 +23,10 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 
-let g:ale_fix_on_save = 0
+let g:ale_fix_on_save = 1
+
+let g:ale_javascript_eslint_use_global=1
+" let g:ale_javascript_eslint_options = '-c ~/.eslintrc.js'
 
 " jsx support
 augroup FiletypeGroup

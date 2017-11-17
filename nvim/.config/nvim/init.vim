@@ -129,15 +129,3 @@ nnoremap <M-n> <C-i>
 source ~/.config/nvim/appearance.vim
 source ~/.config/nvim/formater.vim
 source ~/.config/nvim/plugins.vim
-" source ~/.config/nvim/pluginsettings.vim
-" if &runtimepath =~ 'ale'
-"     source ~/.config/nvim/ale.vim
-" endif
-
-" if &runtimepath =~ 'LanguageClient-neovim'
-"     source ~/.config/nvim/langserver.vim
-" endif
-
-" if &runtimepath =~ 'omnisharp-vim'
-"     source ~/.config/nvim/omniSharp.vim
-" endif

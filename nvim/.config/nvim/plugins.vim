@@ -18,7 +18,7 @@ call plug#begin()
     "---- completion -----
     if has('python3')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+        " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
         Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
         " (Optional) Showing function signature and inline doc.
         Plug 'Shougo/echodoc.vim'
@@ -53,10 +53,10 @@ call plug#begin()
     " Plug 'markwoodhall/vim-nuget'
     " Plug 'mattn/webapi-vim'
     " Plug 'scrooloose/syntastic'
-    if has('python3')
-        Plug 'OmniSharp/omnisharp-vim'
-        Plug 'Robzz/deoplete-omnisharp'
-    endif
+    " if has('python3')
+        " Plug 'OmniSharp/omnisharp-vim'
+        " Plug 'Robzz/deoplete-omnisharp'
+    " endif
     
     "----- extras ---------
     Plug 'crusoexia/vim-monokai'
@@ -88,6 +88,8 @@ autocmd InsertLeave *.json setlocal conceallevel=2 concealcursor=inc
 map <leader>n :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=30        " resize nerdtree width
 let NERDTreeShowHidden=0        " hide hidden files (Shift+i) togggles this
+
+autocmd FileType c,cpp,cs,java setlocal commentstring=//\ %s
 
 " ========= FZF ==============
 nmap <C-p> <plug>(fzf-maps-n)
@@ -130,6 +132,6 @@ if &runtimepath =~ 'LanguageClient-neovim'
     source ~/.config/nvim/langserver.vim
 endif
 
-if &runtimepath =~ 'omnisharp-vim'
-    source ~/.config/nvim/omniSharp.vim
-endif
+" if &runtimepath =~ 'omnisharp-vim'
+"     source ~/.config/nvim/omniSharp.vim
+" endif
