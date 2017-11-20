@@ -52,9 +52,9 @@ set autoread                    " automatically reload files changed outside of 
 set nolist                      " don't show invisible characters by default,
 " but it is enabled for some file types (see later)
 set laststatus=2        " always show status bar
-set viminfo="NONE" " no annoying bkp files and .viminfo
-set nobackup
-set noswapfile
+" set viminfo="NONE" " no annoying bkp files and .viminfo
+" set nobackup
+" set noswapfile
 set completeopt=longest,menuone " omnicomplete dont auto select
 " folding
 setlocal foldmethod=syntax
@@ -64,12 +64,17 @@ set wildmode=longest,list,full
 set wildmenu
 
 " viminfo stores the the state of your previous editing session
-if exists("+undofile")
-    set undofile           " keep an undo file (undo changes after closing)
-  " This is only present in 7.3+
-    " let $VIMHOME = $XDG_CONFIG_HOME.'/nvim'
-    set undodir=$HOME/.local/tmp/vim-undo
-endif
+" if exists("+undofile")
+"     set undofile           " keep an undo file (undo changes after closing)
+"   " This is only present in 7.3+
+"     " let $VIMHOME = $XDG_CONFIG_HOME.'/nvim'
+"     set undodir=$HOME/.local/tmp/vim-undo
+" endif
+" set dir=~/.local/tmp
+" set nobackup
+set noswapfile
+" set noswapfile
+" set noundofile
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
     autocmd!
@@ -135,3 +140,7 @@ nnoremap <M-n> <C-i>
 source ~/.config/nvim/appearance.vim
 source ~/.config/nvim/formater.vim
 source ~/.config/nvim/plugins.vim
+
+" close quick fix with esc 
+autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+            \   <esc> :cclose<cr>:lclose<cr>

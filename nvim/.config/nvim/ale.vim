@@ -15,7 +15,7 @@ let g:ale_set_quickfix = 0
 let g:ale_linters = {
 \           'jsx': ['stylelint', 'eslint'], 
 \           'javascript': ['eslint'],
-\           'cs': ['omnisharp'],
+\           'cs': [],
 \           'json': ['jsonlint'],
 \           'typescript': ['tslint']}
 

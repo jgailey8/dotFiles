@@ -11,10 +11,10 @@ else
     " comment color
     " hi Comment ctermfg=Grey
     " transparent background
-    " hi Normal ctermbg=NONE guibg=NONE
-    " hi NonText ctermbg=NONE guibg=NONE
+    hi Normal ctermbg=NONE guibg=NONE
+    hi NonText ctermbg=NONE guibg=NONE
     " Overide omnicomplete appearance
-    " hi Pmenu  ctermfg=grey ctermbg=black guifg=grey guibg=black
+    hi Pmenu  ctermfg=grey ctermbg=black guifg=grey guibg=black
     hi MatchParen cterm=bold,underline ctermbg=none ctermfg=darkgreen guibg=NONE guifg=green
 
     hi Error ctermfg=Red guifg=Red

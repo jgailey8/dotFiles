@@ -15,10 +15,6 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi
 
-
-if [ -d ~/.gem/ruby/2.4.0/bin ]; then
-    PATH=$PATH:~/.gem/ruby/2.4.0/bin
-fi
 # ------- bash completions ------------
 
 # git completion
