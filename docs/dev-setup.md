@@ -1,9 +1,9 @@
 # some packages to grab
-  pacman -S docker httpie 
+  pacman -S docker 
 # [vs-code](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
    using vs code extension settings-sync to manage settings/keybinds etc..
 1. install plugin
-2. lookup github gist id
+2. go to github.com and settings to lookup gist id
 3. Press Shift + Alt + D it will ask your github Gist ID.
 4. Dowload settings!
 
@@ -60,5 +60,6 @@
 
 ## Vm's
     use virt-manager or command line qemu
-    add user to libvirt-group
+    add user to libvirt 
     enable libvirtd
+    install ebtables and dnsmasq for default networking

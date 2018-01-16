@@ -11,6 +11,7 @@
     mount /dev/sda2 /mnt
     cd /mnt
     btfs subvolume create @
+    btfs subvolume create @home
     btfs subvolume create @snapshots
     cd @snapshots
     btfs subvolume create home_snapshots
@@ -18,6 +19,7 @@
     umount /dev/sda2
 ## install
     mount -o ssd,noatime,subvol=@ /dev/sda2 /mnt
+    mount -o ssd,noatime,subvol=@home /dev/sda2 /mnt/home
     > can create subvolumes like home,etc,mnt etc.. if you want
     mount /dev/sda1 /mnt/boot
     pacstrap /mnt base base-devel btrfs-progs
@@ -25,6 +27,10 @@
 
     fstab example with btrfs volume
     UUID={##}	/         	btrfs     	rw,noatime,ssd,subvol=ROOT	0 0
+    UUID={##}	/home       	btrfs     	rw,noatime,ssd,space_cache,subvol=@home	0 0
+    mount snappshot directorys to subvol=@snapshots/...
+    UUID={##}	/.snapshots       	btrfs     	rw,noatime,ssd,space_cache,subvol=@snapshots/root_snapshots	0 0
+    UUID={##}	/home/.snapshots       	btrfs     	rw,noatime,ssd,space_cache,subvol=@snapshots/home_snapshots	0 0
 
     arch-chroot /mnt /bin/bash
 ## clock, locale and hostname
@@ -62,7 +68,6 @@
     pcmanfm xcompmgr snapper xsel tlp acpi_call trash-cli ntp xautolock xdg-user-dirs
 ## some aur packages 
     visual-studio-code
-    adobe-source-pro 
     powerline-git
     powerline-fonts-git
     light
@@ -70,28 +75,22 @@
     yaourt should install all required python dependencies
     yaourt font-awesome
     
-# dotfiles install
+# install dotfiles
     git clone https://github.com/jmg5e/dotfiles .dotfiles
-    ./install.sh 
-    or install individually ie stow -v -t $HOME vim
-
-
-## install (vim-plug)[https://github.com/junegunn/vim-plug]
-    ```
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    ```
+    stow -v -t $HOME bash vim Xresources xinit i3 sway
 
 # [ dev environment/setup ](dev-setup.md)
 ## docker, npmrc, nginx/mysql, android-sdk, dotnet-core etc..
 
 # optimize system etc..
-    kernel parameters
-        disable watchdog
-        use noop scheduler
-        etc...
-    fstab settings
+## intel early module loading
+    add MODULES=(i915) to /etc/mkinitcpio.conf
+    mkinitcpio -p linux
+## kernel parameters
+    disable watchdog
+    use noop scheduler
+    etc...
+##  fstab settings
 ## update pacman mirror list
     cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
     rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
@@ -104,12 +103,19 @@
     UUID=##	/.snapshots         	btrfs     	rw,noatime,ssd,space_cache,subvol=@snapshots/root_snapshots	 0 0
     enable timed backups for home or whatever
     install snap-pac for nice pre&post pacman snapshots
-    allow user to manage home snaps
-        sudo snapper -c home set-config "ALLOW_USERS=|user|" SYNC_ACL="yes"
 ## [Setup Vpn](https://wiki.archlinux.org/index.php/Private_Internet_Access_VPN)
+    install networkmanager-openvpn & private-internet-access-vpn
+    put username/password into /etc/private-internet-access/login.conf
+    run pia -a
 
+## updatedb
+    pacmans -S mlocate
 
 ## tlp/power-management settings
+    pacman -S tlp acpi_cal
+    edit /etc/default/tlp
+    add SATA_LINKPWR_ON_BAT=max_performance to prevent btrfs file corruption
+    enable tlp.service and tlp-sleep.service
 ## udev rules(keyboard,trackpoint tweaks)
 ## configure xorg.conf
 ## setup backups with snapshots etc..
@@ -117,7 +123,3 @@
 # Urxvt notes
  [tabbadex] (https://github.com/mina86/urxvt-tabbedex)
     > git package supports Control+Shift and kill_tab
-
-# Capslock -> Escape mapping(works under wayland)
-## started in ~/.bin/startup.sh
-  setxkbmap -option caps:escape
