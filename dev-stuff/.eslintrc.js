@@ -1,5 +1,9 @@
 // npm install eslint eslint-config-airbnb --global
 module.exports = {
+  "globals": {
+    "expect": true,
+    "jest": true
+  },
   "env": {
     "browser": true,
     "es6": true,
@@ -11,7 +15,9 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
+  "parser": "babel-eslint",
   "parserOptions": {
+    "ecmaVersion": 2017,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
       "jsx": true
@@ -19,7 +25,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react",
+    "react"
   ],
   "rules": {
     "react/jsx-uses-react": "error",
@@ -27,7 +33,9 @@ module.exports = {
     "indent": [
       "warn", 2
     ],
-    "max-len": [1, 120, 2, {"ignoreComments": true}],
+    "max-len": [1, 120, 2, {
+      "ignoreComments": true
+    }],
     "no-console": 0,
     "no-unused-vars": "warn",
     "quotes": [
@@ -42,11 +50,7 @@ module.exports = {
       "warn",
       "always"
     ],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "always",
-      "asyncArrow": "always"
-    }],
+    "space-before-function-paren": ["error", "never"],
     "object-curly-spacing": ["warn", "always"],
     "comma-spacing": ["error", {
       "before": false,

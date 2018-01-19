@@ -1,12 +1,10 @@
 # Ignore all files named .DS_Store or ending with .log
 **/.DS_Store
 **.log
-**.swp
+**/*.swp
 
-vim/.vim/plugged
-vim/.vim/autoload
-vim/.vim/undo-dir
-nvim/.config/nvim/tmp
+**/tmp
+
 .bash_history
 .bash_local
 .bash_logout

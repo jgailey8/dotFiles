@@ -1,48 +1,47 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-exec --no-startup-id ~/.bin/startup-script sway&
+# sway config file
 
-# focus_follows_mouse yes
-font pango:DejaVu Sans Mono 12, Awesome 12
-gaps 2px
-new_window pixel 3
+# ========= Settings/Workspaces ===== {{{
+# i3
+    # exec --no-startup-id startup-script i3&
+# sway
+    exec --no-startup-id startup-script sway&
 
-#
-### variables
-#
-set $mod Mod4
-# scratchpad / dropdown terminal key
-set $scratchKey Print
+    focus_follows_mouse no
+    font pango:Awesome 12, DejaVu Sans Mono 14
+    new_window pixel 3
 
-set $left h
-set $down j
-set $up k
-set $right l
+# variables
+    set $mod Mod4
+    set $scratchKey Print
+
+    set $left h
+    set $down j
+    set $up k
+    set $right l
 
 # workspace names
-set $tag1 "1: www  "
-set $tag2 "2: code  "
-set $tag3 "3: terminal  "
-set $tag4 "4: debug  "
-set $tag5 "5: media  "
-set $tag6 "6: VMs  "
-# default applications
-set $term urxvt
-set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
+    set $tag1 "1: www "
+    set $tag2 "2: code "
+    set $tag3 "3: terminal "
+    set $tag4 "4: debug "
+    set $tag5 "5: media "
+    set $tag6 "6: VMs "
+    set $tag7 "7: Other λ"
 
-### Media keys
-#
-    bindsym XF86MonBrightnessUp exec --no-startup-id light -A 5
-    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
+# default applications
+    set $term urxvt
+    set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
+# }}}
+# ========= Keybinds ===== {{{
+
+# Media Keys {{{
+    bindsym XF86MonBrightnessUp exec --no-startup-id light -A 10
+    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
     bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
     bindsym XF86AudioMute exec amixer -q set Master toggle
-#
-#----------Navigation--------
-#
+# }}}
+# Navigation {{{
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -63,16 +62,14 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $mod+Control+Right move container to workspace next_on_output
     bindsym $mod+Control+$left move container to workspace prev_on_output
     bindsym $mod+Control+$right move container to workspace next_on_output
-
-#
-### WM bindings
-#
+# }}}
+# WM bindings {{{
     # start a terminal
     bindsym $mod+Return exec $term
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
-    floating_modifier $mod normal
+    floating_modifier $mod
 
     # kill focused window
     bindsym $mod+q kill
@@ -80,11 +77,13 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     # start your launcher
     bindsym $mod+d exec $menu
 
-
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # exit sway (logs you out of your wayland session)
+    # exit 
+# i3
+    # bindsym $mod+Shift+e exec "i3-msg exit"
+# sway
     bindsym $mod+Shift+e exit
 
 ### Workspaces:
@@ -94,7 +93,7 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $mod+4 workspace $tag4
     bindsym $mod+5 workspace $tag5
     bindsym $mod+6 workspace $tag6
-    bindsym $mod+7 workspace 7
+    bindsym $mod+7 workspace $tag7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
@@ -109,10 +108,10 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
-#
-# Layout stuff:
+# }}}
+# Layout {{{
     # bindsym $mod+h splith
-    bindsym $mod+v splitv
+    # bindsym $mod+v splitv
     # bindsym $mod+s layout stacking
     bindsym $mod+t layout tabbed
     bindsym $mod+s layout toggle split
@@ -131,27 +130,182 @@ set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
     bindsym $mod+c focus child
 
     bindsym $mod+shift+s sticky toggle
-#
-# Scratchpad:
-#
+# }}}
+# Scratchpad {{{
     # Move the currently focused window to the scratchpad
     bindsym $mod+$scratchKey move scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
     bindsym $scratchKey scratchpad show
     # removes item from scratchpad
     bindsym $mod+shift+$scratchKey floating disable
+    bindsym $mod+minus floating disable
+# }}}
+# }}}
+# ========= Modes ===== {{{
 
-include ~/.config/sway/modes.conf
-include ~/.config/sway/bar.conf
-include ~/.config/sway/color.conf
-include ~/.config/sway/rules.conf
-include ~/.config/sway/input.conf
-include ~/.config/sway/output.conf
+# Launcher Mode {{{
+        bindsym $mod+semicolon mode "launch"
+        mode "launch" {
+            bindsym c exec --no-startup-id chromium ; mode "default"
+            bindsym f exec --no-startup-id firefox; mode "default"
+            bindsym p exec --no-startup-id pcmanfm ; mode "default"
+            bindsym t exec --no-startup-id urxvt; mode "default"
+            bindsym $mod+Return exec --no-startup-id urxvtc -name dropTerm; mode "default"
+            
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# Move Mode {{{
+        bindsym $mod+m mode "move" focus floating
+        mode "move" {
+            bindsym $mod+Tab focus right
+            bindsym $left move left
+            bindsym $down move down
+            bindsym $up move up
+            bindsym $right move right
+            bindsym Left  move left
+            bindsym Down  move down
+            bindsym Up    move up
+            bindsym Right move right
 
-#
-# Protip:
-# include ~/.config/sway/`hostname`/*
+            # back to normal: Enter or Escape
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# Resize Mode {{{
+        bindsym $mod+r mode "resize"
+        mode "resize" {
+            bindsym $left resize shrink width 10 px or 10 ppt
+            bindsym $down resize grow height 10 px or 10 ppt
+            bindsym $up resize shrink height 10 px or 10 ppt
+            bindsym $right resize grow width 10 px or 10 ppt
+
+            # ditto, with arrow keys
+            bindsym Left resize shrink width 10 px or 10 ppt
+            bindsym Down resize grow height 10 px or 10 ppt
+            bindsym Up resize shrink height 10 px or 10 ppt
+            bindsym Right resize grow width 10 px or 10 ppt
+
+            # return to default mode
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# Layout Mode {{{
+        bindsym $mod+shift+m mode "layout"
+        mode "layout" {
+            bindsym v layout splitv ;mode "default"
+            bindsym h layout splith ;mode "default"
+            bindsym s layout toggle split ;mode "default"
+            bindsym t layout tabbed ;mode "default"
+            # doesnt work in sway
+            bindsym space layout toggle all
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# Volume Mode {{{
+        bindsym $mod+shift+v mode "volume"
+        mode "volume" {
+            bindsym $up exec amixer -q set Master 2dB+ unmute
+            bindsym Up exec amixer -q set Master 2dB+ unmute
+            bindsym $down exec amixer -q set Master 2dB- unmute
+            bindsym Down exec amixer -q set Master 2dB- unmute
+            bindsym m exec amixer -q set Master toggle
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# Brightness Mode {{{
+        bindsym $mod+shift+b mode "brightness"
+        mode "brightness" {
+            bindsym $up exec --no-startup-id light -A 5
+            bindsym Up exec --no-startup-id light -A 5
+            bindsym $down exec --no-startup-id light -U 5
+            bindsym Down exec --no-startup-id light -U 5
+            bindsym Return mode "default"
+            bindsym Escape mode "default"
+        }
+# }}}
+# }}}
+# ========= StatusBar===== {{{
+    bar {
+        workspace_buttons yes
+        font pango: Hack 14
+        position top
+        status_command bumblebee-status -m battery amixer brightness nic date time -p interval=2.5 time.format="%I:%M %P" date.format="%b %-d %Y" -t solarized-powerline
+
+        colors {
+            separator #666666
+            background #222222
+            statusline #dddddd
+            focused_workspace #1793D1 #1793D1 #ffffff
+            focused_workspace #333333 #1793D1 #ffffff
+            active_workspace #333333 #333333 #ffffff
+            inactive_workspace #333333 #333333 #888888
+            urgent_workspace #2f343a #900000 #ffffff
+        }
+    }
+
+    bar {
+        # tray_output none
+        workspace_buttons no
+        binding_mode_indicator no
+        font pango: Hack 14
+        position bottom
+        status_command bumblebee-status -m sensors memory disk:root disk -p inteval=2.5 memory.format="{total}/{used"} disk.path="/tmp" disk.format="{path} {size}/{used}" root.format="{left}" -t solarized-powerline
+
+        colors {
+            separator #666666
+            background #222222
+            statusline #dddddd
+            focused_workspace #1793D1 #1793D1 #ffffff
+            focused_workspace #333333 #1793D1 #ffffff
+            active_workspace #333333 #333333 #ffffff
+            inactive_workspace #333333 #333333 #888888
+            urgent_workspace #2f343a #900000 #ffffff
+        }
+    }
+# }}}
+# ========= Appearance ===== {{{
+    client.focused #0088CC #0088CC #ffffff #dddddd
+    client.focused_inactive #333333 #333333 #888888 #292d2e
+    client.unfocused #333333 #333333 #888888 #292d2e
+    client.urgent #2f343a #900000 #ffffff #900000
+# }}}
+# ========= RULES ===== {{{
+    assign [class="^Chromium$"]      → $tag1
+    assign [class="^Firefox$"]      → $tag1
+    assign [class="^Code$"]      → $tag2
+    assign [class="^(?i)jetbrains-studio"]      → $tag2
+    assign [class="^(?i)Karma.*$"]      → $tag4
+    assign [class="^(?i)Qemu.*$"]      → $tag6
+    assign [class="^(?i)virt\-manager$"]      → $tag6
+
+    for_window [class="[Q,q]emu.*"] border none; fullscreen
+# Floating windows/controls
+    for_window [class="(?i)Android\sEmulator.*"] border none; floating enabled
+    for_window [instance=".*Android\sEmulator.*"] border none; floating enabled
+    for_window [instance="Extended controls"] border none; floating enable
+    for_window [class="(?i)Extended\scontrols.*"] border none; floating enable
+    for_window [instance="Emulator"] border none; floating enable
+
+# Drop Down Terminal
+    for_window [instance="^dropTerm$"] border none; floating enable; move scratchpad; scratchpad show;
+
+# i3
+    # for_window [instance="^dropTerm$"] resize set 1920 1080; resize shrink height 50px; move position 0px 25px; move scratchpad; 
+# sway
+    for_window [instance="^dropTerm$"] resize set 1920 1080; resize shrink height 50px; move scratchpad; 
+# }}}
+
+# Sway
+include ./input.conf 
+include ./output.conf 
+
+# vim: foldmethod=marker:foldlevel=0
