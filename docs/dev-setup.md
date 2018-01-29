@@ -2,6 +2,8 @@
   pacman -S docker 
 # [vs-code](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
    using vs code extension settings-sync to manage settings/keybinds etc..
+## public gist
+   * d58b5ae82409ce855f4c6028b25fa493
 1. install plugin
 2. go to github.com and settings to lookup gist id
 3. Press Shift + Alt + D it will ask your github Gist ID.
