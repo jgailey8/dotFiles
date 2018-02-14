@@ -63,26 +63,26 @@ set completeopt=menuone,preview,noselect " use popup menu when one match, dont a
 " ========= KeyBindings ====    {{{
 " exit from insert mode with  ;;
 imap ;; <Esc>
-nmap ; : 	" remap colon
-noremap Q gq 	"Don't use Ex mode
+nmap ; :
+noremap Q gq
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
-nnoremap <Leader>q :q<CR> 	" quit/save faster with leader key
-nnoremap <Leader>c :bdelete<CR> 	" close current buffer
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>c :bdelete<CR>
 nnoremap <Leader><esc> :q!<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap U <C-r>                " remap U to <C-r> for easier redo
+nnoremap U <C-r>
 set pastetoggle=<F3>            " paste mode
 nnoremap <Leader><Leader> :noh<return>
-map <S-h> <Home> 		" HOME/END with H & L
+map <S-h> <Home>
 map <S-l> <End>
-map <S-j> <C-d> " page up down with shift j/k
+map <S-j> <C-d>
 map <S-k> <C-u>
 " go next/prevous buffer
-nnoremap tp :bp<CR>
-nnoremap tn :bn<CR>
+nnoremap tb :bprevious<CR>
+nnoremap tn :bnext<CR>
 " nnoremap <M-b> :bp<CR>
 " nnoremap <M-n> :bn<CR>
 inoremap <C-Space> <C-x><C-o>
@@ -102,17 +102,17 @@ call plug#begin()
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'tpope/vim-fugitive'
     " ------ linting/language services----------
-    if has('nvim')
-        Plug 'w0rp/ale', { 'do': 'npm install -g eslint tslint prettier' }
-        " Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-unknown-linux-musl', 'do': 'npm install -g javascript-typescript-langserver' }
-        Plug 'prabirshrestha/async.vim'
-        Plug 'prabirshrestha/vim-lsp', { 'do': 'npm install -g javascript-typescript-langserver' }
-        Plug 'prabirshrestha/asyncomplete.vim'
-        Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        Plug 'yami-beta/asyncomplete-omni.vim'
-        Plug 'prabirshrestha/asyncomplete-file.vim'
-        " Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-    endif
+    " if has('nvim')
+    Plug 'w0rp/ale', { 'do': 'npm install -g eslint tslint' }
+    " Plug 'autozimu/LanguageClient-neovim', {'tag': 'binary-*-x86_64-unknown-linux-musl', 'do': 'npm install -g javascript-typescript-langserver' }
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp', { 'do': 'npm install -g javascript-typescript-langserver' }
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'yami-beta/asyncomplete-omni.vim'
+    Plug 'prabirshrestha/asyncomplete-file.vim'
+    " Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
+    " endif
 
     "------snippets--------
     if has('python3')
@@ -325,14 +325,24 @@ if executable('typescript-language-server')
         \ 'whitelist': ['typescript'],
         \ })
 endif
-if executable('javascript-typescript-stdio')
+
+if executable('typescript-language-server')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'javascript-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
+        \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
         \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
         \ 'whitelist': ['javascript', 'javascript.jsx'],
         \ })
 endif
+
+" if executable('javascript-typescript-stdio')
+"     au User lsp_setup call lsp#register_server({
+"       \ 'name': 'javascript-language-server',
+"       \ 'cmd': {server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
+"       \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+"       \ 'whitelist': ['javascript', 'javascript.jsx']
+"       \ })
+" endif
 
 if executable('node')
     au User lsp_setup call lsp#register_server({
@@ -363,9 +373,9 @@ augroup LSP_Mappings
 augroup END
 " }}}
 " ========= ASYNCOMPLETE ========= {{{
-" let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_popup = 1
 let g:asyncomplete_remove_duplicates = 1
-" let g:asyncomplete_completion_delay = 500
+let g:asyncomplete_completion_delay = 500
 augroup registerAsyncCompleteSouces
   autocmd!
 " Omnicomplete 
