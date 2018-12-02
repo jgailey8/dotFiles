@@ -1,0 +1,47 @@
+priority -50
+
+###########################################################################
+#                            SnipMate Snippets                            #
+###########################################################################
+snippet au "augroup" b
+augroup ${1:name}
+	autocmd!
+	$0
+augroup END
+endsnippet
+
+snippet command "command" b
+command! ${1:name} ${2::command}
+endsnippet
+
+snippet func "function" b
+function! $1()
+	$2
+endfun
+endsnippet
+
+snippet if "if" b
+if $1
+	$0
+endif
+endsnippet
+
+snippet ifel "if else" b
+if 
+	echom "if"
+elseif 
+	echom "elseif"
+else
+	echom "else"
+endif
+endsnippet
+
+snippet ac "autocmd" b
+	autocmd $0
+endsnippet
+
+snippet acf "autocmd FileType" b
+	autocmd FileType $0
+endsnippet
+
+# vim:ft=snippets:

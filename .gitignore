@@ -1,0 +1,16 @@
+# Ignore all files named .DS_Store or ending with .log
+**/.DS_Store
+**.log
+**/*.swp
+
+**/tmp
+
+.bash_history
+.bash_local
+.bash_logout
+
+**/.ssh
+
+**/plugged
+**/autoload
+**/.node_modules

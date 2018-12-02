@@ -1,0 +1,71 @@
+snippet cl "console.log(...)" b
+console.log($1)
+endsnippet
+
+snippet cli' "console.info('')" b
+console.info('$2')
+endsnippet
+
+snippet cld' "console.debug('')" b
+console.debug('$2')
+endsnippet
+
+# Arrow Fn
+snippet ar "() => { }" b
+($1) => {$2}
+endsnippet
+
+# Arrow Fn
+snippet gen "generator Fn" b
+function* $1($2) {
+	$3
+}
+endsnippet
+# Class
+snippet class "class" b
+class ${1:Class} {
+	${2}
+}
+endsnippet
+
+# For of loop
+snippet forof "let * of *"
+for (let ${1:s} of ${2:sequence}) {
+	${3}
+}
+endsnippet
+
+snippet imp "import * from *" b
+import $1 from '$2'
+endsnippet
+
+snippet ex "export" b
+export $1
+endsnippet
+
+snippet exd "export default" b
+export default $1
+endsnippet
+
+snippet it "Test Case" b
+it('$1', () => {
+	$2
+});
+endsnippet
+
+snippet des "Test Describe Block" b
+describe('$1', () => {
+	$2
+});
+endsnippet
+
+# Jest
+snippet jf "jest.fn()" b
+jest.fn()
+endsnippet
+
+snippet jmock "jest.mock" b
+jest.mock('$1', () => ({
+	${2:module}: jest.fn().mockReturnValue($3),
+}));
+endsnippet

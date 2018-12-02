@@ -1,0 +1,28 @@
+[user]
+	email = jared.gailey@outlook.com
+	name = Jared Gailey
+[core]
+	editor = nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[alias]
+    ignore = !git update-index --assume-unchanged 
+    unignore = !git update-index --no-assume-unchanged
+    ignored = !git ls-files -v | grep ^[a-z]
+[color]
+	ui = true
+[color "diff-highlight"]
+	newNormal = green bold
+	newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+[color "diff"]
+	meta = yellow
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[diff-so-fancy]
+	stripLeadingSymbols = false
+[mergetool]
+	keepBackup = true
