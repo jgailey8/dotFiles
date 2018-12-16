@@ -1,9 +1,9 @@
 " ========= Omnisharp ========= {{{
 
 " start manually
-let g:Omnisharp_start_server = 0
-let g:Omnisharp_stop_server = 0
-let g:OmniSharp_port = 2000
+" let g:Omnisharp_start_server = 0
+" let g:Omnisharp_stop_server = 0
+" let g:OmniSharp_port = 2000
 " Fetch full documentation during omnicomplete requests.
 " There is a performance penalty with this (especially on Mono).
 " let g:omnicomplete_fetch_full_documentation = 1

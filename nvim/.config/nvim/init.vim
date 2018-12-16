@@ -112,13 +112,13 @@ call plug#begin()
     " ------ linting/language services----------
     if has('nvim')
         " tslint jsonlint stylelint
-        Plug 'w0rp/ale', { 'do': 'npm install -g eslint stylelint jsonlint tslint' }
+        Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
         " Plug 'autozimu/LanguageClient-neovim', {
         "     \ 'branch': 'next',
         "     \ 'do': 'bash install.sh',
         "     \ }
         Plug 'prabirshrestha/async.vim'
-        Plug 'prabirshrestha/vim-lsp', { 'do': 'npm install -g javascript-typescript-langserver typescript-language-server' }
+        Plug 'prabirshrestha/vim-lsp', { 'do': 'npm update -g javascript-typescript-langserver typescript-language-server' }
         " Plug 'prabirshrestha/asyncomplete.vim'
         " Plug 'prabirshrestha/asyncomplete-lsp.vim'
         " Plug 'yami-beta/asyncomplete-omni.vim'
@@ -388,23 +388,22 @@ augroup END
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_javascript_eslint_executable='eslint-global'
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable='eslint-global'
+" \        'scss': ['stylelint'],
 let g:ale_linters = {
 \        'javascript': ['eslint'],
 \        'json': ['jsonlint'],
-\        'css': ['stylelint'],
-\        'scss': ['stylelint'],
 \        'typescript': ['tslint'],
 \        'vim': ['vint'],
 \        'cs': ['omnisharp'],
+\        'css': [],
+\        'scss': [],
 \       }
 
 let g:ale_fixers = {
 \        'javascript': ['eslint'],
-\        'json': ['prettier'],
-\        'css': ['stylelint'],
-\        'scss': ['stylelint']
+\        'json': ['prettier']
 \       }
 
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
