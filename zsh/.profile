@@ -19,8 +19,8 @@ export XDG_CONFIG_HOME=$HOME/.config
 # Development environment variables
 export NODE_ENV="development"
 
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-export JAVA_HOME=/usr/lib/jvm/java-10-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
 
 # fix issue with android studio on tiling managers
 # https://issuetracker.google.com/issues/36975466

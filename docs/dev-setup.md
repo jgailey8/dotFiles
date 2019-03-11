@@ -46,6 +46,7 @@
 
 # [android](https://wiki.archlinux.org/index.php/android#Android_development)
 ## allow running as regular user
+    0. gpasswd -a youruser adbusers
     1. groupadd sdkusers
     2. gpasswd -a <user> sdkusers
     3. chown -R :sdkusers /opt/android-sdk/

@@ -1,0 +1,2 @@
+#!/bin/sh
+$(npm bin -g)/eslint -c $HOME/.eslintrc --ignore-pattern="**/assets" "$@"

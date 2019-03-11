@@ -65,6 +65,40 @@ function! funcs#LinterWarnings() abort
     return l:active ? printf('◆ %d', l:warnings) : ''
 endfunction
 
+function! funcs#DiffStatus() abort
+    if &diff 
+        let l:head = FugitiveStatusline()
+        " return head
+        " let l:buf = expand('%:p')
+        " let current_buff = bufnr("%")
+        " if current_buff == 1
+        "     return 'CURRENT 1'
+        " elseif current_buff == 2
+        "     return 'LOCAL 4'
+        " elseif current_buff == 3
+        "     return 'BASE 3'
+        " elseif current_buff == 4
+        "     return 'REMOTE 4'
+        " endif
+        if l:head =~# 'Git:3'
+            return printf('3 BASE')
+        elseif l:head =~# 'Git:2'
+            return printf('2 LOCAL')
+        endif
+        "     return bufnr("%") . 'LOCAL 2'
+        " elseif l:buf =~# '\/\/4'
+        "     return bufnr("%") . 'BASE 4'
+        " elseif l:buf =~# '\/\/4'
+        "     return bufnr("%") . 'REMOTE 4'
+        " endif
+        " let buf1 = matchstr(expand(, '\ca href=\([''"]\)\zs.\{-}\ze\1')
+        " return printf('✗ %s diff',  expand('%:p'))
+    else
+        return ''
+    endif
+endfunction
+
+
 " show modified symbol in filename
 function! funcs#FilenameModified()
   let l:filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'

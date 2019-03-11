@@ -1,0 +1,11 @@
+#!/bin/sh
+# mono $HOME/.local/omnisharp-http/OmniSharp.exe "$@" -s $(pwd)
+
+if [ -d "$HOME/.omnisharp/omnisharp-roslyn" ]; then
+    $HOME/.omnisharp/omnisharp-roslyn/run "$@" -s $(pwd)
+elif [ -d "$HOME/.local/omnisharp-http" ]; then
+    $HOME/.local/omnisharp-http/run "$@" -s $(pwd)
+else
+    echo "you sure omnisharp is installed?"
+fi
+# $HOME/.local/omnisharp-http/run "$@" -s $(pwd)

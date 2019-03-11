@@ -345,7 +345,7 @@ let g:lightline = {
 \          'colorscheme': 'landscape',
 \          'active': {
 \              'left': [
-\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch']
+\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch', 'diffHelp']
 \           ],
 \           'right': [
 \                  ['readonly', 'percent', 'lineinfo'],
@@ -359,37 +359,37 @@ let g:lightline = {
 \               'null': ''
 \         },
 \         'component_expand': {
-\               'buffers': 'lightline#bufferline#buffers',
-\               'linterWarnings': 'funcs#LinterWarnings',
-\               'linterErrors': 'funcs#LinterErrors',
-\               'linterStatus': 'funcs#LinterStatus',
+\               'buffers': 'lightline#bufferline#buffers'
 \         },
 \         'component_function': {
 \               'filename': 'funcs#FilenameModified',
-\               'gitbranch': 'fugitive#head',
+\               'diffHelp': 'funcs#DiffStatus',
+\               'gitbranch': 'FugitiveStatusline',
 \         },
 \         'component_type': {
 \               'buffers': 'tabsel',
 \               'linterWarnings': 'warning',
 \               'linterErrors': 'error',
 \         },
+\         'bufferline': {
+\               'shorten_path': 0,
+\               'unnamed': '_',
+\         }
 \       }
 
+" let g:lightline#bufferline#enable_devicons=1
+" let g:lightline#bufferline#unicode_symbols=1
+" let g:lightline#bufferline#show_number  = 0
+" let g:lightline#bufferline#shorten_path = 0
+" let g:lightline#bufferline#unnamed      = '*'
 " let g:lightline.colorscheme = 'palenight'
-" update lightline after ale updates
-augroup lightline#ale
-autocmd!
-autocmd User ALEJobStarted call lightline#update()
-autocmd User ALELintPost call lightline#update()
-autocmd User ALEFixPost call lightline#update()
-augroup END
 "}}}
 " ========= ALE ========= {{{
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
-let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable='eslint-global'
+" let g:ale_javascript_eslint_use_global = 1
+" let g:ale_javascript_eslint_executable='eslint-global'
 " \        'scss': ['stylelint'],
 let g:ale_linters = {
 \        'javascript': ['eslint'],
@@ -440,8 +440,9 @@ let g:airline#extensions#ale#enabled = 1    " show erors/warnings in status line
 " \ 'cmd': {server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
 " }}}
 let g:lsp_auto_enable = 1
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+let g:lsp_diagnostics_enabled = 0
+" let g:lsp_signs_enabled = 1         " enable signs
+" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
 let g:lsp_signs_error = {'text': '✗'}
 augroup registerLspServers
     autocmd!
@@ -456,7 +457,7 @@ augroup registerLspServers
         au User lsp_setup call lsp#register_server({
             \ 'name': 'javascript-language-server',
             \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-            \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
             \ 'priority': 1,
             \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
             \ })

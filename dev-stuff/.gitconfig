@@ -8,6 +8,7 @@
     ignore = !git update-index --assume-unchanged 
     unignore = !git update-index --no-assume-unchanged
     ignored = !git ls-files -v | grep ^[a-z]
+    branchdate = for-each-ref --sort=-committerdate refs/heads/ --format="%(authordate:short)%09%(objectname:short)%09%1B[0;33m%(refname:short)%1B[m%09"
 [color]
 	ui = true
 [color "diff-highlight"]
@@ -26,3 +27,9 @@
 	stripLeadingSymbols = false
 [mergetool]
 	keepBackup = true
+[branch]
+	sort = -committerdate
+[merge]
+	tool = fugitive
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

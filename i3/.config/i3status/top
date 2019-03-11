@@ -1,0 +1,56 @@
+###############################################################################
+# ceerious i3 status config
+# see "man i3status" for documentation.
+#
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+###############################################################################
+
+general {
+    interval = 1
+    colors = true
+    color_good = '#ffffff'
+    # color_good = '#88b090'
+    color_degraded = '#ccdc90'
+    color_bad = '#e89393'
+}
+
+order += "volume master"
+order += "battery 0"
+# order += "brightness"
+order += "wireless wlp4s0"
+order += "tztime local"
+
+volume master {
+    format = "%volume  "
+    format_muted = " "
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+battery 0 {
+    format = "%status %percentage %remaining"
+    format_down = ""
+    last_full_capacity = true
+    integer_battery_capacity = true
+    low_threshold = 11
+    threshold_type = percentage
+    hide_seconds = true
+    status_chr = " "
+    status_bat = " "
+    status_unk = " "
+    status_full = " "
+}
+
+wireless wlp4s0 {
+   format_up = "%quality  %essid %ip"
+   format_down = ""
+}
+
+#%Y-%m-%d %H:%M:%S'
+tztime local {
+    format = " %m/%d/%Y   %I:%M "
+}
