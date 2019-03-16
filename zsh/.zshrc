@@ -146,3 +146,5 @@ if [[ $TERM == linux ]]; then
     promptinit
     prompt suse
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

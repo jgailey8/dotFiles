@@ -8,8 +8,8 @@ setlocal tabstop=2 sts=2 sw=2
 
 augroup JsxAutoCmd
     autocmd!
-    autocmd Filetype javascript* set omnifunc=lsp#complete
+"     autocmd Filetype javascript* set omnifunc=lsp#complete
     autocmd FileType javascript.jsx UltiSnipsAddFiletypes html
 augroup END
-
-call LspKeyMaps()
+" call LspKeyMaps()
+" call CocKeyMaps()

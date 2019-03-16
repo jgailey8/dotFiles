@@ -16,7 +16,6 @@ runtime! archlinux.vim
     else
         let $VIMHOME = $HOME.'/.vim'
     endif
-
 " }}}
 " ========= Options ===== {{{
 set mouse=a
@@ -28,7 +27,7 @@ filetype indent on
 syntax on
 syntax enable
 filetype plugin indent on       " enable filetype detection
-set updatetime=1000             " time for keycommands
+set updatetime=300             " time for keycommands
 set hidden  	        		" dont ask to save changes when switching buffers
 set history=100
 set autoread                    " automatically reload files changed outside of Vim"
@@ -65,10 +64,7 @@ set splitbelow                  " create new splits below
 set splitright                  " create new splits to the right
 set wildmenu                    " enable wildmenu
 set wildmode=longest:list,full  " first tab opens longest match, 2nd tab opens menu
-" set completeopt=menuone,preview,noselect " use popup menu when one match, dont automaticcally select match
-" IMPORTANTE: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
-
 set path+=**
 set wildignore+=*/.git/*,*/node_modules/*,*/obj/*,*/bin/*,*/.DS_Store,*/vendor
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
@@ -77,7 +73,6 @@ augroup vimrcEx
   autocmd!
     " disable comment continuation
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
     " comment for xdefault/Xresources file
     autocmd FileType xdefaults set commentstring=!\ %s
     " set filetype for certain special fies
@@ -108,47 +103,19 @@ call plug#begin()
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-
     " ------ linting/language services----------
     if has('nvim')
-        " tslint jsonlint stylelint
+        Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
         Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
-        " Plug 'autozimu/LanguageClient-neovim', {
-        "     \ 'branch': 'next',
-        "     \ 'do': 'bash install.sh',
-        "     \ }
-        Plug 'prabirshrestha/async.vim'
-        Plug 'prabirshrestha/vim-lsp', { 'do': 'npm update -g javascript-typescript-langserver typescript-language-server' }
-        " Plug 'prabirshrestha/asyncomplete.vim'
-        " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-        " Plug 'yami-beta/asyncomplete-omni.vim'
-        " Plug 'prabirshrestha/asyncomplete-buffer.vim'
-        " Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-        " Plug 'prabirshrestha/asyncomplete-tags.vim'
-        " Plug 'prabirshrestha/asyncomplete-file.vim'
     endif
     if has('python3')
         Plug 'OmniSharp/omnisharp-vim'
-    "------completion--------
-        Plug 'ncm2/ncm2'
-        Plug 'roxma/nvim-yarp'
-        Plug 'ncm2/ncm2-bufword'
-        Plug 'ncm2/ncm2-cssomni'
-        Plug 'ncm2/ncm2-vim-lsp'
-        Plug 'ncm2/ncm2-ultisnips'
-        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     "------snippets--------
         Plug 'SirVer/ultisnips'
         Plug 'honza/vim-snippets'
     endif
-    "---- dotnet / c# ----------------
-    Plug 'OrangeT/vim-csharp'
-
     "---- javascript & syntax files -------
-    " Plug 'jelera/vim-javascript-syntax'
-    Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
-    " Plug 'othree/javascript-libraries-syntax.vim'
     Plug 'sheerun/vim-polyglot'
     "----- extras ---------
     Plug 'jmg5e/vim-css-js-converter'
@@ -159,16 +126,8 @@ call plug#begin()
     Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
-    " unused {{{
-    " Plug 'janko-m/vim-test'
-    " Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-    " }}}
 call plug#end()
-
-" ==== My Plugins ===
     runtime! plugins/funcs.vim
-    " runtime! plugins/dragvisuals.vim
-" ===================
 " }}}
 " ========= KeyBindings ====    {{{
 " exit from insert mode with  ;;
@@ -181,10 +140,10 @@ inoremap <C-U> <C-G>u<C-U>
 " U for redo
 nnoremap U <C-r>
 " faster save/close/write
-nnoremap <Leader>q :bdelete<CR>
+nnoremap <silent><Leader>q :bdelete<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>b :buffers<CR>
+nnoremap <silent><Leader>b :buffers<CR>
 nnoremap Q q
 nnoremap <Leader><esc> :q!<CR>
 
@@ -192,15 +151,15 @@ nnoremap <Leader><esc> :q!<CR>
 nnoremap err :cw<CR>
 
 set pastetoggle=<F3>            " paste mode
-nnoremap <Leader><Leader> :noh<return>
+nnoremap <silent><Leader><Leader> :noh<return>
 map <S-h> <Home>
 map <S-l> <End>
 map <S-j> <C-d>
 map <S-k> <C-u>
 
 " go next/prevous buffer
-nnoremap t, :bprevious<CR>
-nnoremap t. :bnext<CR>
+nnoremap <silent>t, :bprevious<CR>
+nnoremap <silent>t. :bnext<CR>
 
 " vim hard mode / move splits around
 noremap <Up> <C-W>K
@@ -233,12 +192,11 @@ command! SudoWrite :w suda://%
 nnoremap <leader>gge :GitGutterEnable<cr>
 nnoremap <leader>ggd :GitGutterDisable<cr>
 
-
-augroup AleBindings
-    autocmd FileType css,scss,javascript nnoremap ale :ALEFix<CR>
-    autocmd FileType css,scss,javascript nnoremap alet :ALEToggle<CR>
-    autocmd FileType css,scss,javascript nnoremap aled :ALEGoToDefinition<CR>
-augroup END
+" augroup AleBindings
+"     autocmd FileType css,scss,javascript nnoremap ale :ALEFix<CR>
+"     autocmd FileType css,scss,javascript nnoremap alet :ALEToggle<CR>
+"     autocmd FileType css,scss,javascript nnoremap aled :ALEGoToDefinition<CR>
+" augroup END
 augroup LanguageClientBindings
     autocmd!
     " autocmd FileType javascript,typescript,css,scss call LanguageClientKeyMaps()
@@ -345,7 +303,7 @@ let g:lightline = {
 \          'colorscheme': 'landscape',
 \          'active': {
 \              'left': [
-\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch', 'diffHelp']
+\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch', 'cocstatus']
 \           ],
 \           'right': [
 \                  ['readonly', 'percent', 'lineinfo'],
@@ -363,8 +321,8 @@ let g:lightline = {
 \         },
 \         'component_function': {
 \               'filename': 'funcs#FilenameModified',
-\               'diffHelp': 'funcs#DiffStatus',
 \               'gitbranch': 'FugitiveStatusline',
+\               'cocstatus': 'coc#status'
 \         },
 \         'component_type': {
 \               'buffers': 'tabsel',
@@ -376,48 +334,37 @@ let g:lightline = {
 \               'unnamed': '_',
 \         }
 \       }
-
-" let g:lightline#bufferline#enable_devicons=1
-" let g:lightline#bufferline#unicode_symbols=1
-" let g:lightline#bufferline#show_number  = 0
-" let g:lightline#bufferline#shorten_path = 0
-" let g:lightline#bufferline#unnamed      = '*'
-" let g:lightline.colorscheme = 'palenight'
 "}}}
-" ========= ALE ========= {{{
+"
+" " ========= ALE ========= {{{
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 let g:ale_fix_on_save = 0
-" let g:ale_javascript_eslint_use_global = 1
-" let g:ale_javascript_eslint_executable='eslint-global'
-" \        'scss': ['stylelint'],
-let g:ale_linters = {
-\        'javascript': ['eslint'],
-\        'json': ['jsonlint'],
-\        'typescript': ['tslint'],
-\        'vim': ['vint'],
-\        'cs': ['omnisharp'],
-\        'css': [],
-\        'scss': [],
-\       }
-
+" " let g:ale_javascript_eslint_use_global = 1
+" " let g:ale_javascript_eslint_executable='eslint-global'
+" " \        'scss': ['stylelint'],
+" let g:ale_linters = {
+" \        'json': ['jsonlint'],
+" \        'typescript': ['tslint'],
+" \        'vim': ['vint'],
+" \        'cs': ['omnisharp'],
+" \        'css': [],
+" \        'scss': [],
+" \       }
+"
 let g:ale_fixers = {
-\        'javascript': ['eslint'],
 \        'json': ['prettier']
 \       }
 
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
-let g:ale_set_highlights = 0 " disable highlighting
-
-" show error msg in status bar
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
-
-" let g:ale_linter_aliases = {'jsx': 'css'}
-
-let g:airline#extensions#ale#enabled = 1    " show erors/warnings in status line
+highlight ALEError ctermbg=none cterm=underline
+" let g:ale_set_highlights = 0 " disable highlighting
+"
+" " show error msg in status bar
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
 " }}}
 " ========= OTHER PLUGINS ========= {{{
 " --- vim-rest-client ---
@@ -434,122 +381,39 @@ let g:airline#extensions#ale#enabled = 1    " show erors/warnings in status line
 
     let g:vrc_split_request_body = 1
 " }}}
-" ========= LSP ========= {{{
-" unused servers {{{
-" \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-" \ 'cmd': {server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
-" }}}
-let g:lsp_auto_enable = 1
-let g:lsp_diagnostics_enabled = 0
-" let g:lsp_signs_enabled = 1         " enable signs
-" let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-let g:lsp_signs_error = {'text': '✗'}
-augroup registerLspServers
-    autocmd!
-    if executable('css-languageserver')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'css-languageserver',
-            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-            \ 'whitelist': ['css', 'less', 'sass', 'scss'],
-            \ })
-    endif
-    if executable('typescript-language-server')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'javascript-language-server',
-            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-            \ 'priority': 1,
-            \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx'],
-            \ })
-    endif
-augroup END
-" }}}
-" ========= NCM2 ========= {{{
-    " enable ncm2 for all buffers
-    augroup NCM2_ENABLE
-        autocmd!
-        autocmd BufEnter * call ncm2#enable_for_buffer()
-    augroup END
-    " suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-    " found' messages
-    set shortmess+=c
-"}}}
+" ========== COC ======== {{{
+set cmdheight=2
+set shortmess+=c
+set signcolumn=yes
 
-" " ========= DEOPLETE ========= {{{
-"
-" let g:deoplete#enable_at_startup = 1
-"
-" " Disable the candidates in Comment/String syntaxes.
-" call deoplete#custom#source('_',
-"             \ 'disabled_syntaxes', ['Comment', 'String'])
-"
-" " ignored sources
-" let g:deoplete#ignore_sources = {}
-" let g:deoplete#ignore_sources._ = ['buffer', 'around']
-" " }}}
-" " ========= LanguageClient ========= {{{
-" " unused servers {{{
-" "   'javascript': ['javascript-typescript-stdio'],
-" " 'javascript': ['typescript-language-server', '--stdio'],
-" " 'javascript': ['flow-language-server', '--stdio'],
-" " 'typescript': ['typescript-language-server', '--stdio'],
-" " 'cpp': ['cquery'],
-" " 'c': ['cquery'],
-" " 'python': ['/Users/aenayet/pyenv/nvim3/bin/pyls'],
-" " 'rust': ['rustup', 'run', 'stable', 'rls'],
-" " 'haskell': ['hie-wrapper']
-" " }}}
-" let g:LanguageClient_serverCommands = {
-"                 \ 'javascript.jsx': ['typescript-language-server', '--stdio'],
-"                 \ 'typescript': ['javascript-typescript-stdio'],
-"                 \ 'css': ['css-languageserver', '--stdio'],
-"                 \ 'scss': ['css-languageserver', '--stdio']
-"                 \ }
-" let g:LanguageClient_autoStart = 1
-" let g:LanguageClient_rootMarkers = {
-"             \ 'typscript': ['tsconfig.json'],
-"             \ 'javascript': ['package.json'],
-"             \ 'cs': ['*.csproj'],
-"             \ }
-"
-" let g:LanguageClient_diagnosticsEnable=1
-" " set completefunc=LanguageClient#complete
-" " set formatexpr=LanguageClient_textDocument_rangeFormatting()
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <c-space> coc#refresh()
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <leader>rn <Plug>(coc-rename)
+nmap <F2> <Plug>(coc-rename)
+nnoremap coc <Esc>:CocList<CR>
+nnoremap cer <Esc>:CocList diagnostics<CR>
+nmap ca  <Plug>(coc-codeaction)
+nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+else
+    call CocAction('doHover')
+endif
+endfunction
+nmap <leader>rn <Plug>(coc-rename)
+
+" Use `:Format` for format current buffer
+command! -nargs=0 CocFormat :call CocAction('format')
+" Use `:Fold` for fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " }}}
-" " ========= Aysnc Complete ========= {{{
-" if has('python3')
-"     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
-"         \ 'name': 'ultisnips',
-"         \ 'whitelist': ['*'],
-"         \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
-"         \ }))
-" endif
-" " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-" "     \ 'name': 'file',
-" "     \ 'whitelist': ['*'],
-" "     \ 'priority': 10,
-" "     \ 'completor': function('asyncomplete#sources#file#completor')
-" "     \ }))
-" " call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-" "     \ 'name': 'buffer',
-" "     \ 'whitelist': ['*'],
-" "     \ 'blacklist': ['go'],
-" "     \ 'priority': 10,
-" "     \ 'completor': function('asyncomplete#sources#buffer#completor'),
-" "     \ }))
-" " call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-" "     \ 'name': 'omni',
-" "     \ 'whitelist': ['scss', 'css'],
-" "     \ 'blacklist': ['html'],
-" "     \ 'completor': function('asyncomplete#sources#omni#completor')
-" "     \  }))
-" " au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#tags#get_source_options({
-" "     \ 'name': 'tags',
-" "     \ 'whitelist': ['*'],
-" "     \ 'completor': function('asyncomplete#sources#tags#completor'),
-" "     \ 'config': {
-" "     \    'max_file_size': 50000000,
-" "     \  },
-" "     \ }))
-" "}}}
 " vim:foldmethod=marker:foldlevel=0

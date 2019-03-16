@@ -1,0 +1,29 @@
+{
+  "diagnostic.displayByAle": {
+    "type": "boolean",
+    "description": "Use Ale for display diagnostics in vim, will disable coc for display diagnostics, restart required on change.",
+    "default": true
+  },
+  "coc.source.around.enable": {
+    "type": "boolean",
+    "default": false
+  },
+  "coc.source.file.trimSameExts": {
+    "type": "array",
+    "default": [".ts", ".js", ".jsx", "tsx"],
+    "description": "Trim same extension on file completion",
+    "items": {
+      "type": "string"
+    }
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true
+  },
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true
+  }
+}

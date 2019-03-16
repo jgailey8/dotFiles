@@ -188,4 +188,9 @@ function! g:LspKeyMaps()
     augroup END
 endfunction
 
+function! g:CocKeyMaps() 
+    augroup CocBindings
+    " Use <c-space> for trigger completion.
+endfunction
+
 " vim:foldmethod=marker:foldlevel=0
