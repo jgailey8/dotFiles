@@ -134,6 +134,7 @@ alias todo="todo.sh"
 # fi
 
 alias vless="/bin/sh -c \"col -b | \vim --not-a-term -c 'set ft=man laststatus=0 nomod nolist noma' -\""
+alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
 
 # export PAGER=/usr/bin/vimpager
 # alias alsamixer-notify="alsamixer && pkill -RTMIN+10 i3blocks"

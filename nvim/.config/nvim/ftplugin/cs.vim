@@ -12,17 +12,25 @@ set previewheight=2
 
 let g:OmniSharp_selector_ui = 'ctrlp'  " Use ctrlp.vim
 
-setlocal omnifunc=OmniSharp#Complete
+setlocal completefunc=OmniSharp#Complete
 
 " autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 nnoremap <leader>cf :OmniSharpCodeFormat<cr>
 nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
 nnoremap ca :OmniSharpGetCodeActions<CR>
 nnoremap <buffer> <Leader>h :OmniSharpTypeLookup<CR>
-
 nnoremap <buffer> <Leader>dc :OmniSharpDocumentation<CR>
 nnoremap <F2> :OmniSharpRename<CR>
 
-"}}}
+nnoremap <silent> er <Esc>:call CSShowErrors()<CR>
 
+function! CSShowErrors() abort
+    let errors = OmniSharp#CodeCheck()
+    call setloclist(0, [], ' ', {'items': errors}) 
+    let matches = []
+    for err in errors
+        call add(matches, '\%' . err.col . 'c' . '\%' . err.lnum . 'l')
+    endfor
+    execute 'match Error /'. join(matches, '\|') . '/'
+endfunction
 " vim:foldmethod=marker:foldlevel=100

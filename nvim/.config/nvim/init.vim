@@ -98,15 +98,16 @@ call plug#begin()
     "---- main plugs -----
     Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-surround'
-    Plug 'scrooloose/nerdTree'
+    " Plug 'scrooloose/nerdTree'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+    Plug 'aserebryakov/vim-todo-lists'
     " ------ linting/language services----------
     if has('nvim')
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-        Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
+        " Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
     endif
     if has('python3')
         Plug 'OmniSharp/omnisharp-vim'
@@ -117,17 +118,17 @@ call plug#begin()
     "---- javascript & syntax files -------
     Plug 'mxw/vim-jsx'
     Plug 'sheerun/vim-polyglot'
+    Plug 'neoclide/jsonc.vim'
     "----- extras ---------
     Plug 'jmg5e/vim-css-js-converter'
     Plug 'crusoexia/vim-monokai'
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    Plug 'diepm/vim-rest-console'
     Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
 call plug#end()
-    runtime! plugins/funcs.vim
+runtime! plugins/funcs.vim
 " }}}
 " ========= KeyBindings ====    {{{
 " exit from insert mode with  ;;
@@ -137,6 +138,8 @@ noremap ; :
 " CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
+" remap buffer completion to ctrl-b
+inoremap <C-x><C-b> <C-x><C-n>
 " U for redo
 nnoremap U <C-r>
 " faster save/close/write
@@ -147,10 +150,7 @@ nnoremap <silent><Leader>b :buffers<CR>
 nnoremap Q q
 nnoremap <Leader><esc> :q!<CR>
 
-" open up quick fix winow(not sure which mapping i will use yet)
-nnoremap err :cw<CR>
-
-set pastetoggle=<F3>            " paste mode
+set pastetoggle=<F4>            " paste mode
 nnoremap <silent><Leader><Leader> :noh<return>
 map <S-h> <Home>
 map <S-l> <End>
@@ -167,9 +167,6 @@ noremap <Down> <C-W>J
 noremap <Left> <C-W>H
 noremap <Right> <C-W>L
 
-" buffer complete
-inoremap <C-Space> <C-x><C-o>
-
 " close all folds
 nnoremap zz zR
 " open  all folds
@@ -181,26 +178,16 @@ nnoremap gm `
 nnoremap gfs :vertical wincmd f<CR>
 vnoremap <F1> "gy<Esc>:call funcs#GoogleSearch()<CR>
 nnoremap <silent>q :call funcs#CloseOtherWindows()<CR>
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call funcs#HLNext()<cr>
+nnoremap <silent> N   N:call funcs#HLNext()<cr>
+
 vnoremap <c-s> :s/
 command! TrimSpaces %s/\s\+$//e
 command! ClearEOL %s/\r//g
 command! Reload :source $MYVIMRC
 command! SudoEdit :e suda://%
 command! SudoWrite :w suda://%
-
-" plugin mappings
-nnoremap <leader>gge :GitGutterEnable<cr>
-nnoremap <leader>ggd :GitGutterDisable<cr>
-
-" augroup AleBindings
-"     autocmd FileType css,scss,javascript nnoremap ale :ALEFix<CR>
-"     autocmd FileType css,scss,javascript nnoremap alet :ALEToggle<CR>
-"     autocmd FileType css,scss,javascript nnoremap aled :ALEGoToDefinition<CR>
-" augroup END
-augroup LanguageClientBindings
-    autocmd!
-    " autocmd FileType javascript,typescript,css,scss call LanguageClientKeyMaps()
-augroup END
 " }}}
 " ========= Swp/Backups/Undo =============== {{{
 if exists('+undofile')
@@ -237,18 +224,14 @@ endif
 " }}}
 " ========= Appearance ====    {{{
 set background=dark
-" set cursorline
 try
     if !empty($DISPLAY)
         set background=dark
         color monokai
-        " transparent background
-        " hi Normal ctermbg=NONE guibg=NONE
     else
         color default
     endif
 catch
-    echom 'error loading apearance settings'
 	colorscheme default
 endtry
 
@@ -257,11 +240,7 @@ if has('gui_running')
     set guifont=Inconsolata\ 14
     set guioptions+=m  "show menu bar
     set guioptions-=T  "remove toolbar
-    " set guioptions-=r  "remove right-hand scroll bar
     set guioptions-=L  "remove left-hand scroll bar
-
-    " no annoying dialogs on close
-    " set guioptions+=lrbmTLce
     set guioptions-=lrbmTLce
     set guioptions+=c
 endif
@@ -271,7 +250,6 @@ try
     map <leader>n :NERDTreeToggle<CR>
     let g:NERDTreeWinSize=30        " resize nerdtree width
     let g:NERDTreeWinPos = 'right'
-    " let NERDTreeShowHidden=0        " hide hidden files (Shift+i) togggles this
 catch
     map <leader>n :Vexplore<CR>
     let g:netrw_banner=0
@@ -282,7 +260,7 @@ endtry
 " }}}
 " ========= Ctrl-P ============== {{{
 " Custom ignores for CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|tmp\|DS_Store\'
+let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|assets|\tmp\|DS_Store\'
 "ignore files from .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_root_markers = ['package.json', '*.sln']
@@ -303,18 +281,14 @@ let g:lightline = {
 \          'colorscheme': 'landscape',
 \          'active': {
 \              'left': [
-\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch', 'cocstatus']
+\                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch']
 \           ],
 \           'right': [
-\                  ['readonly', 'percent', 'lineinfo'],
-\                  ['null', 'linterErrors', 'linterWarnings', 'linterStatus'],
+\                  ['readonly', 'percent', 'lineinfo'], ['cocstatus']
 \           ]
 \         },
 \         'tabline' : {
 \               'left': [['buffers']], 'right': [['filetype', 'fileencoding']]
-\         },
-\         'component': {
-\               'null': ''
 \         },
 \         'component_expand': {
 \               'buffers': 'lightline#bufferline#buffers'
@@ -322,12 +296,10 @@ let g:lightline = {
 \         'component_function': {
 \               'filename': 'funcs#FilenameModified',
 \               'gitbranch': 'FugitiveStatusline',
-\               'cocstatus': 'coc#status'
+\               'cocstatus': 'funcs#CocStatus'
 \         },
 \         'component_type': {
-\               'buffers': 'tabsel',
-\               'linterWarnings': 'warning',
-\               'linterErrors': 'error',
+\               'buffers': 'tabsel'
 \         },
 \         'bufferline': {
 \               'shorten_path': 0,
@@ -335,52 +307,6 @@ let g:lightline = {
 \         }
 \       }
 "}}}
-"
-" " ========= ALE ========= {{{
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_fix_on_save = 0
-" " let g:ale_javascript_eslint_use_global = 1
-" " let g:ale_javascript_eslint_executable='eslint-global'
-" " \        'scss': ['stylelint'],
-" let g:ale_linters = {
-" \        'json': ['jsonlint'],
-" \        'typescript': ['tslint'],
-" \        'vim': ['vint'],
-" \        'cs': ['omnisharp'],
-" \        'css': [],
-" \        'scss': [],
-" \       }
-"
-let g:ale_fixers = {
-\        'json': ['prettier']
-\       }
-
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
-let g:ale_sign_warning = '.'
-highlight ALEError ctermbg=none cterm=underline
-" let g:ale_set_highlights = 0 " disable highlighting
-"
-" " show error msg in status bar
-" let g:ale_echo_msg_error_str = 'E'
-" let g:ale_echo_msg_warning_str = 'W'
-" let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
-" }}}
-" ========= OTHER PLUGINS ========= {{{
-" --- vim-rest-client ---
-    let g:instant_markdown_autostart = 0
-    let g:vrc_curl_opts = {
-        \ '--connect-timeout' : 10,
-        \ '--silent': '',
-        \ '--include': '',
-        \ '-L': '',
-        \ '--max-time': 60,
-        \ '--ipv4': '',
-        \ '--insecure': '',
-        \}
-
-    let g:vrc_split_request_body = 1
-" }}}
 " ========== COC ======== {{{
 set cmdheight=2
 set shortmess+=c
@@ -399,14 +325,14 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
 nnoremap coc <Esc>:CocList<CR>
-nnoremap cer <Esc>:CocList diagnostics<CR>
-nmap ca  <Plug>(coc-codeaction)
+nnoremap er <Esc>:CocList diagnostics<CR>
+nmap ca <Plug>(coc-codeaction)
 nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 function! s:show_documentation()
 if &filetype == 'vim'
     execute 'h '.expand('<cword>')
 else
-    call CocAction('doHover')
+    call CocActionAsync('doHover')
 endif
 endfunction
 nmap <leader>rn <Plug>(coc-rename)
@@ -415,5 +341,14 @@ nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 CocFormat :call CocAction('format')
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" }}}
+" ========== OTHER ======== {{{
+let g:instant_markdown_autostart = 0
+
+"disable moving items after toggle,
+let g:VimTodoListsMoveItems = 0
+" set date insert
+" let g:VimTodoListsDatesEnabled = 1
+" let g:VimTodoListsDatesFormat = "%a %b, %Y"
 " }}}
 " vim:foldmethod=marker:foldlevel=0

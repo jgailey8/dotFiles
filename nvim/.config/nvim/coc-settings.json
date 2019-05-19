@@ -1,29 +1,25 @@
 {
-  "diagnostic.displayByAle": {
-    "type": "boolean",
-    "description": "Use Ale for display diagnostics in vim, will disable coc for display diagnostics, restart required on change.",
-    "default": true
-  },
-  "coc.source.around.enable": {
-    "type": "boolean",
-    "default": false
-  },
-  "coc.source.file.trimSameExts": {
-    "type": "array",
-    "default": [".ts", ".js", ".jsx", "tsx"],
-    "description": "Trim same extension on file completion",
-    "items": {
-      "type": "string"
-    }
-  },
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true
-  },
-  "search.exclude": {
-    "**/node_modules": true
-  },
-  "files.watcherExclude": {
-    "**/node_modules/**": true
-  }
+  "tsserver.enable": false,
+  //"coc.preferences.hoverTarget": "echo",
+  //"diagnostic.refreshOnInsertMode": true,
+  //"suggest.keepCompleteopt": true,
+  //"suggest.triggerAfterInsertEnter": true,
+  //"diagnostic.joinMessageLines": true,
+  "coc.preferences.messageLevel": "error",
+  "coc.preferences.useQuickfixForLocations": true,
+  "diagnostic.errorSign": "●",
+  "javascript.implementationsCodeLens.enable": false,
+  "javascript.referencesCodeLens.enable": false,
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.completeFunctionCalls": false,
+  "javascript.suggest.paths": false,
+  "javascript.updateImportsOnFileMove.enable": false,
+  "javascript.validate.enable": false,
+  "typescript.implementationsCodeLens.enable": false,
+  "typescript.referencesCodeLens.enable": false,
+  "typescript.suggest.paths": false,
+  "typescript.updateImportsOnFileMove.enable": false
+  //"suggest.enablePreview": true,
+  //"tsserver.log": "verbose",
+  //"tsserver.trace.server": "verbose",
 }

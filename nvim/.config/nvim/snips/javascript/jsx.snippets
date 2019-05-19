@@ -54,7 +54,7 @@ import PropTypes from 'prop-types';
 
 const ${1:`!v expand('%:t:r')`} = (${3:props}) => {
 	return (
-		<div className={styles.base}>
+		<div>
 			$4
 		</div>
 	);
@@ -142,6 +142,10 @@ endsnippet
 snippet  pt "propTypes" w
 ${1:component}.propTypes = {
 }
+endsnippet
+
+snippet  .ir "propTypes" w
+.isRequired
 endsnippet
 
 snippet  dp "default props" w

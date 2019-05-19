@@ -16,54 +16,6 @@ endfun "}}}
 function! funcs#readonly() abort
     return &readonly ? 'RO' : ''
 endfun
-function! funcs#AleStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-\        '◆ %d ✗ %d',
-\        l:all_non_errors,
-\        l:all_errors
-\    )
-endfunction
-
-function! funcs#LinterStatus() abort
-    let l:active = get(g:, 'ale_enabled', 0) == 1
-                \ && getbufvar(bufnr(''), 'ale_linted', 0) > 0
-    if(l:active == 0)
-        return ''
-    else
-        " let l:checking = ale#engine#IsCheckingBuffer(bufnr('')) == 1
-        let l:counts = ale#statusline#Count(bufnr(''))
-        let l:status = l:counts.total == 0 ? '✔' : '!'
-        return l:status
-        " return l:checking ? printf('%3s','...') : l:status
-    endif
-endfunction
-
-function! funcs#LinterErrors() abort
-    let l:active = get(g:, 'ale_enabled', 0) == 1
-\           && getbufvar(bufnr(''), 'ale_linted', 0) > 0
-    if(l:active == 0)
-        return ''
-    else
-        let l:counts = ale#statusline#Count(bufnr(''))
-        let l:errors = l:counts.error + l:counts.style_error
-        " let l:warnings = l:counts.total - l:errors
-        return printf('✗ %d', l:errors)
-    endif
-endfunction
-
-function! funcs#LinterWarnings() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-    let l:errors = l:counts.error + l:counts.style_error
-    let l:warnings = l:counts.total - l:errors
-    let l:active = get(g:, 'ale_enabled', 0) == 1
-\           && getbufvar(bufnr(''), 'ale_linted', 0) > 0
-    return l:active ? printf('◆ %d', l:warnings) : ''
-endfunction
 
 function! funcs#DiffStatus() abort
     if &diff 
@@ -160,37 +112,36 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 " }}}
 
-function! g:LanguageClientKeyMaps()
-    augroup LanguageClientBindings
-        autocmd!
-        nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-        nnoremap <silent> <leader>h :call LanguageClient_textDocument_hover()<CR>
-        nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-        nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-        nnoremap <silent> <leader>F :call LanguageClient_textDocument_formatting()<CR>
-        nnoremap <silent> <leader>r :call LanguageClient_textDocument_references()<CR>
-        nnoremap <silent> <leader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-        nnoremap <silent> ca :call LanguageClient_textDocument_codeAction()<CR>
-        inoremap <C-space>:call LanguageClient_textDocument_completion()<CR>
-    augroup END
+function! funcs#CocStatus()
+  if (&ft=='scss' || &ft=='javascript.jsx')
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return 'lsp inactive' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, 'E' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+        call add(msgs, 'W' . info['warning'])
+    endif
+    return 'lsp: ' . join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
+  endif
 endfunction
 
-function! g:LspKeyMaps()
-    augroup LspBindings
-    imap <c-space> <Plug>(asyncomplete_force_refresh)
-    nnoremap <silent> <leader>h :LspHover<CR>
-    nnoremap <silent> gd :LspDefinition<CR>
-    nnoremap <silent> ca :LspCodeAction<CR>
-    nnoremap <silent> <leader>s :LspDocumentSymbol<CR>
-    nnoremap <silent> <F2> :LspRename<CR>
-    nnoremap <silent> <leader>er :LspDocumentDiagnostics<CR>
-    nnoremap <silent> <leader> F :LspDocumentFormat<CR>
-    augroup END
+" create highlight groups without modifying colorscheme
+function! ExtendHighlights()
+    highlight HLCurrent ctermfg=241 ctermbg=220 cterm=bold
 endfunction
+augroup ExtendHighlights
+    autocmd!
+    autocmd ColorScheme * call ExtendHighlights()
+    highlight HLCurrent ctermfg=241 ctermbg=220 cterm=bold
+augroup END
 
-function! g:CocKeyMaps() 
-    augroup CocBindings
-    " Use <c-space> for trigger completion.
+" highlight current selected match.
+function! funcs#HLNext()
+    let target = '\c\%#'.@/
+    let match = matchadd('HLCurrent', target)
+    redraw
 endfunction
 
 " vim:foldmethod=marker:foldlevel=0

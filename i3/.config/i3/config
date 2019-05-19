@@ -13,7 +13,7 @@ set $mod Mod4
 set $scratchKey Print
 set $term urxvt
 set $browser chromium
-set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14'
+set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14' -b
 
 set $left h
 set $down j
@@ -25,8 +25,8 @@ font pango:monospace 12
 floating_modifier $mod
 # thin borders
 hide_edge_borders both
-new_window pixel 2
-new_float normal
+# new_window pixel 2
+# new_float normal
 hide_edge_borders none
 
 # start a terminal
@@ -122,7 +122,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # lock
-bindsym $mod+Shift+x exec i3lock --color 475263
+# bindsym $mod+Shift+x exec i3lock --color 475263
 
 # Move the currently focused window to the scratchpad
 bindsym $mod+$scratchKey move scratchpad
@@ -190,7 +190,7 @@ mode "$mode_launch" {
 bindsym $mod+semicolon mode "$mode_launch"
 # }}}
 # Volume Mode {{{
-set $mode_volume Volume: (r)edirect (m)ute
+set $mode_volume Volume: (r)edirect (m)ute (o)pen
 mode "$mode_volume" {
     bindsym $up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
     bindsym Up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
@@ -199,6 +199,7 @@ mode "$mode_volume" {
     # Redirect sound to headphones
     bindsym r exec "/usr/local/bin/switch-audio-port"
     bindsym m exec amixer sset Master toggle && killall -USR1 i3blocks
+    bindsym o exec urxvt -title floating -e bash -i -c alsamixer
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -252,11 +253,6 @@ bar {
     status_command ~/.local/bin/i3status-extend.sh --config ~/.config/i3status/top
 	colors {
         background #2d2d2d
-        # separator #757575
-        #                  border             background         text
-        # focused_workspace  $bg-color          $bg-color          $text-color
-        # inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-        # urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
     }
 }
 
@@ -271,11 +267,6 @@ bar {
 
 	colors {
         background #2d2d2d
-        # separator #757575
-        #                  border             background         text
-        # focused_workspace  $bg-color          $bg-color          $text-color
-        # inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-        # urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
     }
 }
 #}}}
@@ -304,6 +295,7 @@ bar {
     for_window [class="(?i)Extended\scontrols.*"] border none; floating enable;
     for_window [instance="Emulator"] border none; floating enable;
 
+    for_window [title="floating"] floating enabled; focus;
     for_window [title="alsamixer"] floating enable border pixel 1
     for_window [class="calamares"] floating enable border normal
     for_window [class="Clipgrab"] floating enable
@@ -349,10 +341,6 @@ bar {
 # volume
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-
-# granular volume control
-bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
 
 # mute
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
