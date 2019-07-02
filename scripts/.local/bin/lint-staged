@@ -19,7 +19,7 @@ fi
 
 for FILE in $STAGED_FILES
 do
-  eslint "$FILE"
+  npx eslint "$FILE"
 
   if [[ "$?" == 0 ]]; then
     echo "ESLint Passed: $FILE"

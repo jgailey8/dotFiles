@@ -112,21 +112,6 @@ endfunction
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 " }}}
 
-function! funcs#CocStatus()
-  if (&ft=='scss' || &ft=='javascript.jsx')
-    let info = get(b:, 'coc_diagnostic_info', {})
-    if empty(info) | return 'lsp inactive' | endif
-    let msgs = []
-    if get(info, 'error', 0)
-        call add(msgs, 'E' . info['error'])
-    endif
-    if get(info, 'warning', 0)
-        call add(msgs, 'W' . info['warning'])
-    endif
-    return 'lsp: ' . join(msgs, ' '). ' ' . get(g:, 'coc_status', '')
-  endif
-endfunction
-
 " create highlight groups without modifying colorscheme
 function! ExtendHighlights()
     highlight HLCurrent ctermfg=241 ctermbg=220 cterm=bold

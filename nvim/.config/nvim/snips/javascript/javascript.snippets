@@ -69,3 +69,17 @@ jest.mock('$1', () => ({
 	${2:module}: jest.fn().mockReturnValue($3),
 }));
 endsnippet
+
+snippet reducer "redux reducer" b
+import { createReducer } from "utils/reducer";
+
+const reducer = createReducer(
+  {},
+  {
+    ["Type"]: state => state
+  }
+);
+export default reducer;
+
+export const selectors = {};
+endsnippet

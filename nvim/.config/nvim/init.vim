@@ -99,11 +99,13 @@ call plug#begin()
     Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-surround'
     " Plug 'scrooloose/nerdTree'
-    Plug 'ctrlpvim/ctrlp.vim'
+    " Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    Plug 'aserebryakov/vim-todo-lists'
+    " Plug 'aserebryakov/vim-todo-lists'
     " ------ linting/language services----------
     if has('nvim')
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -127,6 +129,7 @@ call plug#begin()
     Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
 runtime! plugins/funcs.vim
 " }}}
@@ -258,12 +261,28 @@ catch
     let g:netrw_list_hide=netrw_gitignore#Hide()
 endtry
 " }}}
+" ========= FZF ============== {{{
+nnoremap <c-p> :FZF<CR>
+" find lines in all files
+command! -bang FLines call fzf#vim#grep(
+     \ 'grep -vnITr --color=always --exclude-dir=".svn" --exclude-dir=".git" --exclude=tags --exclude=*\.pyc --exclude=*\.exe --exclude=*\.dll --exclude=**\assets --exclude=*\.zip --exclude=*\.gz "^$"', 
+     \ 0,  
+     \ {'options': '--reverse --prompt "FLines> "'})
+
+nnoremap <silent> <leader>gr :FLines<cr>
+" }}}
 " ========= Ctrl-P ============== {{{
 " Custom ignores for CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|assets|\tmp\|DS_Store\'
-"ignore files from .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_root_markers = ['package.json', '*.sln']
+" let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|assets|\tmp\|DS_Store\'
+" "ignore files from .gitignore
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" let g:ctrlp_root_markers = ['package.json', '*.sln']
+"
+" if executable('rg') " use ripgrep if installed
+"   set grepprg=rg\ --color=never
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" endif
 " }}}
 " ========= UltiSnips ======== {{{
 let g:UltiSnipsExpandTrigger='<c-k>'
@@ -284,7 +303,7 @@ let g:lightline = {
 \                  ['mode', 'paste'], ['filename', 'readonly'], ['gitbranch']
 \           ],
 \           'right': [
-\                  ['readonly', 'percent', 'lineinfo'], ['cocstatus']
+\                  ['readonly', 'percent', 'lineinfo'], []
 \           ]
 \         },
 \         'tabline' : {
@@ -296,7 +315,6 @@ let g:lightline = {
 \         'component_function': {
 \               'filename': 'funcs#FilenameModified',
 \               'gitbranch': 'FugitiveStatusline',
-\               'cocstatus': 'funcs#CocStatus'
 \         },
 \         'component_type': {
 \               'buffers': 'tabsel'
@@ -326,7 +344,7 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <F2> <Plug>(coc-rename)
 nnoremap coc <Esc>:CocList<CR>
 nnoremap er <Esc>:CocList diagnostics<CR>
-nmap ca <Plug>(coc-codeaction)
+nmap <leader>ca <Plug>(coc-codeaction)
 nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 function! s:show_documentation()
 if &filetype == 'vim'
@@ -351,4 +369,45 @@ let g:VimTodoListsMoveItems = 0
 " let g:VimTodoListsDatesEnabled = 1
 " let g:VimTodoListsDatesFormat = "%a %b, %Y"
 " }}}
+" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
+"
+" " ripgrep
+" if executable('rg')
+"   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+"   set grepprg=rg\ --vimgrep
+"   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" endif
+"
+" " Files + devicons
+" function! Fzf_dev()
+"   let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
+"
+"   function! s:files()
+"     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+"     return s:prepend_icon(l:files)
+"   endfunction
+"
+"   function! s:prepend_icon(candidates)
+"     let l:result = []
+"     for l:candidate in a:candidates
+"       let l:filename = fnamemodify(l:candidate, ':p:t')
+"       let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+"       call add(l:result, printf('%s %s', l:icon, l:candidate))
+"     endfor
+"
+"     return l:result
+"   endfunction
+"
+"   function! s:edit_file(item)
+"     let l:pos = stridx(a:item, ' ')
+"     let l:file_path = a:item[pos+1:-1]
+"     execute 'silent e' l:file_path
+"   endfunction
+"
+"   call fzf#run({
+"         \ 'source': <sid>files(),
+"         \ 'sink':   function('s:edit_file'),
+"         \ 'options': '-m ' . l:fzf_files_options,
+"         \ 'down':    '40%' })
+" endfunction
 " vim:foldmethod=marker:foldlevel=0
