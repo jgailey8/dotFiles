@@ -1,0 +1,129 @@
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
+
+URxvt.perl-ext-common: default,tabbedex,selection-to-clipboard,keyboard-select,font-size
+!URxvt.perl-ext-common: default,tabbed,selection-to-clipboard,keyboard-select
+
+URxvt*font:                 xft:Hack Nerd Font Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
+URxvt*boldFont:             xft:Hack Bold Nerd Font Complete Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
+! URxvt*font:                 xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
+! URxvt*boldFont:             xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
+! URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
+URxvt*letterSpace: 0
+
+URxvt.depth:                      32
+URxvt.utf8:                       true
+URxvt.locale:                     true
+URxvt*scrollBar:                  false
+URxvt*mouseWheelScrollPage:       false
+URxvt*cursorBlink:                true
+URxvt.background:                 [100]#2c2c2c
+URxvt*foreground:                 grey
+URxvt*saveLines:                  2048
+URxvt*borderless: true
+URxvt*scrollTtyOutput: true
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
+! for 'fake' transparency (without Compton) uncomment the following three lines
+! URxvt*inheritPixmap:            true
+! URxvt*transparent:              true
+! URxvt*shading:                  138
+
+! Normal copy-paste keybindings without perls
+URxvt.iso14755:                   false
+URxvt.keysym.Shift-Control-V:     eval:paste_clipboard
+URxvt.keysym.Shift-Control-C:     eval:selection_to_clipboard
+
+! vim hjkl arrow keys with modifier(also set in zprofile)
+URxvt.keysym.Meta-l: \033[C
+URxvt.keysym.Meta-h: \033[D
+URxvt.keysym.Meta-j: \033[B
+URxvt.keysym.Meta-k: \033[A
+
+!------- keyboard-select -----------------
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keyboard-select.clipboard: true
+!------- tabbedex -----------------
+URxvt.tabbedex.autohide: yes
+URxvt.tabbedex.new-button: no
+URxvt.tabbedex.no-tabbedex-keys: true
+URxvt.tabbedex.title: no
+URxvt.tabbedex.bell-timeout: 1
+
+URxvt.keysym.M-comma: tabbedex:prev_tab
+URxvt.keysym.M-period: tabbedex:next_tab
+URxvt.keysym.M-n: tabbedex:new_tab
+URxvt.keysym.M-q: tabbedex:kill_tab
+URxvt.keysym.M-r: tabbedex:rename_tab
+! alt + < > keys for moving tabs
+URxvt.keysym.M-0x3c: tabbedex:move_tab_left
+URxvt.keysym.M-0x3e: tabbedex:move_tab_right
+
+!-------- font-size -------------
+URxvt.keysym.M-equal:  font-size:incglobal
+URxvt.keysym.M-minus:  font-size:decglobal
+URxvt.keysym.C-equal:  font-size:increase
+URxvt.keysym.C-minus:  font-size:decrease
+
+! Colors {{{
+! xterm 
+XTerm*background:        #222D31
+XTerm*foreground:        #d8d8d8
+XTerm*pointerColor:      #1ABB9B
+XTerm*faceName:          Fixed
+XTerm*faceSize:          11
+XTerm*reverseVideo:      on
+XTerm*selectToClipboard: true
+
+*background:                      #222D31
+*foreground:                      #d8d8d8
+*fading:                          8
+*fadeColor:                       black
+*cursorColor:                     #1ABB9B
+*pointerColorBackground:          #2B2C2B
+*pointerColorForeground:          #16A085
+
+!! black dark/light
+*color0:                          #222D31
+*color8:                          #585858
+
+!! red dark/light
+*color1:                          #ab4642
+*color9:                          #ab4642
+
+!! green dark/light
+*color2:                          #7E807E
+*color10:                         #8D8F8D
+
+!! yellow dark/light
+*color3:                          #f7ca88
+*color11:                         #f7ca88
+
+!! blue dark/light
+*color4:                          #7cafc2
+*color12:                         #7cafc2
+
+!! magenta dark/light
+*color5:                          #ba8baf
+*color13:                         #ba8baf
+
+!! cyan dark/light
+*color6:                          #1ABB9B
+*color14:                         #1ABB9B
+
+!! white dark/light
+*color7:                          #d8d8d8
+*color15:                         #f8f8f8
+
+Xcursor.theme: xcursor-breeze
+Xcursor.size:                     0
+! }}}
+dropTerm*background:              [95]#222D31
+
+! vim: foldmethod=marker:foldlevel=0

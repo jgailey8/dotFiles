@@ -15,3 +15,4 @@ let gitdir=system("echo $(git rev-parse --show-toplevel)/src")
 if (empty(matchstr(gitdir, '^fatal:.*')) && gitdir =~ "phoenix_frontend")
     cd `=gitdir`
 endif
+nnoremap <F2> :%s/\<<C-r><C-w>\>/

@@ -25,11 +25,10 @@
 	whitespace = red reverse
 [diff-so-fancy]
 	stripLeadingSymbols = false
-[mergetool]
-	keepBackup = true
 [branch]
 	sort = -committerdate
 [merge]
 	tool = fugitive
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+	cmd = nvim -f -c \"Gvdiff\" \"$MERGED\"
+	# keepBackup = true

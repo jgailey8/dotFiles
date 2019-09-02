@@ -20,18 +20,18 @@ runtime! archlinux.vim
 " ========= Options ===== {{{
 set mouse=a
 set encoding=utf-8  " The encoding displayed.
-scriptencoding utf-8"
+scriptencoding utf-8
 set fileencoding=utf-8  " The encoding written to file.
 filetype plugin on
 filetype indent on
 syntax on
 syntax enable
 filetype plugin indent on       " enable filetype detection
-set updatetime=300             " time for keycommands
+set updatetime=300              " time for keycommands
 set hidden  	        		" dont ask to save changes when switching buffers
 set history=100
 set autoread                    " automatically reload files changed outside of Vim"
-set visualbell                  "No sounds
+set visualbell                  " No sounds
 set clipboard=unnamedplus   	" use system clipboard
 set relativenumber      		" show realitve line number
 set number          			" show current line number
@@ -109,7 +109,7 @@ call plug#begin()
     " ------ linting/language services----------
     if has('nvim')
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-        " Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
+        Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
     endif
     if has('python3')
         Plug 'OmniSharp/omnisharp-vim'
@@ -129,7 +129,8 @@ call plug#begin()
     Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
-    Plug 'ryanoasis/vim-devicons'
+    " Plug 'chrisbra/csv.vim'
+    " Plug 'ryanoasis/vim-devicons'
 call plug#end()
 runtime! plugins/funcs.vim
 " }}}
@@ -325,7 +326,7 @@ let g:lightline = {
 \         }
 \       }
 "}}}
-" ========== COC ======== {{{
+" ========= COC ======== {{{
 set cmdheight=2
 set shortmess+=c
 set signcolumn=yes
@@ -341,9 +342,11 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 nmap <leader>rn <Plug>(coc-rename)
-nmap <F2> <Plug>(coc-rename)
+" nmap <F2> <Plug>(coc-rename)
 nnoremap coc <Esc>:CocList<CR>
-nnoremap er <Esc>:CocList diagnostics<CR>
+" open up quick fix winow(not sure which mapping i will use yet)
+nnoremap er :cw<CR>
+nnoremap <leader>er <Esc>:CocList diagnostics<CR>
 nmap <leader>ca <Plug>(coc-codeaction)
 nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -353,14 +356,34 @@ else
     call CocActionAsync('doHover')
 endif
 endfunction
-nmap <leader>rn <Plug>(coc-rename)
 
 " Use `:Format` for format current buffer
 command! -nargs=0 CocFormat :call CocAction('format')
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " }}}
-" ========== OTHER ======== {{{
+" ========= ALE ========= {{{
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_fix_on_save = 0
+let g:ale_linters = {
+\        'javascript': ['eslint'],
+\        'jsx': ['eslint'],
+\        'json': ['jsonlint'],
+\        'typescript': ['tslint'],
+\        'vim': ['vint'],
+\        'cs': ['omnisharp'],
+\        'css': [],
+\        'scss': []
+\       }
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+let g:ale_set_highlights = 0
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
+" }}}
+" ========= OTHER ======== {{{
 let g:instant_markdown_autostart = 0
 
 "disable moving items after toggle,
@@ -369,45 +392,4 @@ let g:VimTodoListsMoveItems = 0
 " let g:VimTodoListsDatesEnabled = 1
 " let g:VimTodoListsDatesFormat = "%a %b, %Y"
 " }}}
-" nnoremap <silent> <leader>e :call Fzf_dev()<CR>
-"
-" " ripgrep
-" if executable('rg')
-"   let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-"   set grepprg=rg\ --vimgrep
-"   command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-" endif
-"
-" " Files + devicons
-" function! Fzf_dev()
-"   let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
-"
-"   function! s:files()
-"     let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-"     return s:prepend_icon(l:files)
-"   endfunction
-"
-"   function! s:prepend_icon(candidates)
-"     let l:result = []
-"     for l:candidate in a:candidates
-"       let l:filename = fnamemodify(l:candidate, ':p:t')
-"       let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-"       call add(l:result, printf('%s %s', l:icon, l:candidate))
-"     endfor
-"
-"     return l:result
-"   endfunction
-"
-"   function! s:edit_file(item)
-"     let l:pos = stridx(a:item, ' ')
-"     let l:file_path = a:item[pos+1:-1]
-"     execute 'silent e' l:file_path
-"   endfunction
-"
-"   call fzf#run({
-"         \ 'source': <sid>files(),
-"         \ 'sink':   function('s:edit_file'),
-"         \ 'options': '-m ' . l:fzf_files_options,
-"         \ 'down':    '40%' })
-" endfunction
 " vim:foldmethod=marker:foldlevel=0

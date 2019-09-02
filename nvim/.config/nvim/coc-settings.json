@@ -10,7 +10,7 @@
   "diagnostic.errorSign": "●",
   "javascript.implementationsCodeLens.enable": false,
   "javascript.referencesCodeLens.enable": false,
-  "javascript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": false,
   "javascript.suggest.completeFunctionCalls": false,
   "javascript.suggest.paths": false,
   "javascript.updateImportsOnFileMove.enable": false,

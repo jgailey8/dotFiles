@@ -65,6 +65,9 @@ if type ruby > /dev/null 2>&1; then
     export GEM_HOME=$HOME/.local/gem
     export PATH="$PATH:$(ruby -e 'print Gem.user_dir')/bin"
 fi
+# go
+export GOPATH=$HOME/.local/go
+export PATH="$PATH:$GOPATH/bin"
 #}}}
 
 help() {

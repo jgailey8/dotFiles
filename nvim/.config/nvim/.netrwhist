@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/home/jared/phoenix_frontend/src/components/forms/states-select'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/jared/phoenix_frontend/src/components/screens/login'
+let g:netrw_dirhist_2='/home/jared/phoenix_frontend/src/components/screens'
+let g:netrw_dirhist_3='/home/jared/phoenix_frontend/src/components/hooks/useQuery'
+let g:netrw_dirhist_4='/home/jared/work/patient-portal/src/components/screens/text-message-consent'
+let g:netrw_dirhist_5='/home/jared/phoenix_frontend/src/assets/stylesheets/mobile'
+let g:netrw_dirhist_6='/home/jared/phoenix_frontend/src/assets/stylesheets/public'
+let g:netrw_dirhist_7='/home/jared/phoenix_frontend/src/components/screens/user-profile'
+let g:netrw_dirhist_8='/home/jared/phoenix_frontend/src/components/twilio-call-logs/call-profile'

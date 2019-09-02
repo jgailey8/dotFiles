@@ -6,11 +6,8 @@ function! funcs#CloseOtherWindows()
 	lclose
 	cclose
 	helpclose
-	if exists('g:NERDTree') && g:NERDTree.IsOpen()
-		NERDTreeToggle
-	endif
-endfun "}}}
-
+endfun 
+"}}}
 " - Lightline Status Functions {{{
 
 function! funcs#readonly() abort
@@ -57,7 +54,6 @@ function! funcs#FilenameModified()
   let l:modified = &modified ? '*' : ''
   return l:filename . l:modified
 endfunction " }}}
-
 " - fold text dispaly header {{{
 function! funcs#FoldText()
     let l:lpadding = &foldcolumn
@@ -93,14 +89,12 @@ function! funcs#FoldText()
 
     return l:text . repeat(' ', l:width - strlen(substitute(l:text, '.', 'x', 'g'))) . l:info
 endfunction " }}}
-
 " - Google Search {{{
 function! funcs#GoogleSearch()
      let l:searchterm = getreg('g')
      silent! exec "silent! !xdg-open \"http://google.com/search?q=" . l:searchterm . "\" &"
 endfunction
 "}}}
-
 " - Visual Mode */# from Scrooloose {{{
 function! s:VSetSearch()
   let temp = @@
@@ -111,8 +105,7 @@ endfunction
 
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 " }}}
-
-" create highlight groups without modifying colorscheme
+" create highlight groups without modifying colorscheme {{{
 function! ExtendHighlights()
     highlight HLCurrent ctermfg=241 ctermbg=220 cterm=bold
 endfunction
@@ -121,12 +114,13 @@ augroup ExtendHighlights
     autocmd ColorScheme * call ExtendHighlights()
     highlight HLCurrent ctermfg=241 ctermbg=220 cterm=bold
 augroup END
-
-" highlight current selected match.
+" }}}
+" highlight current selected match. {{{
 function! funcs#HLNext()
     let target = '\c\%#'.@/
     let match = matchadd('HLCurrent', target)
     redraw
 endfunction
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
