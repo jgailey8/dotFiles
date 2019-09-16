@@ -1,0 +1,23 @@
+priority -50
+
+###########################################################################
+#                            SnipMate Snippets                            #
+###########################################################################
+snippet select "SELECT" b
+SELECT * FROM ${1:name}
+endsnippet
+
+snippet update "Update" b
+UPDATE ${1:name} 
+SET column1='', column2='' WHERE ${4};
+endsnippet
+
+snippet delete "DELETE" b
+DELETE FROM ${1:name} WHERE ${2:condition};
+endsnippet
+
+snippet tables "Show Tables" b
+--show tables;
+.tables
+endsnippet
+# vim:ft=snippets:

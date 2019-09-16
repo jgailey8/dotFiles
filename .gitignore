@@ -2,8 +2,9 @@
 **/.DS_Store
 **.log
 **/*.swp
-
 **/tmp
+**/dbs.vim
+**/.netrwhist
 
 .bash_history
 .bash_local
@@ -15,4 +16,4 @@
 **/autoload
 **/.node_modules
 
-***/.netrwhist
+**/.netrwhist

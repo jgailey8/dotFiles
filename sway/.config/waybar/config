@@ -1,0 +1,99 @@
+{
+  "layer": "top",
+  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "custom/vpn",
+    "network",
+    "custom/alsa",
+    "backlight",
+    "battery",
+    "clock",
+    "idle_inhibitor",
+    "tray"
+  ],
+  "sway/window": {
+    "max-length": 50
+  },
+  "tray": {
+    "icon-size": 20,
+    "spacing": 10
+  },
+  "custom/vpn": {
+    "exec": "vpn.sh",
+    "interval": 10,
+    "return-type": "json",
+    "format": "{} {icon}",
+    "tooltip": false,
+    "format-icons": [""],
+    "on-click": "nmcli connection up 'US Chicago'",
+    "on-right-click": "nmcli connection down 'US Chicago'"
+  },
+  "network": {
+    "interface": "wlp4s0",
+    "format": "{ifname}:{ipaddr}",
+    "interval": 30,
+    "format-wifi": "{essid}: {ipaddr} ",
+    "format-ethernet": "{ifname} ",
+    "tooltip": false,
+    "format-disconnected": "", //An empty format will hide the module.
+    "on-click": "urxvt -title floating -e bash -i -c nmtui",
+    "format-icons": [""]
+  },
+  "custom/alsa": {
+    "exec": "alsa.sh",
+    "signal": 8,
+    "interval": 5,
+    "return-type": "json",
+    "format": "{} {icon}",
+    "tooltip": false,
+    "format-icons": ["", "", ""],
+    "on-click": "urxvt -title floating -e bash -i -c alsamixer"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "interval": 5,
+    "signal": 22,
+    "tooltip": false,
+    "on-scroll-down": "light -U 2 && pkill -RTMIN+22 waybar",
+    "on-scroll-up": "light -A 2 && pkill -RTMIN+22 waybar",
+    "format-icons": ["", ""]
+  },
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "tooltip": false,
+    "format-icons": ["", "", "", "", ""]
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "clock": {
+    "format": "{:%a %d %b   %I:%M}",
+    "tooltip": false
+  },
+  "temperature": {
+    "tooltip": false,
+    "format": "{temperatureC}° "
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "tooltip": false,
+    "max-length": 10
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "tooltip": false,
+    "max-length": 10
+  }
+}
+
+// vim: ft=jsonc

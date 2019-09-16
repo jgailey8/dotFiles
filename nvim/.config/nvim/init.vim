@@ -98,14 +98,11 @@ call plug#begin()
     "---- main plugs -----
     Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-surround'
-    " Plug 'scrooloose/nerdTree'
-    " Plug 'ctrlpvim/ctrlp.vim'
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     Plug 'tpope/vim-fugitive'
     Plug 'airblade/vim-gitgutter'
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
-    " Plug 'aserebryakov/vim-todo-lists'
     " ------ linting/language services----------
     if has('nvim')
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -129,8 +126,7 @@ call plug#begin()
     Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
-    " Plug 'chrisbra/csv.vim'
-    " Plug 'ryanoasis/vim-devicons'
+    Plug 'tpope/vim-dadbod'
 call plug#end()
 runtime! plugins/funcs.vim
 " }}}
@@ -385,11 +381,5 @@ let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
 " }}}
 " ========= OTHER ======== {{{
 let g:instant_markdown_autostart = 0
-
-"disable moving items after toggle,
-let g:VimTodoListsMoveItems = 0
-" set date insert
-" let g:VimTodoListsDatesEnabled = 1
-" let g:VimTodoListsDatesFormat = "%a %b, %Y"
 " }}}
 " vim:foldmethod=marker:foldlevel=0

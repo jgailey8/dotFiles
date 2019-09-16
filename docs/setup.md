@@ -63,7 +63,7 @@
     options root=PARTUUID=## rw rootflags=subvol=ROOT elevator=noop nmi_watchdog=0
 ```
 # some basic core packages
-    pacman -S xorg-server xorg-xinit xf86-video-intel i3 sway networkmanager alsa-utils wget git python nodejs lua npm rxvt-unicode dmenu feh stow vim chromium 
+    pacman -S xorg-server xorg-xinit xf86-video-intel i3 sway waybar dmenu networkmanager archlinux-wallpaper alsa-utils wget git python nodejs lua npm rxvt-unicode feh stow vim chromium neovim
 ## other packages
     pcmanfm xcompmgr snapper xsel tlp acpi_call trash-cli ntp xautolock xdg-user-dirs
 ## some aur packages 
@@ -74,7 +74,7 @@
 ### [bumblebee-status](https://github.com/tobi-wan-kenobi/bumblebee-status)
     yaourt should install all required python dependencies
     yaourt font-awesome
-    
+
 # install dotfiles
     git clone https://github.com/jmg5e/dotfiles .dotfiles
     stow -v -t $HOME bash vim Xresources xinit i3 sway

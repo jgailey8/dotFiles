@@ -46,7 +46,6 @@ if ! zgen saved; then
   zgen save
 fi
 #}}}
-
 ## ==== zplug ==== {{{
 # export ZPLUG_HOME=${HOME}/.zplug
 # if [[ ! -d ${ZPLUG_HOME} ]]; then
@@ -151,3 +150,6 @@ fi
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export RBENV_VERSION="2.1.10"
+eval "$(rbenv init -)"

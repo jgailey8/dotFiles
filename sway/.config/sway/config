@@ -20,11 +20,11 @@ hide_edge_borders both
 hide_edge_borders none
 
 # Set inner/outer gaps
-gaps inner 5px
-gaps outer 5px
+gaps inner 10px
+gaps outer 0px
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps smart
+smart_gaps on
 
 default_border none
 
@@ -226,7 +226,13 @@ bindsym $mod+b mode "brightness"
 # output eDP-1 scale 1
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output eDP-1 background ~/.local/backgrounds/arch_kiss.jpg fill
+# output eDP-1 background ~/.local/backgrounds/arch_kiss.jpg fill
+output eDP-1 {
+    scale 1
+    background ~/.local/backgrounds/arch_kiss.jpg fill
+    # resolution 1920x1080
+}
+
 # }}}
 # Input configuration {{{
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -324,12 +330,14 @@ bindsym XF86AudioPrev exec mocp --previous
     for_window [instance="^dropTerm$"] border none; floating enable; move scratchpad; scratchpad show;
     for_window [instance="^dropTerm$"] resize set 1920 1080; resize shrink height 30px; move position 0px 0px; move scratchpad; 
 #}}}
+bar {
+    swaybar_command waybar
+}
 # ===== Autostart apps ===== {{{
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "sleep 2s && urxvt -name dropTerm"
 exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id "mako --default-timeout 1000"
-exec waybar
 #}}}
 
 # vim: foldmethod=marker:foldlevel=0
