@@ -1,60 +1,96 @@
 {
   "layer": "top",
-  "modules-left": ["sway/workspaces", "sway/mode"],
+  "modules-left": ["sway/workspaces", "custom/arrow6", "sway/mode"],
   "modules-right": [
     "cpu",
     "memory",
     "temperature",
-    "custom/vpn",
-    "network",
-    "custom/alsa",
+    "custom/arrow3",
     "backlight",
+    "custom/alsa",
+    "custom/arrow2",
+    "network",
+    "custom/vpn",
+    "custom/arrow1",
     "battery",
+    "custom/arrow2",
     "clock",
     "idle_inhibitor",
     "tray"
   ],
-  "sway/window": {
-    "max-length": 50
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{index} {name}"
+  },
+  "sway/mode": {
+    "format": "  {}"
+  },
+  "temperature": {
+    "tooltip": false,
+    "format": " {temperatureC}°"
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "tooltip": false
+  },
+  "cpu": {
+    "interval": 10,
+    "format": " {}%",
+    "tooltip": false
   },
   "tray": {
-    "icon-size": 20,
     "spacing": 10
+  },
+  "battery": {
+    "format": "{icon}  {capacity}% - {time}",
+    "format-charging": "<span color='green'></span>  {capacity}%",
+    "format-full": "  {capacity}%",
+    "states": {
+      "warning": 35,
+      "critical": 15
+    },
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": false
+  },
+  "network": {
+    "format": "{ifname}:{ipaddr}",
+    "format-disconnected": "Disconnected ⚠",
+    "format-ethernet": "{ifname} ",
+    "format-icons": [""],
+    "format-wifi": "{icon} {essid}: {ipaddr}",
+    "interface": "wlp4s0",
+    "interval": 30,
+    "on-click": "urxvt -title floating -e bash -i -c nmtui",
+    "tooltip": false
   },
   "custom/vpn": {
     "exec": "~/.config/waybar/modules/vpn.sh",
     "interval": 10,
     "return-type": "json",
-    "format": "{icon} {}",
+    "format": "{} {icon}",
     "tooltip": false,
     "format-icons": [""],
     "on-click": "nmcli connection up 'US Chicago'",
     "on-right-click": "nmcli connection down 'US Chicago'"
-  },
-  "network": {
-    "interface": "wlp4s0",
-    "format": "{ifname}:{ipaddr}",
-    "interval": 30,
-    "format-wifi": "{essid}: {ipaddr} ",
-    "format-ethernet": "{ifname} ",
-    "tooltip": false,
-    "format-disconnected": "", //An empty format will hide the module.
-    "on-click": "urxvt -title floating -e bash -i -c nmtui",
-    "format-icons": [""]
   },
   "custom/alsa": {
     "exec": "~/.config/waybar/modules/alsa.sh",
     "signal": 8,
     "interval": 5,
     "return-type": "json",
-    "format": "{} {icon}",
+    "format": "{icon} {}",
     "tooltip": false,
-    "format-icons": ["", "", ""],
-    "on-click": "urxvt -title floating -e bash -i -c alsamixer"
+    "on-click": "urxvt -title floating -e bash -i -c alsamixer",
+    "format-icons": {
+      "headphones": "",
+      "default": ["", ""]
+    }
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "{percent}% {icon}",
+    "format": "{icon} {percent}%",
     "interval": 5,
     "signal": 22,
     "tooltip": false,
@@ -62,40 +98,34 @@
     "on-scroll-up": "light -A 2 && pkill -RTMIN+22 waybar",
     "format-icons": ["", ""]
   },
-  "battery": {
-    "interval": 30,
-    "format": "{capacity}% ({time})  <span color='#f2f2f2'>{icon}</span>",
-    "format-charging": "{capacity}%  <span color='green'></span>",
-    "tooltip": false,
-    "format-icons": ["", "", "", "", ""]
+  "clock": {
+    "format": "  {:%a %d %b   %I:%M}",
+    "tooltip": false
   },
   "idle_inhibitor": {
     "format": "{icon}",
+    "tooltip": false,
     "format-icons": {
       "activated": "",
       "deactivated": ""
     }
   },
-  "clock": {
-    "format": "{:%a %d %b   %I:%M}",
-    "tooltip": false
+  "custom/arrow1": {
+    "format": ""
   },
-  "temperature": {
-    "tooltip": false,
-    "format": "{temperatureC}° "
+  "custom/arrow2": {
+    "format": ""
   },
-  "memory": {
-    "interval": 30,
-    "format": " {}%",
-    "tooltip": false,
-    "max-length": 10
+  "custom/arrow3": {
+    "format": ""
   },
-  "cpu": {
-    "interval": 10,
-    "format": " {}%",
-    "tooltip": false,
-    "max-length": 10
+  "custom/arrow4": {
+    "format": ""
+  },
+  "custom/arrow5": {
+    "format": ""
+  },
+  "custom/arrow6": {
+    "format": ""
   }
 }
-
-// vim: ft=jsonc

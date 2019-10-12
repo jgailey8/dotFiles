@@ -10,4 +10,4 @@ if [ -z "$status" ]
         tooltip=$(ip addr show tun0 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
 fi
 
-echo -e "{\"text\":\""$status"\", \"class\":\""$class"\", \"tooltip\":\""$tooltip"\"}"
+echo -e "{\"text\":\"""\", \"class\":\""$class"\", \"tooltip\":\""$tooltip"\"}"
