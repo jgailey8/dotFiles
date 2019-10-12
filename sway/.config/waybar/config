@@ -22,10 +22,10 @@
     "spacing": 10
   },
   "custom/vpn": {
-    "exec": "vpn.sh",
+    "exec": "~/.config/waybar/modules/vpn.sh",
     "interval": 10,
     "return-type": "json",
-    "format": "{} {icon}",
+    "format": "{icon} {}",
     "tooltip": false,
     "format-icons": [""],
     "on-click": "nmcli connection up 'US Chicago'",
@@ -43,7 +43,7 @@
     "format-icons": [""]
   },
   "custom/alsa": {
-    "exec": "alsa.sh",
+    "exec": "~/.config/waybar/modules/alsa.sh",
     "signal": 8,
     "interval": 5,
     "return-type": "json",
@@ -63,7 +63,9 @@
     "format-icons": ["", ""]
   },
   "battery": {
-    "format": "{capacity}% {icon}",
+    "interval": 30,
+    "format": "{capacity}% ({time})  <span color='#f2f2f2'>{icon}</span>",
+    "format-charging": "{capacity}%  <span color='green'></span>",
     "tooltip": false,
     "format-icons": ["", "", "", "", ""]
   },

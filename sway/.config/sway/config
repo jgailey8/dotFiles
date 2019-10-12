@@ -196,10 +196,10 @@ bindsym $mod+semicolon mode "$mode_launch"
 #   Volume Mode {{{
 set $mode_volume Volume: (r)edirect (m)ute (o)pen
 mode "$mode_volume" {
-    bindsym $up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+8 waybar
-    bindsym Up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+8 waybar
-    bindsym $down exec amixer -D pulse sset Master 5%- && pkill -RTMIN+8 waybar
-    bindsym Down exec amixer -D pulse sset Master 5%- && pkill -RTMIN+8 waybar
+    bindsym $up exec amixer sset Master 1%+ && pkill -RTMIN+8 waybar
+    bindsym Up exec amixer sset Master 1%+ && pkill -RTMIN+8 waybar
+    bindsym $down exec amixer sset Master 1%- && pkill -RTMIN+8 waybar
+    bindsym Down exec amixer sset Master 1%- && pkill -RTMIN+8 waybar
     # Redirect sound to headphones
     bindsym r exec "/usr/local/bin/switch-audio-port"
     bindsym m exec amixer sset Master toggle && killall -USR1 waybar
@@ -211,10 +211,10 @@ bindsym $mod+v mode "$mode_volume"
 # }}}
 #   Brightness Mode {{{
 mode "brightness" {
-    bindsym $up exec --no-startup-id light -A 5 && pkill -RTMIN+22 waybar
-    bindsym Up exec --no-startup-id light -A 5 && pkill -rtmin+22 waybar
-    bindsym $down exec --no-startup-id light -U 5 && pkill -RTMIN+22 waybar
-    bindsym Down exec --no-startup-id light -U 5 && pkill -RTMIN+22 waybar
+    bindsym $up exec --no-startup-id light -A 3 && pkill -RTMIN+22 waybar
+    bindsym Up exec --no-startup-id light -A 3 && pkill -rtmin+22 waybar
+    bindsym $down exec --no-startup-id light -U 3 && pkill -RTMIN+22 waybar
+    bindsym Down exec --no-startup-id light -U 3 && pkill -RTMIN+22 waybar
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -225,8 +225,6 @@ bindsym $mod+b mode "brightness"
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 # output eDP-1 scale 1
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-# output eDP-1 background ~/.local/backgrounds/arch_kiss.jpg fill
 output eDP-1 {
     scale 1
     background ~/.local/backgrounds/arch_kiss.jpg fill
@@ -257,8 +255,8 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 # }}}
 # Multimedia Keys {{{
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+8 waybar
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+8 waybar
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && pkill -RTMIN+8 waybar
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && pkill -RTMIN+8 waybar
 
 # mute
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
@@ -269,6 +267,11 @@ bindsym XF86AudioStop exec mocp --togle-pause
 bindsym XF86AudioNext exec mocp --next
 bindsym XF86AudioPrev exec mocp --previous
 
+#}}}
+# Bar {{{
+bar {
+    swaybar_command waybar
+}
 #}}}
 # ========= RULES ===== {{{
     assign [class="^Chromium$"]      → $tag1
@@ -330,14 +333,15 @@ bindsym XF86AudioPrev exec mocp --previous
     for_window [instance="^dropTerm$"] border none; floating enable; move scratchpad; scratchpad show;
     for_window [instance="^dropTerm$"] resize set 1920 1080; resize shrink height 30px; move position 0px 0px; move scratchpad; 
 #}}}
-bar {
-    swaybar_command waybar
-}
 # ===== Autostart apps ===== {{{
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "sleep 2s && urxvt -name dropTerm"
 exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id "mako --default-timeout 1000"
+exec swayidle \
+    timeout 900 'swaymsg "output * dpms off"' \
+       resume 'swaymsg "output * dpms on"' \
+    timeout 2700 'systemctl suspend'
 #}}}
 
 # vim: foldmethod=marker:foldlevel=0

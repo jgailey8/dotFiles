@@ -1,20 +1,16 @@
-Xft.dpi:       96
+URxvt.perl-ext-common: default,tabbedex,selection-to-clipboard,keyboard-select,font-size
+
+URxvt*font:                 xft:Hack Nerd Font Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
+URxvt*boldFont:             xft:Hack Bold Nerd Font Complete Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
+URxvt*letterSpace: 0
+!https://www.wiki.manjaro.org/index.php?title=Improve_Font_Rendering
+Xft.dpi:       96 
 Xft.antialias: true
 Xft.hinting:   true
 Xft.rgba:      rgb
 Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
-
-URxvt.perl-ext-common: default,tabbedex,selection-to-clipboard,keyboard-select,font-size
-!URxvt.perl-ext-common: default,tabbed,selection-to-clipboard,keyboard-select
-
-URxvt*font:                 xft:Hack Nerd Font Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
-URxvt*boldFont:             xft:Hack Bold Nerd Font Complete Mono:pixelsize=22:minspace=False, xft:DejaVu Sans:pixelsize=18
-! URxvt*font:                 xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
-! URxvt*boldFont:             xft:Inconsolata Nerd Font Mono:pixelsize=27:minspace=False, xft:DejaVu Sans:pixelsize=18
-! URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
-URxvt*letterSpace: 0
 
 URxvt.depth:                      32
 URxvt.utf8:                       true
@@ -24,10 +20,10 @@ URxvt*mouseWheelScrollPage:       false
 URxvt*cursorBlink:                true
 URxvt.background:                 [100]#2c2c2c
 URxvt*foreground:                 grey
-URxvt*saveLines:                  2048
+URxvt*saveLines:                  4096
 URxvt*borderless: true
 URxvt*scrollTtyOutput: true
-URxvt*scrollWithBuffer: true
+URxvt*scrollWithBuffer: false
 URxvt*scrollTtyKeypress: true
 
 ! for 'fake' transparency (without Compton) uncomment the following three lines

@@ -192,10 +192,10 @@ bindsym $mod+semicolon mode "$mode_launch"
 # Volume Mode {{{
 set $mode_volume Volume: (r)edirect (m)ute (o)pen
 mode "$mode_volume" {
-    bindsym $up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-    bindsym Up exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-    bindsym $down exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
-    bindsym Down exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+    bindsym $up exec amixer sset Master 5%+ && pkill -RTMIN+1 i3blocks
+    bindsym Up exec amixer sset Master 5%+ && pkill -RTMIN+1 i3blocks
+    bindsym $down exec amixer sset Master 5%- && pkill -RTMIN+1 i3blocks
+    bindsym Down exec amixer sset Master 5%- && pkill -RTMIN+1 i3blocks
     # Redirect sound to headphones
     bindsym r exec "/usr/local/bin/switch-audio-port"
     bindsym m exec amixer sset Master toggle && killall -USR1 i3blocks
@@ -207,10 +207,10 @@ bindsym $mod+v mode "$mode_volume"
 # }}}
 # Brightness Mode {{{
 mode "brightness" {
-    bindsym $up exec --no-startup-id light -A 5 && pkill -RTMIN+22 i3blocks
-    bindsym Up exec --no-startup-id light -A 5 && pkill -rtmin+22 i3blocks
-    bindsym $down exec --no-startup-id light -U 5 && pkill -RTMIN+22 i3blocks
-    bindsym Down exec --no-startup-id light -U 5 && pkill -RTMIN+22 i3blocks
+    bindsym $up exec --no-startup-id light -A 3 && pkill -RTMIN+22 i3blocks
+    bindsym Up exec --no-startup-id light -A 3 && pkill -rtmin+22 i3blocks
+    bindsym $down exec --no-startup-id light -U 3 && pkill -RTMIN+22 i3blocks
+    bindsym Down exec --no-startup-id light -U 3 && pkill -RTMIN+22 i3blocks
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -339,8 +339,8 @@ bar {
 #}}}
 ## Multimedia Keys {{{
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && pkill -RTMIN+1 i3block
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && pkill -RTMIN+1 i3block
 
 # mute
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
