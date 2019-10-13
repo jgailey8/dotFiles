@@ -120,17 +120,17 @@ alias dotnet-prod="export ASPNETCORE_ENVIRONMENT=Production"
 
 alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
 alias weather="curl wttr.in"
-alias todo="todo.sh"
+alias wiki="vim $HOME/.wiki/index.md"
 
 # use trash-cli
-# if type trash > /dev/null 2>&1; then
+if type trash > /dev/null 2>&1; then
     alias rm="trash"
-# fi
+fi
 
 # migrating to neovim
-# if type nvim > /dev/null 2>&1; then
+if type nvim > /dev/null 2>&1; then
     alias vim="nvim"
-# fi
+fi
 
 alias vless="/bin/sh -c \"col -b | \vim --not-a-term -c 'set ft=man laststatus=0 nomod nolist noma' -\""
 alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'

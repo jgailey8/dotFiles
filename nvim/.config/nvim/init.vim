@@ -58,7 +58,7 @@ set smartindent
 set scrolloff=4                 " keep 4 lines off the edges of the screen when scrolling
 set hlsearch                    " highlight search terms
 set incsearch                   " show search matches as you type
-set shortmess+=I                " hide the launch screen
+set shortmess+=I               " hide the launch screen
 set nolist                      " don't show invisible characters by default,
 set splitbelow                  " create new splits below
 set splitright                  " create new splits to the right
@@ -121,6 +121,7 @@ call plug#begin()
     Plug 'neoclide/jsonc.vim'
     "---- markdown  -------
     " Plug 'plasticboy/vim-markdown'
+    Plug 'vimwiki/vimwiki'
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     "----- extras ---------
     Plug 'jmg5e/vim-css-js-converter'
@@ -218,6 +219,11 @@ if has('nvim')
     set directory=$VIMHOME/tmp/swp " Where to backup files
     set undolevels=1000
 endif
+
+augroup SwpFileCheck " open as readonly if swp file exists
+  autocmd!
+  autocmd SwapExists * let v:swapchoice = "o"
+augroup END
 " }}}
 " ========= Folding =============== {{{
 if has('folding')
@@ -370,6 +376,8 @@ let g:mkdp_port = ''
 
 " preview page title
 " ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
+" let g:mkdp_page_title = '「${name}」'
+let g:vimwiki_list = [{'path': '~/.wiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 " }}}
 " vim:foldmethod=marker:foldlevel=0
