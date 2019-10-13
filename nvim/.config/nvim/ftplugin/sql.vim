@@ -18,11 +18,11 @@ func! DBSelected(result)
 endfunc
 
 function! DB_EXE()
-    if exists("g:db")
+    if exists('g:db')
         let content=join(getline(1, '$'), "\n")
-        execute "DB " . g:db . " " . content
+        execute 'DB ' . g:db . ' ' . content
      else
-         echom "no db currently selected"
+         echom 'no db currently selected'
      endif
 endfun 
 

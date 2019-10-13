@@ -1,154 +1,213 @@
-## core packages
-```
-sudo pacman -S networkmanager nginx php php-fpm trash-cli gvim rxvt-unicode urxvt-perls chromium htop git stow neovim python-neovim python2-neovim gvim mlocate ranger nodejs npm zsh zsh-completions xterm xsel diff-so-fancy xautolock
-```
-## yaourt
-```
-nerd-font-hack
-light-git
-private-internet-access
-visual-studio-code
-adminer
+# Table of Contents
 
-```
-# [vs-code](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
-   using vs code extension settings-sync to manage settings/keybinds etc..
-## public gist
-   * d58b5ae82409ce855f4c6028b25fa493
-1. install plugin
-2. go to github.com and settings to lookup gist id
-3. Press Shift + Alt + D it will ask your github Gist ID.
-4. Dowload settings!
+- [Post Install](#post-install)
+  - [zsh](#zsh)
+  - [User Dirs](#user-dirs)
+  - [Urxvt](#urxvt)
+  - [Vim](#vim)
+    - [Language Servers](#language-servers)
+- [Dev Tools](#dev-tools)
+  - [javascript](#javascript)
+  - [android](#android)
+  - [dotnet](#dotnet)
+  - [Other Tools](#other-tolls)
+  - [Docker](#docker)
+  - [Virt Manager](#virt-manager)
+  - [Web Server](#web-server)
+- [Sway](#sway)
+- [i3](#i3)
+- [VPN](#vpn)
+- [Power Management](#power-management)
+- [Video Drivers](#video-driver)
 
-# dotnet
-```
-yaourt dotnet-sdk aspnet-runtime
-```
-# node, javascript, typescript
-## set environment varialbs and path for global npm packages
-    export npm_config_prefix=~/.node_modules
-    PATH="$HOME/.node_modules/bin:$PATH"
-## packages
-```
-npm install -g browser-sync typescript typescript-language-server vscode-css-languageserver-bin instant-markdown-d prettier javascript-typescript-langserver create-react-app jsonlint
-```
-### some other packages
-```
-npm install -g @angular/cli nativescript js-beautify
-```
+## Post Install
 
-# nginx/php
-/etc/nginx/php.conf
-```
-location ~ \.php$ {
-   fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
-   fastcgi_index index.php;
-   include fastcgi.conf;
-}
-```
-/etc/nginx/nginx.conf
-```
-    server {
-        listen       80;
-        server_name  localhost;
-        include php.conf;
-        root /srv/http;
-        # deny access to .htaccess files, if Apache's document root
-        location ~ /\.ht {
-            deny  all;
-        }
-    }
-```
-### https://stackoverflow.com/questions/46031491/nginx-on-fedora-26-could-not-build-optimal-types-hash-error-message
-add to http block
-types_hash_max_size                4096;
+### zsh
 
-# nginx multiple servers
-/etc/nginx.conf in http section add 
-include sites-enabled/*;
+```bash
+sudo pacman -S zsh zsh-completions python-psutil
+chsh -s /bin/zsh
+git clone https://github.com/tarjoilija/zgen.git "\${HOME}/.zgen"
 
-```
-mkdir /etc/nginx/sites-available
-mkdir /etc/nginx/sites-enabled
-```
-## adminer
-/etc/nginx/sites-avaliable/adminer
-```
-	server {
-		listen 90;
-		server_name db.location;
-		include php.conf;
-		root /usr/share/webapps/adminer;
+### User Dirs
 
-		# If you want to use a .htpass file, uncomment the three following lines.
-		#auth_basic "Admin-Area! Password needed!";
-		#auth_basic_user_file /usr/share/webapps/adminer/.htpass;
-		#access_log /var/log/nginx/adminer-access.log;
-
-		error_log /var/log/nginx/adminer-error.log;
-		location / {
-			index index.php;
-			try_files $uri $uri/ /index.php?$args;
-		}
-	}
-```
-### enable servers
-```
-ln -s /etc/nginx/sites-available/adminer /etc/nginx/sites-enabled/adminer
-```
-### /etc/hosts
-```
-127.0.0.1   localhost
-127.0.0.1:90   db.localhost
+```bash
+sudo pacman -S xdg-user-dirs pcmanfm trash-cli htop diff-so-fancy tldr wget \
+                xautolock openssh networkmanager-openvpn tmux rdesktop networkmanager-openconnect
+xdg-user-dirs-update
+rm -r Templates Desktop Documents Public Videos Music
 ```
 
-### phpmyadmin easiest method is just to create symlink
-```
-ln -s /usr/share/webapps/phpMyAdmin/ /srv/http/phpmyadmin
-```
-# mysql(mariadb) etc..
-## disable cow before installing(if on btrfs)
-```
-mkdir /var/lib/mysql
-chattr +C /var/lib/mysql #disable copy-on-write
-sudo pacman -S mysql
-mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-systemctl start mysqld
-mysql_secure_installation
-```
-### php extension
-enable mysqli extension in /etc/php/php.ini
+## Urxvt
 
-# ms-sql
+```bash
+yay xsel nerd-fonts-hack urxvt-tabbedex-mina86-git urxvt-font-size-git urxvt-perls
 ```
-yaourt mssql-server mssql-tools
-sudo /opt/mssql/bin/mssql-conf setup
-```
-## php extension
-```
-yaourt php-sqlsrv
-```
-enable extension=sqlsrv in /etc/php.ini
 
-# [android](https://wiki.archlinux.org/index.php/android#Android_development)
-## allow running as regular user
-    1. groupadd sdkusers
-    2. gpasswd -a <user> sdkusers
-    3. chown -R :sdkusers /opt/android-sdk/
-    4. chmod -R g+w /opt/android-sdk/
-    5. newgrp sdkusers
-## get packages
-    yaourt -S android-platform android-sdk android-sdk-platform-tools android-sdk-build-tools android-udev-git
-## create virtual machine
-    1. get system images
-        sdkmanager "system-images;android-25;google_apis;x86"
-    2. create avd
-        avdmanager create avd --force --name avd-25 --package 'system-images;android-25;google_apis;x86'
-## Vm's
-    use virt-manager or command line qemu
-    add user to libvirt 
-    enable libvirtd
-    install ebtables and dnsmasq for default networking
+## Vim
 
-## Docker
+```bash
+sudo pacman -S python-pynvim python2-pynvim vint
+```
 
+### Language Servers
+
+> coc-extensions
+
+- coc-tsserver
+- coc-css
+- coc-omnisharp
+
+> other
+
+- bash-languae-server (npm)
+- typescript (npm)
+
+## Sway
+
+```bash
+sudo pacman -S sway waybar swayidle mako libappindicator-gtk3
+sudo pacman -S slurp grim
+```
+
+## i3
+
+```bash
+sudo pacman -S i3
+```
+
+## Dev Tools
+
+### javascript
+
+```bash
+sudo pacman -S nodejs npm
+npm install -g browser-sync typescript typescript-language-server \
+    instant-markdown-d prettier create-react-app markdownlint-cli
+```
+
+### [android](https://wiki.archlinux.org/index.php/android#Android_development)
+
+```bash
+yay -S android-platform android-udev
+optional android-sdk-build-tools
+```
+
+> allow running as regular user
+
+1. gpasswd -a youruser adbusers
+2. groupadd sdkusers
+3. gpasswd -a <user> sdkusers
+4. chown -R :sdkusers /opt/android-sdk/
+5. chmod -R g+w /opt/android-sdk/
+6. newgrp sdkusers
+
+### dotnet
+
+```bash
+wget https://dot.net/v1/dotnet-install.sh
+./dotnet-install.sh -channel Current -version latest
+./dotnet-install.sh -channel 2.2
+#./dotnet-install.sh --install-dir /opt/dotnet -channel Current -version latest
+# add ~/.dotnet to path
+```
+
+> or use pacman ?
+
+```bash
+sudo pacman -S dotnet-runtime dotnet-sdk
+dotnet tool install --global dotnet-watch
+```
+
+### Other Tools
+
+```bash
+yay visual-studio-code-bin postman-bin azuredatastudio slack-desktop
+```
+
+### Docker
+
+```bash
+sudk pacman -S docker
+# add user to docker group
+gpasswd -a user docker
+```
+
+### Virt Manager
+
+- use virt-manager or command line qemu
+- add user to libvirt
+- enable libvirtd
+- install ebtables and dnsmasq for default networking
+
+### Web Server
+
+```bash
+  pacman -S nginx php php-fpm mysql phpmyadmin
+```
+
+> disable cow before installing mysql (if on btrfs)
+
+```bash
+     mkdir /var/lib/mysql
+     chattr +C /var/lib/mysql
+```
+
+```bash
+    mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+    systemctl start mysqld
+    mysql_secure_installation
+```
+
+> enable mysqli extension in /etc/php/php.ini
+
+## [Vpn](https://wiki.archlinux.org/index.php/Private_Internet_Access_VPN)
+
+```bash
+sudo pacman -S networkmanager-openvpn
+```
+
+- install networkmanager-openvpn & private-internet-access-vpn
+- put username/password into /etc/private-internet-access/login.conf
+- run pia -a
+
+## Power Management
+
+```bash
+sudo pacman -S tlp
+sudo systemctl enable tlp.service
+```
+
+### Video Driver
+
+- Early kernal loading
+  - add MODULES=(i915) to /etc/mkinitcpio.d
+  - mkinitcpio -p linux
+
+### Bug: Chromium dropped frames
+
+> Playing YouTube in VP9 with chromium-vaapi is smooth, <10%CPU is used and no frame drops with libva-intel-driver-hybrid chromium-vaapi
+
+```bash
+yay libva-intel-driver chromium-vaapi
+
+# is va driver loaded?
+sudo pacman -S libva-utils
+vainfo
+```
+
+- [Gpu Status](https://chrome://gpu)
+  - video decode should hardware acellerated
+  - optionally install chrome extension h264ify
+- [Flags](https://chrome:flags)
+  - enable flag - Override software rendering list
+
+### Other
+
+```bash
+# Orphan packages
+  sudo pacman -Rns $(pacman -Qtdq)
+
+# Failed Services
+  sudo systemctl --failed
+```

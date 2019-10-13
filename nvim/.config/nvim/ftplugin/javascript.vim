@@ -1,4 +1,4 @@
-nnoremap run :! node %<CR>
+runtime! plugins/coc-mappings.vim
 
 let g:prettier#config#bracket_spacing = 'true'
 let g:prettier#config#print_width = 80
@@ -11,8 +11,9 @@ augroup JsxAutoCmd
 augroup END
 
 " Change working dir to the src for phoenix_frontend
-let gitdir=system("echo $(git rev-parse --show-toplevel)/src")
-if (empty(matchstr(gitdir, '^fatal:.*')) && gitdir =~ "phoenix_frontend")
+let gitdir=system('echo $(git rev-parse --show-toplevel)/src')
+if (empty(matchstr(gitdir, '^fatal:.*')) && gitdir =~? 'phoenix_frontend' || gitdir =~? 'patient_portal')
     cd `=gitdir`
 endif
-nnoremap <F2> :%s/\<<C-r><C-w>\>/
+
+nnoremap run :! node %<CR>

@@ -1,14 +1,15 @@
 #!/bin/bash
 
-amixer sget Master | grep off > /dev/null
-is_muted=$?
+format() {
+  perl_filter='if (/.*\[(\d+%)\] (\[(-?\d+.\d+dB)\] )?\[(on|off)\]/)'
+  perl_filter+='{CORE::say $4 eq "off" ? "MUTE" : "'
+  perl_filter+='$1'
+  perl_filter+='"; exit}'
+  output=$(perl -ne "$perl_filter")
+  echo "$output"
+}
 
-if (( is_muted == 0 )); then
-  volume=0
-  class=muted
-else
-  volume=$(awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master) | sed 's/[^0-9]*//g')
-  class=active
-fi
 
-echo -e "{\"text\":\""$volume% "\", \"class\":\""$class"\",\"percentage\":\"$volume\"}"
+volume=$(amixer -D default | format)
+
+echo -e "{\"text\":\""$volume "\", \"percentage\":\"$volume\"}"

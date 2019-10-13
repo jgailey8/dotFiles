@@ -43,14 +43,14 @@ bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+Shift+d exec --no-startup-id i3-dmenu-desktop
 # }}}
 # ========= WorkSpaces ========== {{{
-    set $tag0 "0: terminal "
-    set $tag1 "1: www "
-    set $tag2 "2: code "
-    set $tag3 "3: slack "
-    set $tag4 "4: debug "
-    set $tag5 "5: media "
-    set $tag6 "6: VMs "
-    set $tag7 "7: Other λ"
+    set $tag0 "0: "
+    set $tag1 "1: "
+    set $tag2 "2: "
+    set $tag3 "3: "
+    set $tag4 "4: "
+    set $tag5 "5: "
+    set $tag6 "6: "
+    set $tag7 "7: λ"
 
     bindsym $mod+0 workspace $tag0
     bindsym $mod+1 workspace $tag1
@@ -211,10 +211,10 @@ bindsym $mod+v mode "$mode_volume"
 # }}}
 #   Brightness Mode {{{
 mode "brightness" {
-    bindsym $up exec --no-startup-id light -A 3 && pkill -RTMIN+22 waybar
-    bindsym Up exec --no-startup-id light -A 3 && pkill -rtmin+22 waybar
-    bindsym $down exec --no-startup-id light -U 3 && pkill -RTMIN+22 waybar
-    bindsym Down exec --no-startup-id light -U 3 && pkill -RTMIN+22 waybar
+    bindsym $up exec --no-startup-id light -A 2 && pkill -RTMIN+22 waybar
+    bindsym Up exec --no-startup-id light -A 2 && pkill -rtmin+22 waybar
+    bindsym $down exec --no-startup-id light -U 2 && pkill -RTMIN+22 waybar
+    bindsym Down exec --no-startup-id light -U 2 && pkill -RTMIN+22 waybar
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -324,6 +324,7 @@ bar {
     for_window [class="Timeset-gui"] floating enable border normal
     for_window [class="(?i)virtualbox"] floating enable border normal
     for_window [class="Xfburn"] floating enable
+    for_window [class="i3-nagbar"] floating enable
 
     for_window [class="URxvt" instance="floating"] floating enable border pixel 3
     # switch to workspace with urgent window automatically
@@ -331,7 +332,7 @@ bar {
 
     # Drop Down Terminal
     for_window [instance="^dropTerm$"] border none; floating enable; move scratchpad; scratchpad show;
-    for_window [instance="^dropTerm$"] resize set 1920 1080; resize shrink height 30px; move position 0px 0px; move scratchpad; 
+    for_window [instance="^dropTerm$"] resize set 1920 1050; move scratchpad; 
 #}}}
 # ===== Autostart apps ===== {{{
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

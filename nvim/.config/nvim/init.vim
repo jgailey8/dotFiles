@@ -69,6 +69,7 @@ set path+=**
 set wildignore+=*/.git/*,*/node_modules/*,*/obj/*,*/bin/*,*/.DS_Store,*/vendor
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
 
+setlocal tabstop=2 sts=2 sw=2 " default spacing tab width
 augroup vimrcEx
   autocmd!
     " disable comment continuation
@@ -118,12 +119,14 @@ call plug#begin()
     Plug 'mxw/vim-jsx'
     Plug 'sheerun/vim-polyglot'
     Plug 'neoclide/jsonc.vim'
+    "---- markdown  -------
+    " Plug 'plasticboy/vim-markdown'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     "----- extras ---------
     Plug 'jmg5e/vim-css-js-converter'
     Plug 'crusoexia/vim-monokai'
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    Plug 'suan/vim-instant-markdown', { 'do': 'npm install -g instant-markdown-d', 'for': 'markdown' }
     Plug 'chrisbra/Colorizer'
     Plug 'lambdalisue/suda.vim'
     Plug 'tpope/vim-dadbod'
@@ -173,6 +176,13 @@ nnoremap zz zR
 nnoremap ZZ zM
 " go mark
 nnoremap gm `
+
+" Rename
+nnoremap <F2> :%s/\<<C-r><C-w>\>/
+nnoremap <Leader><F2> :%s/\<<C-r><C-w>\>/
+
+" calcualtor/evaluate line
+inoremap <C-E> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 " open file in vertial split
 nnoremap gfs :vertical wincmd f<CR>
@@ -234,7 +244,6 @@ try
 catch
 	colorscheme default
 endtry
-
 if has('gui_running')
     set background=dark
     set guifont=Inconsolata\ 14
@@ -245,18 +254,12 @@ if has('gui_running')
     set guioptions+=c
 endif
 " }}}
-" ========= NerdTree/FileExplorer ========= {{{
-try
-    map <leader>n :NERDTreeToggle<CR>
-    let g:NERDTreeWinSize=30        " resize nerdtree width
-    let g:NERDTreeWinPos = 'right'
-catch
-    map <leader>n :Vexplore<CR>
-    let g:netrw_banner=0
-    let g:netrw_browse_split=4
-    let g:netrw_liststyle=3
-    let g:netrw_list_hide=netrw_gitignore#Hide()
-endtry
+" ========= FileExplorer ========= {{{
+map <leader>n :Vexplore<CR>
+let g:netrw_banner=0
+let g:netrw_browse_split=4
+let g:netrw_liststyle=3
+let g:netrw_list_hide=netrw_gitignore#Hide()
 " }}}
 " ========= FZF ============== {{{
 nnoremap <c-p> :FZF<CR>
@@ -323,40 +326,12 @@ let g:lightline = {
 \       }
 "}}}
 " ========= COC ======== {{{
+let g:coc_global_extensions=[ 'coc-tsserver', 'coc-snippets', 'coc-css', 'coc-omnisharp' ]
 set cmdheight=2
 set shortmess+=c
 set signcolumn=yes
-
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <silent><expr> <c-space> coc#refresh()
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-nmap <leader>rn <Plug>(coc-rename)
-" nmap <F2> <Plug>(coc-rename)
-nnoremap coc <Esc>:CocList<CR>
-" open up quick fix winow(not sure which mapping i will use yet)
-nnoremap er :cw<CR>
-nnoremap <leader>er <Esc>:CocList diagnostics<CR>
-nmap <leader>ca <Plug>(coc-codeaction)
-nnoremap <silent> <leader>h :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-else
-    call CocActionAsync('doHover')
-endif
-endfunction
-
-" Use `:Format` for format current buffer
-command! -nargs=0 CocFormat :call CocAction('format')
-" Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+hi CocFloating ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+" key mappings in coc-mappings.vim
 " }}}
 " ========= ALE ========= {{{
 let g:ale_set_loclist = 0
@@ -368,7 +343,6 @@ let g:ale_linters = {
 \        'json': ['jsonlint'],
 \        'typescript': ['tslint'],
 \        'vim': ['vint'],
-\        'cs': ['omnisharp'],
 \        'css': [],
 \        'scss': []
 \       }
@@ -380,6 +354,22 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
 " }}}
 " ========= OTHER ======== {{{
-let g:instant_markdown_autostart = 0
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+" refresh on save or leave insert mode
+let g:mkdp_refresh_slow = 1
+
+" set to 1, echo preview page url in command line when open preview page
+let g:mkdp_echo_preview_url = 0
+" use a custom markdown style must be absolute path
+let g:mkdp_markdown_css = ''
+" use a custom highlight style must absolute path
+let g:mkdp_highlight_css = ''
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
 " }}}
 " vim:foldmethod=marker:foldlevel=0

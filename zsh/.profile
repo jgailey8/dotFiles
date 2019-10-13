@@ -2,7 +2,6 @@
 export EDITOR='nvim'
 export LANG=en_US.UTF-8
 export XKB_DEFAULT_LAYOUT=us
-
 # remap caps to escape
 export XKB_DEFAULT_OPTIONS=caps:escape
 
@@ -19,8 +18,8 @@ export XDG_CONFIG_HOME=$HOME/.config
 # Development environment variables
 export NODE_ENV="development"
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk
+export JAVA_HOME=/usr/lib/jvm/default
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 
 # fix issue with android studio on tiling managers
 # https://issuetracker.google.com/issues/36975466
@@ -59,6 +58,9 @@ if type dotnet > /dev/null 2>&1; then
     export ASPNETCORE_URLS=http://0.0.0.0:5000
     export PATH="$PATH:$HOME/.dotnet/tools"
 fi
+if [ -d "$HOME/.dotnet" ]; then
+    export PATH="$PATH:$HOME/.dotnet"
+fi
 
 # ruby
 if type ruby > /dev/null 2>&1; then
@@ -69,7 +71,7 @@ fi
 export GOPATH=$HOME/.local/go
 export PATH="$PATH:$GOPATH/bin"
 #}}}
-
+# ==== funcs === {{{
 help() {
     if ! type tldr > /dev/null; then
         echo "could not find tldr"
@@ -79,5 +81,6 @@ help() {
         command tldr "$@" | vless
     fi
 }
+# }}}
 
 # vim:foldmethod=marker:foldlevel=0:ft=sh

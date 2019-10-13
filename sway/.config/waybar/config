@@ -5,9 +5,10 @@
     "cpu",
     "memory",
     "temperature",
+    "custom/arrow4",
     "custom/arrow3",
-    "backlight",
     "custom/alsa",
+    "backlight",
     "custom/arrow2",
     "network",
     "custom/vpn",
@@ -16,6 +17,7 @@
     "custom/arrow2",
     "clock",
     "idle_inhibitor",
+    "custom/redshift",
     "tray"
   ],
   "sway/workspaces": {
@@ -24,7 +26,7 @@
     "format": "{index} {name}"
   },
   "sway/mode": {
-    "format": "  {}"
+    "format": " {}"
   },
   "temperature": {
     "tooltip": false,
@@ -37,7 +39,7 @@
   },
   "cpu": {
     "interval": 10,
-    "format": " {}%",
+    "format": " {load}%",
     "tooltip": false
   },
   "tray": {
@@ -48,22 +50,21 @@
     "format-charging": "<span color='green'></span>  {capacity}%",
     "format-full": "  {capacity}%",
     "states": {
+      "good": 95,
       "warning": 35,
-      "critical": 15
+      "critical": 20
     },
     "format-icons": ["", "", "", "", ""],
     "tooltip": false
   },
   "network": {
-    "format": "{ifname}:{ipaddr}",
-    "format-disconnected": "Disconnected ⚠",
-    "format-ethernet": "{ifname} ",
+    "interface": "wlp4s0",
+    "format": "<span color='red'>  </span>",
     "format-icons": [""],
     "format-wifi": "{icon} {essid}: {ipaddr}",
-    "interface": "wlp4s0",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) {signaldBm} up:{bandwidthUpBits} down:{bandwidthDownBits}",
     "interval": 30,
-    "on-click": "urxvt -title floating -e bash -i -c nmtui",
-    "tooltip": false
+    "on-click": "urxvt -title floating -e bash -i -c nmtui"
   },
   "custom/vpn": {
     "exec": "~/.config/waybar/modules/vpn.sh",
@@ -81,12 +82,8 @@
     "interval": 5,
     "return-type": "json",
     "format": "{icon} {}",
-    "tooltip": false,
     "on-click": "urxvt -title floating -e bash -i -c alsamixer",
-    "format-icons": {
-      "headphones": "",
-      "default": ["", ""]
-    }
+    "format-icons": ["", "", "d"]
   },
   "backlight": {
     "device": "intel_backlight",
@@ -96,7 +93,7 @@
     "tooltip": false,
     "on-scroll-down": "light -U 2 && pkill -RTMIN+22 waybar",
     "on-scroll-up": "light -A 2 && pkill -RTMIN+22 waybar",
-    "format-icons": ["", ""]
+    "format-icons": ["", "", ""]
   },
   "clock": {
     "format": "  {:%a %d %b   %I:%M}",
@@ -110,6 +107,14 @@
       "deactivated": ""
     }
   },
+  "custom/redshift": {
+    "exec": "~/.config/waybar/modules/redshift.sh",
+    "interval": 30,
+    "return-type": "json",
+    "format": "{icon} {}",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/modules/redshift.sh --toggle"
+  },
   "custom/arrow1": {
     "format": ""
   },
@@ -120,7 +125,7 @@
     "format": ""
   },
   "custom/arrow4": {
-    "format": ""
+    "format": ""
   },
   "custom/arrow5": {
     "format": ""
@@ -129,3 +134,4 @@
     "format": ""
   }
 }
+// vim: ft=jsonc

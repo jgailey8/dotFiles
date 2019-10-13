@@ -1,10 +1,8 @@
 {
-  "tsserver.enable": false,
-  //"coc.preferences.hoverTarget": "echo",
-  //"diagnostic.refreshOnInsertMode": true,
-  //"suggest.keepCompleteopt": true,
-  //"suggest.triggerAfterInsertEnter": true,
-  //"diagnostic.joinMessageLines": true,
+  "tsserver.enable": true,
+  "tsserver.reportStyleChecksAsWarnings": false,
+  "tsserver.formatOnType": false,
+  "javascript.validate.enable": false,
   "coc.preferences.messageLevel": "error",
   "coc.preferences.useQuickfixForLocations": true,
   "diagnostic.errorSign": "●",
@@ -23,3 +21,4 @@
   //"tsserver.log": "verbose",
   //"tsserver.trace.server": "verbose",
 }
+// vim: ft=jsonc
