@@ -1,0 +1,186 @@
+{"message":"host.start","level":"debug"}
+{"level":"info","message":"handleRequest: "}
+{"level":"debug","message":"request received: "}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"createPlugin./home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools.clearCache: true","level":"debug"}
+{"level":"debug","message":"getPlugin.alwaysInit"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"host.start","level":"debug"}
+{"level":"info","message":"handleRequest: "}
+{"level":"debug","message":"request received: "}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"createPlugin./home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools.clearCache: true","level":"debug"}
+{"level":"debug","message":"getPlugin.alwaysInit"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/injectGlobalHook.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/polyfill.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/ext/common.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/ext/content.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/include.preload.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-functions.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-bandaids.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/onloadwff.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/content.bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/pagewrap.bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/0.chunk.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/main.chunk.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/main.e9d5c64d46c619d180cb.hot-update.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/include.postload.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-uiscripts-rightclick_hook.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-notificationoverlay.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: file:///home/jared/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.4.0_0/build/contentScript.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/backend.js","level":"info"}
+{"message":"request -> neovim.api.nvim_command","level":"debug"}
+{"message":"response -> neovim.api.nvim_command: null","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_set_current_line","level":"debug"}
+{"message":"response -> neovim.api.nvim_set_current_line: null","level":"debug"}
+{"message":"[vim-chrome-devtools] Line should be set","level":"info"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_set_current_line","level":"debug"}
+{"message":"response -> neovim.api.nvim_set_current_line: null","level":"debug"}
+{"message":"[vim-chrome-devtools] Line should be set","level":"info"}
+{"message":"host.disconnected","level":"debug"}
+{"message":"host.start","level":"debug"}
+{"level":"info","message":"handleRequest: "}
+{"level":"debug","message":"request received: "}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"createPlugin./home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools.clearCache: true","level":"debug"}
+{"level":"debug","message":"getPlugin.alwaysInit"}
+{"message":"request -> neovim.api.nvim_set_current_line","level":"debug"}
+{"message":"response -> neovim.api.nvim_set_current_line: null","level":"debug"}
+{"level":"error","message":"Error making request to nvim_set_current_linenvim_set_current_line: Wrong type for argument 1, expecting String","stack":"Error: Error making request to nvim_set_current_line\n    at NeovimClient.request (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/api/Base.js:75:23)\n    at NeovimClient.setLine (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/api/Neovim.js:203:21)\n    at Object.ChromeDevToolsPlugin.test [as fn] (/home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools/lib/ChromeDevToolsPlugin.js:43:27)\n    at NvimPlugin.<anonymous> (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:155:41)\n    at Generator.next (<anonymous>)\n    at /home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:4:12)\n    at NvimPlugin.handleRequest (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:133:16)\n    at Host.<anonymous> (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/index.js:71:27)"}
+{"message":"Error in plugin for function:Test: nvim_set_current_line: Wrong type for argument 1, expecting String (file: /home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools, stack: Error: Error making request to nvim_set_current_line\n    at NeovimClient.request (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/api/Base.js:75:23)\n    at NeovimClient.setLine (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/api/Neovim.js:203:21)\n    at Object.ChromeDevToolsPlugin.test [as fn] (/home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools/lib/ChromeDevToolsPlugin.js:43:27)\n    at NvimPlugin.<anonymous> (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:155:41)\n    at Generator.next (<anonymous>)\n    at /home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:8:71\n    at new Promise (<anonymous>)\n    at __awaiter (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:4:12)\n    at NvimPlugin.handleRequest (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/NvimPlugin.js:133:16)\n    at Host.<anonymous> (/home/jared/.local/node_modules/lib/node_modules/neovim/lib/host/index.js:71:27))","level":"error"}
+{"level":"info","message":"Unhandled Rejection at:"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/injectGlobalHook.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/polyfill.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/ext/common.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/ext/content.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/include.preload.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-functions.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-bandaids.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://hdokiejnpimakedhajhdlcegeplioahd/onloadwff.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/content.bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://lmhkpmbekcpmknklioeibfkpmmfibljd/js/pagewrap.bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/bundle.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/0.chunk.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/static/js/main.chunk.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: http://localhost:3000/main.e9d5c64d46c619d180cb.hot-update.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/include.postload.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-uiscripts-rightclick_hook.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://gighmmpiobklfepjocnamgkkbiglidom/adblock-notificationoverlay.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: ","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: file:///home/jared/.config/google-chrome/Default/Extensions/fmkadmapgofadopljbjfkapdkoienihi/4.4.0_0/build/contentScript.js","level":"info"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/backend.js","level":"info"}
+{"message":"request -> neovim.api.nvim_command","level":"debug"}
+{"message":"response -> neovim.api.nvim_command: null","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_set_current_line","level":"debug"}
+{"message":"response -> neovim.api.nvim_set_current_line: null","level":"debug"}
+{"message":"[vim-chrome-devtools] Line should be set","level":"info"}
+{"message":"host.start","level":"debug"}
+{"level":"info","message":"handleRequest: "}
+{"level":"debug","message":"request received: "}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"createPlugin./home/jared/.dotfiles/nvim/.config/nvim/plugged/vim-chrome-devtools.clearCache: true","level":"debug"}
+{"level":"debug","message":"getPlugin.alwaysInit"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"request -> neovim.api.nvim_call_function","level":"debug"}
+{"message":"response -> neovim.api.nvim_call_function: ","level":"debug"}
+{"level":"info","message":"handleNotification: "}
+{"level":"debug","message":"host.handlePlugin: "}
+{"message":"getPlugin.useCachedPlugin","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: 9222","level":"debug"}
+{"message":"request -> neovim.api.nvim_get_var","level":"debug"}
+{"message":"response -> neovim.api.nvim_get_var: localhost","level":"debug"}
+{"message":"[vim-chrome-devtools] script parsed: chrome-extension://fmkadmapgofadopljbjfkapdkoienihi/build/injectGlobalHook.js","level":"info"}

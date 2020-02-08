@@ -1,0 +1,11 @@
+#!/bin/sh
+read -p "Search For:"  searchFor
+read -p "Replace With:"  replaceWith
+
+grep -rn "$searchFor"
+read -p "Replace following instances?" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  grep -RiIl "$searchFor" | xargs sed -i "s/$searchFor/$replaceWith/g"
+fi

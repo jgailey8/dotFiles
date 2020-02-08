@@ -9,7 +9,6 @@
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages.
 runtime! archlinux.vim
-
 " ========= nvim/vim environemnt ===== {{{
     if has('nvim')
         let $VIMHOME = $HOME.'/.config/nvim'
@@ -68,6 +67,8 @@ set completeopt=noinsert,menuone,noselect
 set path+=**
 set wildignore+=*/.git/*,*/node_modules/*,*/obj/*,*/bin/*,*/.DS_Store,*/vendor
 set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set nocompatible
+" set termguicolors
 
 setlocal tabstop=2 sts=2 sw=2 " default spacing tab width
 augroup vimrcEx
@@ -96,6 +97,11 @@ if empty(glob( $VIMHOME .'/autoload/plug.vim'))
 endif
 
 call plug#begin()
+    " Plug 'file:///home/jared/code/vim-redux-devtools', { 'do': 'npm install && npm run build' }
+    Plug 'file:///home/jared/code/vim-chrome-devtools', { 'do': 'npm install && npm run build' }
+    Plug 'janko/vim-test'
+    Plug 'chrisbra/Colorizer'
+    Plug 'hdiniz/vim-gradle'
     "---- main plugs -----
     Plug 'tomtom/tcomment_vim'
     Plug 'tpope/vim-surround'
@@ -106,11 +112,10 @@ call plug#begin()
     Plug 'prettier/vim-prettier', { 'do': 'npm install' }
     " ------ linting/language services----------
     if has('nvim')
-        Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-        Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        " Plug 'w0rp/ale', { 'do': 'npm install -g eslint jsonlint' }
     endif
     if has('python3')
-        Plug 'OmniSharp/omnisharp-vim'
     "------snippets--------
         Plug 'SirVer/ultisnips'
         Plug 'honza/vim-snippets'
@@ -128,11 +133,12 @@ call plug#begin()
     Plug 'crusoexia/vim-monokai'
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    Plug 'chrisbra/Colorizer'
+    " Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
     Plug 'lambdalisue/suda.vim'
     Plug 'tpope/vim-dadbod'
 call plug#end()
 runtime! plugins/funcs.vim
+runtime! plugins/s3.vim
 " }}}
 " ========= KeyBindings ====    {{{
 " exit from insert mode with  ;;
@@ -242,7 +248,7 @@ endif
 set background=dark
 try
     if !empty($DISPLAY)
-        set background=dark
+        " set background=dark
         color monokai
     else
         color default
@@ -265,6 +271,7 @@ map <leader>n :Vexplore<CR>
 let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_liststyle=3
+let g:netrw_winsize = 85
 let g:netrw_list_hide=netrw_gitignore#Hide()
 " }}}
 " ========= FZF ============== {{{
@@ -332,32 +339,44 @@ let g:lightline = {
 \       }
 "}}}
 " ========= COC ======== {{{
-let g:coc_global_extensions=[ 'coc-tsserver', 'coc-snippets', 'coc-css', 'coc-omnisharp' ]
+let g:coc_global_extensions=[ 'coc-tsserver', 'coc-snippets', 'coc-css', 'coc-omnisharp', 'coc-eslint', 'coc-highlight' ]
 set cmdheight=2
 set shortmess+=c
 set signcolumn=yes
-hi CocFloating ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi CocFloating ctermfg=220 ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi CocErrorFloat ctermfg=NONE ctermbg=52 guifg=#ff0000 guibg=#3f4145
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" #command! Prettier :silent %!prettier --stdin --stdin-filepath % <CR>
 " key mappings in coc-mappings.vim
 " }}}
 " ========= ALE ========= {{{
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-let g:ale_fix_on_save = 0
-let g:ale_linters = {
-\        'javascript': ['eslint'],
-\        'jsx': ['eslint'],
-\        'json': ['jsonlint'],
-\        'typescript': ['tslint'],
-\        'vim': ['vint'],
-\        'css': [],
-\        'scss': []
-\       }
-let g:ale_sign_error = '●'
-let g:ale_sign_warning = '.'
-let g:ale_set_highlights = 0
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
+" let g:ale_fix_on_save = 0
+" let g:ale_linters = {
+" \        'javascript': ['eslint'],
+" \        'jsx': ['eslint'],
+" \        'json': ['jsonlint'],
+" \        'typescript': ['tslint'],
+" \        'vim': ['vint'],
+" \        'css': [],
+" \        'scss': []
+" \       }
+" let g:ale_sign_error = '●'
+" let g:ale_sign_warning = '.'
+" let g:ale_set_highlights = 0
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '%linter%[%severity%] - %s'
 " }}}
 " ========= OTHER ======== {{{
 let g:mkdp_auto_start = 0
@@ -379,5 +398,12 @@ let g:mkdp_port = ''
 " let g:mkdp_page_title = '「${name}」'
 let g:vimwiki_list = [{'path': '~/.wiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" let g:Hexokinase_ftEnabled = ['css', 'scss', 'html']
+" let g:Hexokinase_highlighters = ['foregroundfull']
 " }}}
+let g:ChromeDevTools_port = '9222'
+let g:ChromeDevTools_host = 'localhost'
+let g:ChromeDevTools_defaultUrl = 'http://localhost:3000'
+
 " vim:foldmethod=marker:foldlevel=0

@@ -1,3 +1,6 @@
+export NVIM_NODE_LOG_FILE="/home/jared/vim-node.log"
+export NVIM_NODE_LOG_LEVEL="info"
+
 # ===== ENVIRONMENT ===== {{{
 export EDITOR='nvim'
 export LANG=en_US.UTF-8
@@ -26,7 +29,7 @@ export JAVA_HOME=/usr/lib/jvm/default
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
-export DOTNET_ROOT=/opt/dotnet
+export DOTNET_ROOT=$HOME/.dotnet
 export ASPNETCORE_URLS="http://*:5000/"
 
 # meson pkconfig
@@ -53,14 +56,14 @@ if [ -d "$HOME/.local/bin" ]; then
 fi
 
 # dotnet
-if type dotnet > /dev/null 2>&1; then
+# if [ -d "$HOME/.dotnet" ]; then
+    export PATH="$PATH:$HOME/.dotnet"
+# fi
+# if type dotnet > /dev/null 2>&1; then
     export ASPNETCORE_ENVIRONMENT=Development
     export ASPNETCORE_URLS=http://0.0.0.0:5000
     export PATH="$PATH:$HOME/.dotnet/tools"
-fi
-if [ -d "$HOME/.dotnet" ]; then
-    export PATH="$PATH:$HOME/.dotnet"
-fi
+# fi
 
 # ruby
 if type ruby > /dev/null 2>&1; then
@@ -70,6 +73,10 @@ fi
 # go
 export GOPATH=$HOME/.local/go
 export PATH="$PATH:$GOPATH/bin"
+# NVM
+# export NVM_DIR="$HOME/.local/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 #}}}
 # ==== funcs === {{{
 help() {

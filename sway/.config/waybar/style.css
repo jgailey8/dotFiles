@@ -72,12 +72,6 @@ window#waybar {
   border-left: 1px solid rgba(100, 114, 125, 0.3);
 }
 
-#custom-arrow1 {
-  font-size: 24px;
-  color: #242424;
-  background: #333;
-}
-
 #network,
 #custom-vpn,
 #clock {
@@ -91,28 +85,31 @@ window#waybar {
   border-left: 1px solid rgba(100, 114, 125, 0.3);
 }
 
+#custom-arrow1 {
+  font-size: 24px;
+  color: #242424;
+  background: #333;
+}
 #custom-arrow2 {
   font-size: 24px;
   color: #333;
   background: #242424;
 }
-
 #custom-arrow3 {
   font-size: 24px;
-  background: #2c2c2c;
+  background: #3c3c3c;
   color: #242424;
 }
 #custom-arrow4 {
   font-size: 24px;
   background: transparent;
-  color: #2c2c2c;
+  color: #3c3c3c;
 }
 #custom-arrow5 {
   font-size: 24px;
   color: #262626;
   background: transparent;
 }
-
 /* workspace-seperator */
 #custom-arrow6 {
   font-size: 24px;

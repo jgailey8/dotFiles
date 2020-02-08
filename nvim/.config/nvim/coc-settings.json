@@ -1,5 +1,5 @@
 {
-  "tsserver.enable": true,
+  "tsserver.enable": false,
   "tsserver.reportStyleChecksAsWarnings": false,
   "tsserver.formatOnType": false,
   "javascript.validate.enable": false,
@@ -16,9 +16,12 @@
   "typescript.implementationsCodeLens.enable": false,
   "typescript.referencesCodeLens.enable": false,
   "typescript.suggest.paths": false,
-  "typescript.updateImportsOnFileMove.enable": false
-  //"suggest.enablePreview": true,
+  "typescript.updateImportsOnFileMove.enable": false,
+  "suggest.enablePreview": true,
   //"tsserver.log": "verbose",
   //"tsserver.trace.server": "verbose",
+  "eslint.packageManager": "npm",
+  "jest.watch": "false",
+  "tabnine.shortcut": "CT"
 }
 // vim: ft=jsonc

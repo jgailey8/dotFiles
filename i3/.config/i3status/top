@@ -17,8 +17,8 @@ general {
     color_bad = '#e89393'
 }
 
-order += "volume master"
-order += "battery 0"
+# order += "volume master"
+# order += "battery 0"
 # order += "brightness"
 order += "wireless wlp4s0"
 order += "tztime local"

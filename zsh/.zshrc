@@ -93,6 +93,7 @@ fi
 ## ==== Aliases ==== {{{
 ## Alias section 
 alias e="$EDITOR"
+alias v="nvim"
 alias cp="cp -i"                                                # Confirm before overwriting something
 alias df='df -h'                                                # Human-readable sizes
 alias ls="ls --color=auto"
@@ -111,16 +112,24 @@ alias h="history"
 alias cl="clear"
 alias sc="sudo systemctl"
 alias scu="systemctl --user"
-alias chrome-dev="chromium --remote-debugging-port=9222"
+alias chrome-dev="google-chrome-stable --remote-debugging-port=9222"
 alias node-dev="export NODE_ENV=development"
 alias node-test="export NODE_ENV=test"
 alias node-prod="export NODE_ENV=production"
 alias dotnet-dev="export ASPNETCORE_ENVIRONMENT=Development"
 alias dotnet-prod="export ASPNETCORE_ENVIRONMENT=Production"
+alias gs="git status"
+alias gl="git log"
+alias gb="git branch"
+alias gc="git checkout"
+alias gd="git diff"
 
-alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000"
+alias torrent="transmission-remote-cli -n -c danglePi:8080"
+alias mount-danglepi="sshfs jared@danglePi:/mnt/Drive /mnt/DanglePi"
+alias serve="browser-sync start -s -f . --no-notify --host $LOCAL_IP --port 9000 --single"
 alias weather="curl wttr.in"
-alias wiki="vim $HOME/.wiki/index.md"
+alias wiki="vim -c VimwikiIndex" #$HOME/.wiki/index.md"
+alias st="tabbed -r 2 st -w ''"
 
 # use trash-cli
 if type trash > /dev/null 2>&1; then
@@ -133,10 +142,8 @@ if type nvim > /dev/null 2>&1; then
 fi
 
 alias vless="/bin/sh -c \"col -b | \vim --not-a-term -c 'set ft=man laststatus=0 nomod nolist noma' -\""
-alias docker-clean-all='docker stop $(docker container ls -a -q) && docker system prune -a -f --volumes'
 
 # export PAGER=/usr/bin/vimpager
-# alias alsamixer-notify="alsamixer && pkill -RTMIN+10 i3blocks"
 # alias less=$PAGER
 # export MANPAGER="/bin/sh -c \"col -b | \vim --not-a-term -c 'set ft=man laststatus=0 nomod nolist noma' -\""
 #}}}
@@ -150,3 +157,7 @@ fi
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fnm
+export PATH=/home/jared/.fnm:$PATH
+eval "`fnm env --multi`"

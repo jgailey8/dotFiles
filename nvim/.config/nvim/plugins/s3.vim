@@ -1,19 +1,12 @@
 scriptencoding utf-8
-function! funcs#showInPreview(lines)
-    echo "yes"
-    let l:command = "silent! pedit! +setlocal\\ " .
-                  \ "buftype=nofile\\ nobuflisted\\ " .
-                  \ "noswapfile\\ nonumber\\ " .
-                  \ "filetype=json"
-    exe l:command
-
-    if has('nvim')
-        let l:bufNr = bufnr("%")
-        call nvim_buf_set_lines(l:bufNr, 0, -1, 0, a:lines)
-    else
-        call setbufline(a:name, 1, a:lines)
-    endif
+function! s3#getUserId()
+  call ChromeDevTools_Runtime_evaluate(['JSON.parse(localStorage.getItem("evergreen")).id'])
 endfunction
+
+function! s3#getUserToken()
+  call ChromeDevTools_Runtime_evaluate(['JSON.parse(localStorage.getItem("evergreen")).authentication_token'])
+endfunction
+
 " - Close other windows {{{
 function! funcs#CloseOtherWindows()
 	pclose

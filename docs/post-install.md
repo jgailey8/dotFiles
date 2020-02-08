@@ -9,11 +9,13 @@
 - [Dev Tools](#dev-tools)
   - [javascript](#javascript)
   - [android](#android)
-  - [dotnet](#dotnet)
+  - [dotnet]([[#dotnet]])
   - [Other Tools](#other-tolls)
   - [Docker](#docker)
   - [Virt Manager](#virt-manager)
   - [Web Server](#web-server)
+  - [MongoDb](#mongodb)
+  - [Ruby](#ruby)
 - [Sway](#sway)
 - [i3](#i3)
 - [VPN](#vpn)
@@ -111,6 +113,8 @@ wget https://dot.net/v1/dotnet-install.sh
 #./dotnet-install.sh --install-dir /opt/dotnet -channel Current -version latest
 # add ~/.dotnet to path
 ```
+sudo ./dotnet-install.sh --install-dir /opt/dotnet -channel Current -version latest
+sudo ./dotnet-install.sh --install-dir /opt/dotnet -channel 2.2
 
 > or use pacman ?
 
@@ -128,7 +132,7 @@ yay visual-studio-code-bin postman-bin azuredatastudio slack-desktop
 ### Docker
 
 ```bash
-sudk pacman -S docker
+sudk pacman -S docker docker-compose
 # add user to docker group
 gpasswd -a user docker
 ```
@@ -160,6 +164,20 @@ gpasswd -a user docker
 ```
 
 > enable mysqli extension in /etc/php/php.ini
+
+### MongoDb
+
+```bash
+# shell/tools only
+yay mongodb-tools-bin
+yay mongodb-shell-bin
+```
+
+### Ruby
+
+```bash
+sudo pacman -S ruby
+```
 
 ## [Vpn](https://wiki.archlinux.org/index.php/Private_Internet_Access_VPN)
 

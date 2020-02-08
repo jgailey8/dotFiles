@@ -2,6 +2,7 @@
 set $mod Mod4
 set $scratchKey Print
 set $term urxvt
+#set $term tabbed -r 2 st -w ''
 set $browser chromium
 set $menu dmenu_run  -nb '#212121' -nf '#FFFFFF' -fn 'Droid Sans Mono-14' -b
 
@@ -34,7 +35,7 @@ smart_borders on
 
 # start a terminal
 bindsym $mod+Return exec $term
-bindsym $mod+Shift+Return exec urxvt -name floating
+bindsym $mod+Shift+Return exec $term -name floating
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -183,7 +184,9 @@ mode "$mode_launch" {
     bindsym c exec --no-startup-id $browser ; mode "default"
     bindsym f exec --no-startup-id firefox; mode "default"
     bindsym p exec --no-startup-id pcmanfm ; mode "default"
-    bindsym t exec --no-startup-id urxvt; mode "default"
+    bindsym t exec --no-startup-id $term; mode "default"
+    bindsym s exec --no-startup-id slack; mode "default"
+    bindsym m exec --no-startup-id spotfiy; mode "default"
     bindsym k exec --no-startup-id kodi; mode "default"
     # bindsym s mode "$mode_system"
     bindsym $mod+Return exec urxvt -name dropTerm; mode "default"
@@ -225,6 +228,7 @@ bindsym $mod+b mode "brightness"
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 # output eDP-1 scale 1
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
+#3840 x 2160
 output eDP-1 {
     scale 1
     background ~/.local/backgrounds/arch_kiss.jpg fill
@@ -336,7 +340,8 @@ bar {
 #}}}
 # ===== Autostart apps ===== {{{
 # exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id "sleep 2s && urxvt -name dropTerm"
+# exec --no-startup-id "sleep 2s && urxvt -name dropTerm"
+exec --no-startup-id "sleep 2s && tabbed -n dropTerm -r 2 st -w ''"
 exec --no-startup-id setxkbmap -option caps:escape
 exec --no-startup-id "mako --default-timeout 1000"
 exec swayidle \
